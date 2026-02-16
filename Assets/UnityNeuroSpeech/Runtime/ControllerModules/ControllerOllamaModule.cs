@@ -1,10 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Microsoft.Extensions.AI;
-using OllamaSharp;
-using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using UnityNeuroSpeech.Utils;
 
 namespace UnityNeuroSpeech.Runtime.Ollama
@@ -12,28 +7,19 @@ namespace UnityNeuroSpeech.Runtime.Ollama
     internal class ControllerOllamaModule
     {
         private int _responseCount;
-        private IChatClient _chatClient;
-        public List<ChatMessage> ChatHistory { get; private set; } = new();
-
         public void InitOllamaModular(string systemPrompt, string modelName, string ollamaURI)
         {
-            _chatClient = new OllamaApiClient(new Uri(ollamaURI), modelName);
-
-            ChatHistory.Add(new(ChatRole.System, systemPrompt));
+            // Init ollama client
         }
 
         public async UniTask<AgentState> SendMessageModular(string userPrompt, string lang, CancellationToken token)
         {
             LogUtils.LogMessage("Sending message to Ollama...");
 
-            ChatHistory.Add(new(ChatRole.User, userPrompt));
-
             var chatResponse = "";
-            await foreach (var item in _chatClient.GetStreamingResponseAsync(ChatHistory).WithCancellation(token)) chatResponse += item.Text;
+            // await foreach (var item in _chatClient.GetStreamingResponseAsync(ChatHistory).WithCancellation(token)) chatResponse += item.Text;
             
             LogUtils.LogMessage($"Ollama response: {chatResponse}");
-
-            ChatHistory.Add(new(ChatRole.Assistant, chatResponse));
             _responseCount++;
 
             var responseWithoutThinking = CleanThinking(chatResponse);

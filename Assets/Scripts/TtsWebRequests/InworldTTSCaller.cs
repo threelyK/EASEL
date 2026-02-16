@@ -8,6 +8,8 @@ namespace TtsWebRequests
 {
     public class InworldTtsCaller
     {
+
+        #region Request Parameters
         private const string URL = "https://api.inworld.ai/tts/v1/voice";
         private readonly string _apiKey;    
         
@@ -22,7 +24,8 @@ namespace TtsWebRequests
         private const int Channels = 1;
         private readonly AudioSource _ttsAudioSource;
         private const int HeaderOffset = 24; // idk why it's 24 but the static stopped
-
+        #endregion
+        
         public InworldTtsCaller(AudioSource ttsAudioSource, string apiKey)
         {
             _ttsAudioSource = ttsAudioSource;
