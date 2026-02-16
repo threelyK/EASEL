@@ -1,6 +1,3 @@
-using Microsoft.Extensions.AI;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityNeuroSpeech.Shared;
@@ -30,62 +27,7 @@ namespace UnityNeuroSpeech.Runtime.JsonData
             
             return JsonUtility.FromJson<FrameworkSettings>(settingsFile.text);
         }
-
-        public void LoadOrCreateJsonDialogHistoryModular(List<ChatMessage> chatHistory)
-        {
-            // If user don't want to save dialog history to json
-            if (string.IsNullOrEmpty(_jsonDialogHistoryFileName)) return;
-
-            // If some history already exists and saved
-            if (File.Exists(Path.Combine(StaticData.AGENT_HISTORY_PATH, $"{_jsonDialogHistoryFileName}.json")))
-            {
-                var json = File.ReadAllText(Path.Combine(StaticData.AGENT_HISTORY_PATH, $"{_jsonDialogHistoryFileName}.json"));
-
-                DialogHistoryData runtimeData;
-
-                // Encryption?
-                if (!string.IsNullOrEmpty(_encryptionHistoryKey))
-                {
-                    try
-                    {
-                        var encryptedData = EncryptionUtils.Decrypt(json, _encryptionHistoryKey);
-                        runtimeData = JsonUtility.FromJson<DialogHistoryData>(encryptedData);
-                    }
-                    catch (Exception e)
-                    {
-                        LogUtils.LogError($"Error decoding encrypted data with this key! If you don't use any encryption, delete key parameter in your AgentBehaviour script. Full error message: {e}");
-                        return;
-                    }
-                }
-                else runtimeData = JsonUtility.FromJson<DialogHistoryData>(json);
-
-                // Add it to current _chatHistory
-                foreach (var message in runtimeData.dialogHistory)
-                {
-                    chatHistory.Add(new(ChatRole.User, message.userMessage));
-                    chatHistory.Add(new(ChatRole.Assistant, message.llmResponse));
-                }
-
-                LogUtils.LogMessage("Dialog history restored");
-            }
-            else
-            {
-                LogUtils.LogMessage("No dialog history was found");
-
-                var emptyList = new List<DialogData>();
-                // If don't add anything and just creating empty json file, JsonUtility won't be able to deserialize RuntimeJsonData
-                emptyList.Add(new(string.Empty, string.Empty));
-
-                var json = JsonUtility.ToJson(new DialogHistoryData(emptyList));
-
-                if (!string.IsNullOrEmpty(_encryptionHistoryKey))
-                {
-                    File.WriteAllText(Path.Combine(StaticData.AGENT_HISTORY_PATH, $"{_jsonDialogHistoryFileName}.json"), EncryptionUtils.Encrypt(json, _encryptionHistoryKey));
-                }
-                else File.WriteAllText(Path.Combine(StaticData.AGENT_HISTORY_PATH, $"{_jsonDialogHistoryFileName}.json"), json);
-            }
-        }
-
+        
         /// <summary>
         /// For Ollama
         /// </summary>
