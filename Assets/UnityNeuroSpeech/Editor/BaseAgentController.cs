@@ -64,8 +64,6 @@ namespace UnityNeuroSpeech.Editor
 
             LogUtils.logLevel = sharedSettings.Value.logLevel;
 
-            _jsonModule.LoadOrCreateJsonDialogHistoryModular(_ollamaModule.ChatHistory);
-
             _ttsModule = new(agentSettings.agentIndex, _ttsAudioSource);
 
             _ollamaModule.InitOllamaModular(agentSettings.systemPrompt, agentSettings.modelName, sharedSettings.Value.ollamaURI);
