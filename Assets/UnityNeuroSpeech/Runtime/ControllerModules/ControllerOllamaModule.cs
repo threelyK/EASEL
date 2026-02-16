@@ -12,10 +12,9 @@ namespace UnityNeuroSpeech.Runtime.Ollama
         
         // TODO: Keeping chatlogs for test purposes?
         
-        public void InitOllamaModular(string systemPrompt, string modelName, string ollamaURI)
+        public void InitOllamaModular(string systemPrompt)
         {
             // Init ollama client
-            // Don't need to init - Handled by OllamaRequests class
             ollamaRequester = new OllamaRequests(systemPrompt);
         }
 

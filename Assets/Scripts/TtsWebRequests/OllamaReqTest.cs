@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TtsWebRequests
@@ -12,12 +13,19 @@ namespace TtsWebRequests
             RunTest();
         }
 
-        private void RunTest()
+        private async void RunTest()
         {
-            var ollamaRequester = new OllamaRequests(SystemPrompt);
+            try
+            {
+                var ollamaRequester = new OllamaRequests(SystemPrompt);
             
-            var response = ollamaRequester.SendPrompt(Prompt);
-            Debug.Log(response);
+                var response = await ollamaRequester.SendPrompt(Prompt);
+                Debug.Log(response);
+            }
+            catch (Exception e)
+            {
+                throw; // TODO handle exception
+            }
         }
 
     }

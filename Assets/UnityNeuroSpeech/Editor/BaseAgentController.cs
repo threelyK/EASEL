@@ -66,7 +66,7 @@ namespace UnityNeuroSpeech.Editor
 
             _ttsModule = new(agentSettings.agentIndex, _ttsAudioSource);
 
-            _ollamaModule.InitOllamaModular(agentSettings.systemPrompt, agentSettings.modelName, sharedSettings.Value.ollamaURI);
+            _ollamaModule.InitOllamaModular(agentSettings.systemPrompt);
 
             // Setting Whisper and UI
             _microphoneRecord.OnRecordStop += OnRecordStop;
