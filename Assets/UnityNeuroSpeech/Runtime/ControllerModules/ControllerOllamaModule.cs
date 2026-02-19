@@ -8,21 +8,21 @@ namespace UnityNeuroSpeech.Runtime.Ollama
     internal class ControllerOllamaModule
     {
         private int _responseCount;
-        private OllamaRequests ollamaRequester;
+        private OllamaRequests _ollamaRequester;
         
         // TODO: Keeping chatlogs for test purposes?
         
         public void InitOllamaModular(string systemPrompt)
         {
             // Init ollama client
-            ollamaRequester = new OllamaRequests(systemPrompt);
+            _ollamaRequester = new OllamaRequests(systemPrompt);
         }
 
         public async UniTask<AgentState> SendMessageModular(string userPrompt, string lang, CancellationToken token)
         {
             LogUtils.LogMessage("Sending message to Ollama...");
 
-            var chatResponse = await ollamaRequester.SendPrompt(userPrompt);
+            var chatResponse = await _ollamaRequester.SendPrompt(userPrompt);
             
             LogUtils.LogMessage($"Ollama response: {chatResponse}");
             _responseCount++;
