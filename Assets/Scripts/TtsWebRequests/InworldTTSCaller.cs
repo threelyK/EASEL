@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using Cysharp.Threading.Tasks;
 
 namespace TtsWebRequests
 {
@@ -33,11 +34,17 @@ namespace TtsWebRequests
         }
 
 
-        public IEnumerator PostAndPlayToInworldVoice(string text)
+        public async UniTask PostAndPlayToInworldVoice(string text)
+        {
+            var response = await PostToInworldVoice(text);
+            PlayVoiceClip(response);
+        }
+        
+        private async UniTask<DownloadHandler> PostToInworldVoice(string text)
         {
             Debug.Log("Started Post");
             var postRequest = CreatePostRequest(text);
-            yield return postRequest.SendWebRequest();
+            await postRequest.SendWebRequest();
             // -> downloadHandler.text = audioContent{<BYTES>}
 
             try
@@ -53,8 +60,9 @@ namespace TtsWebRequests
             }
             
             var response = postRequest.downloadHandler;
-            PlayVoiceClip(response);
+            return response;
         }
+
 
         private void PlayVoiceClip(DownloadHandler response)
         {

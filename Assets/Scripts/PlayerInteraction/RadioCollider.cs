@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Player
+namespace PlayerInteraction
 {
     public class RadioCollider : MonoBehaviour
     {
@@ -9,8 +9,8 @@ namespace Player
         private bool _isTalking;
 
         private const string PlayerRangeTag = "PlayerInteractable";
-        public static Action OnPlayerTalking;
-        public static Action OnPlayerStoppedTalking;
+        public static event Action OnPlayerTalking;
+        public static event Action OnPlayerStoppedTalking;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -32,12 +32,12 @@ namespace Player
         {
             if (_inRange && !_isTalking && OVRInput.GetDown(OVRInput.Button.One))
             {
-                // Debug.Log("InRange and Pressing");
+                Debug.Log("InRange and Pressing");
                 OnPlayerTalking?.Invoke();
                 _isTalking = true;
             } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.One) || !_inRange))
             {
-                // Debug.Log("OutRange or StoppedPressing");
+                Debug.Log("OutRange or StoppedPressing");
                 OnPlayerStoppedTalking?.Invoke();
                 _isTalking = false;
             }

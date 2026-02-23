@@ -24,7 +24,7 @@ namespace TtsWebRequests
             }
             catch (Exception e)
             {
-                throw; // TODO handle exception
+                Debug.Log(e.Message);
             }
         }
 

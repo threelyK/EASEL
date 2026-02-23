@@ -27,12 +27,12 @@ namespace UnityNeuroSpeech.Runtime.ControllerModules
         /// <summary>
         /// Starts TTS process in Mono
         /// </summary>
-        public IEnumerator StartTTSProcessMonoModular(string llmResponse)
+        public async UniTask StartTTSProcessMonoModular(string llmResponse)
         {
             llmResponse = llmResponse.Replace("\r", "").Replace("\n", " ").Trim();
 
             var ttsCaller = new InworldTtsCaller(_ttsAudioSource, APIKey);
-            return ttsCaller.PostAndPlayToInworldVoice(llmResponse);
+            await ttsCaller.PostAndPlayToInworldVoice(llmResponse);
         }
 
         public async UniTask CheckTTSProcessMonoModular(string currentLang, Process currentProcess)

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace TtsWebRequests
 {
@@ -16,12 +18,11 @@ namespace TtsWebRequests
             RunTest();
         }
 
-        private void RunTest()
+        private async UniTask RunTest()
         {
             var ttsCaller = new InworldTtsCaller(ttsAudioSourceTest, apiKey);
             
-            var result = ttsCaller.PostAndPlayToInworldVoice(TestMessage);
-            StartCoroutine(result);
+            await ttsCaller.PostAndPlayToInworldVoice(TestMessage);
         }
     }
 }
