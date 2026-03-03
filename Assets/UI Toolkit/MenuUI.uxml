@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/MainMenu.uss?fileID=7433441132597879392&amp;guid=d129d5f242808db4ea15d6372dab276e&amp;type=3#MainMenu"/>
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label text="Recog" name="GameTitle" style="color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Fonts/Petrona-Regular.ttf?fileID=12800000&amp;guid=3b0bc7aff8ca94249b7d366f1eb86c1d&amp;type=3#Petrona-Regular&quot;); -unity-text-align: upper-left; font-size: 100px; margin-bottom: 20%;"/>
+        <ui:GroupBox>
+            <ui:Button text="Start" name="PlayButton"/>
+            <ui:Button text="Exit" name="Exit"/>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>
