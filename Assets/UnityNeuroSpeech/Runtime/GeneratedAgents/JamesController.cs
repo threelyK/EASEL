@@ -15,6 +15,8 @@ using System.Threading;
 using UnityNeuroSpeech.Runtime.ControllerModules;
 using LogUtils = UnityNeuroSpeech.Utils.LogUtils;
 using TtsWebRequests;
+using PlayerInteraction;
+
 #endregion
 
 namespace UnityNeuroSpeech.Runtime
@@ -39,8 +41,8 @@ namespace UnityNeuroSpeech.Runtime
         [Header("Speech-To-Text")]
         [SerializeField] private WhisperManager _whisperManager;
         [SerializeField] private MicrophoneRecord _microphoneRecord;
-        [SerializeField] private Button _micButton;
-        [SerializeField] private Sprite _enableMicSprite, _disableMicSprite;
+        // [SerializeField] private Button _micButton;
+        // [SerializeField] private Sprite _enableMicSprite, _disableMicSprite;
         public Action<string> AfterSTT { get; set; }
         private bool _processingOtherActions;
 
@@ -73,8 +75,17 @@ namespace UnityNeuroSpeech.Runtime
 
             // Setting Whisper and UI
             _microphoneRecord.OnRecordStop += OnRecordStop;
-            _micButton.onClick.AddListener(OnButtonPressed);
-            _micButton.image.sprite = _disableMicSprite;
+        }
+
+        private void OnEnable()
+        {
+            RadioCollider.OnPlayerTalking += OnButtonPressed;
+            RadioCollider.OnPlayerStoppedTalking += OnButtonRelease;
+        }
+        
+        private void OnDisable() {
+            RadioCollider.OnPlayerTalking -= OnButtonPressed;
+            RadioCollider.OnPlayerStoppedTalking -= OnButtonRelease;
         }
 
         #endregion
@@ -92,7 +103,7 @@ namespace UnityNeuroSpeech.Runtime
 
             var ttsCaller = new InworldTtsCaller(_ttsAudioSource, _apiKey);
 
-            StartCoroutine(ttsCaller.PostAndPlayToInworldVoice(llmResponse));
+            await ttsCaller.PostAndPlayToInworldVoice(llmResponse);
             AfterTTS?.Invoke();
 
             _processingOtherActions = false;
@@ -149,14 +160,18 @@ namespace UnityNeuroSpeech.Runtime
             if (!_microphoneRecord.IsRecording)
             {
                 _microphoneRecord.StartRecord();
-                _micButton.image.sprite = _enableMicSprite;
+                // _micButton.image.sprite = _enableMicSprite;
             }
-            else
-            {
-                _microphoneRecord.StopRecord();
-                _micButton.image.sprite = _disableMicSprite;
-                _processingOtherActions = true;
-            }
+        }
+
+        private void OnButtonRelease()
+        {
+            if (_processingOtherActions) return;
+            if (!_microphoneRecord.IsRecording) return;
+            
+            _microphoneRecord.StopRecord();
+            _processingOtherActions = true;
+            // _micButton.image.sprite = _disableMicSprite;
         }
 
         #endregion

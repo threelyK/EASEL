@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Questionnaire
 {
@@ -16,17 +17,17 @@ namespace Questionnaire
 
         [SerializeField] private TMP_Text questionText;
         
-        [SerializeField] private UnityEngine.UI.Toggle optAToggle;
-        [SerializeField] private UnityEngine.UI.Toggle optBToggle;
-        [SerializeField] private UnityEngine.UI.Toggle optCToggle;
-        [SerializeField] private UnityEngine.UI.Toggle optDToggle;
+        [SerializeField] private Toggle optAToggle;
+        [SerializeField] private Toggle optBToggle;
+        [SerializeField] private Toggle optCToggle;
+        [SerializeField] private Toggle optDToggle;
         
-        [SerializeField] private TMP_Text optAText;
-        [SerializeField] private TMP_Text optBText;
-        [SerializeField] private TMP_Text optCText;
-        [SerializeField] private TMP_Text optDText;
+        private TMP_Text _optAText;
+        private TMP_Text _optBText;
+        private TMP_Text _optCText;
+        private TMP_Text _optDText;
         
-        private UnityEngine.UI.Toggle[] _toggles;
+        private Toggle[] _toggles;
         private TMP_Text[] _texts;
         
         #region QuestionnaireStrings
@@ -131,7 +132,7 @@ namespace Questionnaire
             "Applying my knowledge in real situations.",
         };
         #endregion
-        
+
         public void NextPage()
         {
             switch (_currentPageNumber)
@@ -150,19 +151,19 @@ namespace Questionnaire
         private void TogglePageVisible(bool isVisible)
         {
             questionText.alpha = isVisible ? 1 : 0;
-            optAText.alpha = isVisible ? 1 : 0;
-            optBText.alpha = isVisible ? 1 : 0;
-            optCText.alpha = isVisible ? 1 : 0;
-            optDText.alpha = isVisible ? 1 : 0;
+            _optAText.alpha = isVisible ? 1 : 0;
+            _optBText.alpha = isVisible ? 1 : 0;
+            _optCText.alpha = isVisible ? 1 : 0;
+            _optDText.alpha = isVisible ? 1 : 0;
         }
 
-        private void LoadPage(int  pageNumber)
+        private void LoadPage(int pageNumber)
         {
-            questionText.text = _questionTexts[_currentPageNumber];
-            optAText.text = _optionAs[_currentPageNumber];
-            optBText.text = _optionBs[_currentPageNumber];
-            optCText.text = _optionCs[_currentPageNumber];
-            optDText.text = _optionDs[_currentPageNumber];
+            questionText.text = _questionTexts[pageNumber];
+            _optAText.text = _optionAs[pageNumber];
+            _optBText.text = _optionBs[pageNumber];
+            _optCText.text = _optionCs[pageNumber];
+            _optDText.text = _optionDs[pageNumber];
             
             var positions = new List<int> {12, 0, -12, -24};
 
@@ -191,8 +192,20 @@ namespace Questionnaire
         
         private void Start()
         {
+            _optAText = optAToggle.GetComponentInChildren<TMP_Text>();
+            if (_optAText == null) Debug.LogWarning("No option text found for _optAText");
+            
+            _optBText = optBToggle.GetComponentInChildren<TMP_Text>();
+            if (_optBText == null) Debug.LogWarning("No option text found for _optBText");
+            
+            _optCText = optCToggle.GetComponentInChildren<TMP_Text>();
+            if (_optCText == null) Debug.LogWarning("No option text found for _optCText");
+            
+            _optDText = optDToggle.GetComponentInChildren<TMP_Text>();
+            if (_optDText == null) Debug.LogWarning("No option text found for _optDText");
+            
             _toggles = new[] {optAToggle, optBToggle, optCToggle, optDToggle};
-            _texts = new[] {questionText, optAText, optBText, optCText, optDText};
+            _texts = new[] {questionText, _optAText, _optBText, _optCText, _optDText};
         }
     }
 }
