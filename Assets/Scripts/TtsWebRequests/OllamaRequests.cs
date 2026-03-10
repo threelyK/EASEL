@@ -22,7 +22,6 @@ namespace TtsWebRequests
         public string response;
     }
     
-    // TODO: Find out if it remembers previous messages
     public class OllamaRequests
     {
         private const string IPAddress = "127.0.0.1";

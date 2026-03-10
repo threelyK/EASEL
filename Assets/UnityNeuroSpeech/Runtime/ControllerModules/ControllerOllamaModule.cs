@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityNeuroSpeech.Utils;
@@ -10,8 +11,6 @@ namespace UnityNeuroSpeech.Runtime.Ollama
         private int _responseCount;
         private OllamaRequests _ollamaRequester;
         
-        // TODO: Keeping chatlogs for test purposes?
-        
         public void InitOllamaModular(string systemPrompt)
         {
             // Init ollama client
@@ -23,7 +22,7 @@ namespace UnityNeuroSpeech.Runtime.Ollama
             LogUtils.LogMessage("Sending message to Ollama...");
 
             var chatResponse = await _ollamaRequester.SendPrompt(userPrompt);
-            
+        
             LogUtils.LogMessage($"Ollama response: {chatResponse}");
             _responseCount++;
 
