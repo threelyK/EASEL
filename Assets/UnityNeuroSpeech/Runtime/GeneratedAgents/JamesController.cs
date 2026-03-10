@@ -59,8 +59,9 @@ namespace UnityNeuroSpeech.Runtime
         #endregion
         
         // Custom
-        private string _blank = "[BLANK_AUDIO]";
-        private string _empty = "";
+        private const string _blank = "[BLANK_AUDIO]";
+        private const string _empty = "";
+        private const string _augment = " answer in less than 2000 characters";
         
         #region Unity methods
         private void Start()
@@ -139,7 +140,7 @@ namespace UnityNeuroSpeech.Runtime
         /// <returns>Response from LLM</returns>
         private async UniTask<string> SendMessageToOllama(string userPrompt, string lang, CancellationToken token)
         {
-            var ollamaResult = await _ollamaModule.SendMessageModular(userPrompt, lang, token);
+            var ollamaResult = await _ollamaModule.SendMessageModular(userPrompt + _augment, lang, token);
 
             _jsonModule.UpdateJsonDialogHistoryModular(lastDialog: new(ollamaResult.userPrompt, ollamaResult.agentMessage));
 

@@ -42,10 +42,11 @@ namespace TtsWebRequests
         
         private async UniTask<string> PostToInworldVoice(string text)
         {
-            Debug.Log("Started Post");
-
             using var postRequest = CreatePostRequest(text);
-            await postRequest.SendWebRequest();
+            
+            await postRequest.SendWebRequest(); // Error occuring here
+            
+            Debug.Log("Sent Request");
             // -> downloadHandler.text = audioContent{<BYTES>}
 
             if (postRequest.result != UnityWebRequest.Result.Success)
