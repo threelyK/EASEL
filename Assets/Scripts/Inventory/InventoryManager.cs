@@ -1,33 +1,42 @@
 using System;
-using UnityEngine;
+using System.Linq;
+using UnityEngine.Serialization;
 
-namespace PlayerInteraction.Inventory
+namespace Inventory
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : Singleton<InventoryManager>
     {
+        // Doesn't handle UI elements only data
+        
         // Detects changes to inventory
-        public InventorySlot[] slots;
         public static Action<ItemSO> OnItemPickup;
         public static Action<ItemSO> OnItemDrop;
 
         // Tracks possession of items
-        // Should make a slot for every collectible artifact
-        private InventorySlot _artifact1;
-        private InventorySlot _artifact2;
+        private const int _itemCount = 3; // Total number of artifacts
+        private InventoryItem[] _inventoryItems = new InventoryItem[_itemCount];
+        public ItemSO[] items = new ItemSO[_itemCount];
         
-        public ItemSO itemSo1;
-        public ItemSO itemSo2;
-    
-    
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private void PickupItem(ItemSO item)
+        {
+            _inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemPickedUp(); 
+        }
+        
+        private void DropItem(ItemSO item)
+        {
+            _inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemDropped(); 
+        }
+        
         private void Start()
         {
-            _artifact1 = new InventorySlot(itemSo1);
-            _artifact2 = new InventorySlot(itemSo2);
-            
-            slots = new []{_artifact1, _artifact2};
-        }
+            // Initializing inventory
+            for (var i = 0; i < _inventoryItems.Length; i++)
+            {
+                _inventoryItems[i] = new InventoryItem(items[i]);
+            }
 
+        }
+        
         private void OnEnable()
         {
             OnItemPickup += PickupItem;
@@ -39,25 +48,5 @@ namespace PlayerInteraction.Inventory
             OnItemPickup -= PickupItem;
             OnItemDrop -= DropItem;
         }
-        
-        private void PickupItem(ItemSO itemSO)
-        {
-            foreach (var inventorySlot in slots)
-            {
-                if (inventorySlot._itemSo != itemSO) continue;
-                inventorySlot.foundItem = true;
-                inventorySlot.hasItem = true;
-            }
-        }
-
-        private void DropItem(ItemSO itemSO)
-        {
-            foreach (var inventorySlot in slots)
-            {
-                if (inventorySlot._itemSo != itemSO) continue;
-                inventorySlot.hasItem = false;
-            }
-        }
-        
     }
 }

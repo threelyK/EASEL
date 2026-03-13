@@ -1,10 +1,13 @@
 using System;
 
-namespace PlayerInteraction.Inventory
+namespace Inventory
 {
     [Serializable]
     public class InventorySlot
     {
+        // GUI related inventory
+        
+        
         public bool foundItem;
         // _hasItem was switched on then display grayed-out image ("in world") instead of black
 

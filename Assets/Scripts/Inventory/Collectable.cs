@@ -1,13 +1,12 @@
-using System;
-using PlayerInteraction.Inventory;
 using UnityEngine;
 
 namespace Inventory
 {
     public class Collectable : MonoBehaviour
     {
-        public ItemSO itemSO;
-
+        [SerializeField] private ItemSO _itemSO;
+        
+        // Detects when in inventory zone
         private void OnTriggerStay(Collider other)
         {
             if (!other.GetComponent<Collider>().CompareTag("InventoryDropZone")) return;
@@ -15,19 +14,14 @@ namespace Inventory
                 OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger))
             {
                 PlaceIntoInventory();
-            };
+            }
         }
 
         private void PlaceIntoInventory()
         {
-            InventoryManager.OnItemPickup?.Invoke(itemSO);
+            InventoryManager.OnItemPickup?.Invoke(_itemSO);
             Debug.Log("Placed into inventory");
             Destroy(gameObject);
         }
-
-        // TODO:
-        // - When in range produce outline to indicate it's interactable
-    
-    
     }
 }
