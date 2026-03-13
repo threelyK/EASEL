@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +14,6 @@ namespace Inventory
     }
     public class ItemPage : MonoBehaviour
     {
-        // Change Inventory Item shown on Inventory Display Object
-        // Format:
-        // Top --> Name -- if not found name = ???
-        // Middle --> Object Preview
-        // Bot --> Description
-        
         public int pageNumber;
 
         [SerializeField] private TMP_Text[] _nameTexts;
@@ -28,6 +23,7 @@ namespace Inventory
         [SerializeField] private int _numberOfPageItems = 3;
         private InventoryItem[] _pageItems; // size of this does not reflect the page number
 
+        private ItemStatus[] _pageItemStatuses;
         private string[] _names;
         
         [SerializeField] private int _indexStart; // Can be used to find the true index from the local index
@@ -41,20 +37,53 @@ namespace Inventory
             // TODO: figure out masking of the image
             if (pageNumber != pageNum) return;
             
-            // Delete these after test
-            Debug.Log($"Has item: {_pageItems[0].hasItem}");
-            Debug.Log($"Has item invm: {_inventoryManager.inventoryItems[0].hasItem}");
-            
-            // Updates caches for _pageItems;
-            // If hasItem = false && foundItem = false --> Black silhouette
-            // If hasItem = false && foundItem --> Gray silhouette
-            // If hasItem && foundItem --> No silhouette
+            // Check all pageItems for updates
+            for (var i = 0; i < _pageItems.Length; i++)
+            {
+                if (_pageItems[i].HasItem())
+                {
+                    _pageItemStatuses[i] = ItemStatus.HELD;
+                } else if (_pageItems[i].FoundItem())
+                {
+                    _pageItemStatuses[i] = ItemStatus.FOUND;
+                }
+                else
+                {
+                    _pageItemStatuses[i] = ItemStatus.NOT_FOUND;
+                }
+            }
+
+            UpdateCurrentPage();
+        }
+
+        private void UpdateCurrentPage()
+        {
+            for (int i = 0; i < _pageItemStatuses.Length; i++)
+            {
+                var status = _pageItemStatuses[i];
+                switch (status)
+                {
+                    case ItemStatus.HELD:
+                        _nameTexts[i].text = _names[i];
+                        _sprites[i].color = Color.white;
+                        break;
+                    case ItemStatus.FOUND:
+                        // Change silhouette
+                        _sprites[i].color = new Color32(0, 0, 0, 100);
+                        break;
+                    case ItemStatus.NOT_FOUND:
+                        // Change silhouette
+                        _sprites[i].color = Color.black;
+                        break;
+                }
+            }
         }
         
         private void Start()
         {
             _pageItems = new InventoryItem[_numberOfPageItems];
             _names = new string[_numberOfPageItems];
+            _pageItemStatuses = new ItemStatus[_numberOfPageItems];
             
             _inventoryManager = InventoryManager.Instance;
             
@@ -64,12 +93,16 @@ namespace Inventory
             {
                 var localIndex = i - _indexStart;
                 _pageItems[localIndex] = _inventoryManager.inventoryItems[i];
-                
+
+
+                _pageItemStatuses[localIndex] = ItemStatus.NOT_FOUND;
                 _nameTexts[localIndex].text = "???";
                 _names[localIndex] = _inventoryManager.items[i].displayName;
                 _sprites[localIndex].sprite = _inventoryManager.items[i].icon;
                 _descTexts[localIndex].text = _inventoryManager.items[i].description;
             }
+            
+            CheckForChanges(pageNumber);
         }
 
         private void OnEnable()
