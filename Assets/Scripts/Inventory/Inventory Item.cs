@@ -1,20 +1,24 @@
 namespace Inventory
 {
+    public enum ItemStatus
+    {
+        HELD,
+        FOUND,
+        NOT_FOUND,
+    }
     public class InventoryItem
     {
-        private bool _foundItem;
-        private bool _hasItem;
+        private ItemStatus _itemStatus = ItemStatus.NOT_FOUND;
         public ItemSO _itemSo;
 
         public void ItemPickedUp()
         {
-            if (!_foundItem) _foundItem = true;
-            _hasItem = true;
+            _itemStatus = ItemStatus.HELD;
         }
 
         public void ItemDropped()
         {
-            _hasItem = false;
+            _itemStatus = ItemStatus.FOUND;
         }
         
         public InventoryItem(ItemSO itemSo)
@@ -22,14 +26,9 @@ namespace Inventory
             _itemSo = itemSo;
         }
 
-        public bool HasItem()
+        public ItemStatus GetItemStatus()
         {
-            return _hasItem;
-        }
-
-        public bool FoundItem()
-        {
-            return _foundItem;
+            return _itemStatus;
         }
     }
 }
