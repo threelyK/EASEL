@@ -9,14 +9,14 @@ namespace Inventory
         // Pages are manually made
         // TODO: first page has 3 artifacts
 
-        [SerializeField] private GameObject _mainPage;
+        [SerializeField] private GameObject _mainPage; // Used to show/hide whenever the inventory is brought up
         public ItemPage[] _pages;
 
         [SerializeField] private TMP_Text _pageNumberText;
         
-        [SerializeField] private int pageCount; // 2 pages = index 0,1
-        private int pageNumber; // First page = 0
-        private int prevPageNumber;
+        private int _pageCount; // 2 pages = index 0,1
+        private int pageIndex; // First page = 0
+        private int prevPageIndex;
 
         public static Action<int> OnPageChanged;
         
@@ -25,33 +25,34 @@ namespace Inventory
             switch (forwardAmount)
             {
                 case > 0:
-                    if (pageNumber + forwardAmount <= pageCount)
+                    if (pageIndex + forwardAmount < _pageCount)
                     {
-                        prevPageNumber = pageNumber;
-                        pageNumber += forwardAmount;
-                        DisplayPage(pageNumber);
-                        HidePage(prevPageNumber);
+                        prevPageIndex = pageIndex;
+                        pageIndex += forwardAmount;
+                        DisplayPage(pageIndex);
+                        HidePage(prevPageIndex);
                     }
                     break;
                 case < 0:
-                    if (pageNumber + forwardAmount >= 0)
+                    if (pageIndex + forwardAmount >= 0)
                     {
-                        prevPageNumber = pageNumber;
-                        pageNumber += forwardAmount;
-                        DisplayPage(pageNumber);
-                        HidePage(prevPageNumber);
+                        prevPageIndex = pageIndex;
+                        pageIndex += forwardAmount;
+                        DisplayPage(pageIndex);
+                        HidePage(prevPageIndex);
                     }
                     break;
                 default:
                     return;
-                OnPageChanged?.Invoke(pageNumber);
             }
+
+            OnPageChanged?.Invoke(pageIndex);
         }
 
         private void DisplayPage(int pageNum)
         {
             var page =  _pages[pageNum];
-            _pageNumberText.text = $"Page: {pageNum}";
+            _pageNumberText.text = $"Page: {pageIndex+1}";
             page.gameObject.SetActive(true);
         }
 
@@ -65,7 +66,12 @@ namespace Inventory
 
         private void Start()
         {
-            _pageNumberText.text = $"Page: {pageNumber+1}";
+            _pageCount = _pages.Length;
+            _pageNumberText.text = $"Page: {pageIndex+1}";
+            for (var i = 1; i < _pageCount; i++)
+            {
+                _pages[i].gameObject.SetActive(false);
+            }
         }
 
         #endregion

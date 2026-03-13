@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using UnityEngine.Serialization;
 
 namespace Inventory
 {
@@ -13,9 +12,8 @@ namespace Inventory
         public static Action<ItemSO> OnItemDrop;
 
         // Tracks possession of items
-        private const int _itemCount = 3; // Total number of artifacts
-        public readonly InventoryItem[] inventoryItems = new InventoryItem[_itemCount];
-        public ItemSO[] items = new ItemSO[_itemCount];
+        public InventoryItem[] inventoryItems;
+        public ItemSO[] items;
         
         private void PickupItem(ItemSO item)
         {
@@ -29,12 +27,14 @@ namespace Inventory
         
         private void Start()
         {
+            inventoryItems = new InventoryItem[items.Length];
+            
             // Initializing inventory
-            for (var i = 0; i < inventoryItems.Length; i++)
+            for (var i = 0; i < items.Length; i++)
             {
+                // Making an inventoryItem for every item that can be put into the inventory
                 inventoryItems[i] = new InventoryItem(items[i]);
             }
-
         }
         
         private void OnEnable()
