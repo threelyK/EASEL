@@ -14,25 +14,25 @@ namespace Inventory
 
         // Tracks possession of items
         private const int _itemCount = 3; // Total number of artifacts
-        private InventoryItem[] _inventoryItems = new InventoryItem[_itemCount];
+        public readonly InventoryItem[] inventoryItems = new InventoryItem[_itemCount];
         public ItemSO[] items = new ItemSO[_itemCount];
         
         private void PickupItem(ItemSO item)
         {
-            _inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemPickedUp(); 
+            inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemPickedUp(); 
         }
         
         private void DropItem(ItemSO item)
         {
-            _inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemDropped(); 
+            inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemDropped(); 
         }
         
         private void Start()
         {
             // Initializing inventory
-            for (var i = 0; i < _inventoryItems.Length; i++)
+            for (var i = 0; i < inventoryItems.Length; i++)
             {
-                _inventoryItems[i] = new InventoryItem(items[i]);
+                inventoryItems[i] = new InventoryItem(items[i]);
             }
 
         }

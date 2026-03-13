@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+using UnityEngine;
 
 namespace Inventory
 {
@@ -6,41 +8,67 @@ namespace Inventory
     {
         // Pages are manually made
         // TODO: first page has 3 artifacts
+
+        [SerializeField] private GameObject _mainPage;
+        public ItemPage[] _pages;
+
+        [SerializeField] private TMP_Text _pageNumberText;
         
+        [SerializeField] private int pageCount; // 2 pages = index 0,1
         private int pageNumber; // First page = 0
-        private int maxPageNumber;
+        private int prevPageNumber;
 
-        public static Action<int> OnPageForwardChange;
+        public static Action<int> OnPageChanged;
         
-        private void OnEnable()
-        {
-            OnPageForwardChange += HandlePageChange;
-        }
-
-        private void HandlePageChange(int forwardAmount)
+        public void HandlePageChange(int forwardAmount)
         {
             switch (forwardAmount)
             {
                 case > 0:
-                    if (pageNumber + forwardAmount <= maxPageNumber) pageNumber += forwardAmount;
+                    if (pageNumber + forwardAmount <= pageCount)
+                    {
+                        prevPageNumber = pageNumber;
+                        pageNumber += forwardAmount;
+                        DisplayPage(pageNumber);
+                        HidePage(prevPageNumber);
+                    }
                     break;
                 case < 0:
-                    if (pageNumber + forwardAmount >= 0) pageNumber += forwardAmount;
+                    if (pageNumber + forwardAmount >= 0)
+                    {
+                        prevPageNumber = pageNumber;
+                        pageNumber += forwardAmount;
+                        DisplayPage(pageNumber);
+                        HidePage(prevPageNumber);
+                    }
                     break;
+                default:
+                    return;
+                OnPageChanged?.Invoke(pageNumber);
             }
         }
 
-        private void DisplayPage(int pageNumber)
+        private void DisplayPage(int pageNum)
         {
-            // Change Inventory Item shown on Inventory Display Object
-            // Format:
-            // Top --> Name -- if not found name = ???
-            // Middle --> Object Preview
-            // Bot --> Description
-            
-            
+            var page =  _pages[pageNum];
+            _pageNumberText.text = $"Page: {pageNum}";
+            page.gameObject.SetActive(true);
         }
-        
+
+        private void HidePage(int pageNum)
+        {
+            var page = _pages[pageNum];
+            page.gameObject.SetActive(false);
+        }
+
+        #region  Unity Methods
+
+        private void Start()
+        {
+            _pageNumberText.text = $"Page: {pageNumber+1}";
+        }
+
+        #endregion
         
     }
 }
