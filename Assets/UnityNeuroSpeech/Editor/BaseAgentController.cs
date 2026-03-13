@@ -54,7 +54,11 @@ namespace UnityNeuroSpeech.Editor
         private ControllerTTSModule _ttsModule;
         private ControllerJsonDataModule _jsonModule;
         #endregion
-
+        
+        // Custom
+        private string _blank = "blank";
+        private string _empty = "empty";
+        
         #region Unity methods
         private void Start()
         {
@@ -83,7 +87,20 @@ namespace UnityNeuroSpeech.Editor
         /// </summary>
         private async UniTask MainCycle(AudioChunk recordedAudio)
         {
+            // RadioActions.OnReadyReady?.Invoke(false);
+            
             var whisperResult = await GetWhisperResult(recordedAudio);
+
+            var whisperResultStr = whisperResult.Result;
+            
+            var invalidPrompt = (whisperResultStr.Contains(_blank) || whisperResultStr.Contains(_empty)) && whisperResultStr.Length < 11
+                                || whisperResultStr.Equals("");
+
+            if (invalidPrompt)
+            {
+                // RadioReady?.Invoke(true);
+                return;
+            }
 
             var llmResponse = await SendMessageToOllama(whisperResult.Result, whisperResult.Language, this.GetCancellationTokenOnDestroy());
 

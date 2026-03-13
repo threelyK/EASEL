@@ -30,14 +30,14 @@ namespace PlayerInteraction
         
         void Update()
         {
-            if (_inRange && !_isTalking && OVRInput.GetDown(OVRInput.Button.One))
+            if (_inRange && !_isTalking && OVRInput.GetDown(OVRInput.Button.Two))
             {
-                Debug.Log("InRange and Pressing");
+                // Debug.Log("InRange and Pressing");
                 OnPlayerTalking?.Invoke();
                 _isTalking = true;
-            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.One) || !_inRange))
+            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.Two) || !_inRange))
             {
-                Debug.Log("OutRange or StoppedPressing");
+                // Debug.Log("OutRange or StoppedPressing");
                 OnPlayerStoppedTalking?.Invoke();
                 _isTalking = false;
             }

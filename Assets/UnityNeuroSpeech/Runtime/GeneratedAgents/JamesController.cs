@@ -5,7 +5,6 @@
 using System;
 using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.UI;
 using Whisper.Utils;
 using UnityNeuroSpeech.Runtime.Ollama;
 using UnityNeuroSpeech.Runtime.JsonData;
@@ -16,7 +15,6 @@ using UnityNeuroSpeech.Runtime.ControllerModules;
 using LogUtils = UnityNeuroSpeech.Utils.LogUtils;
 using TtsWebRequests;
 using PlayerInteraction;
-
 #endregion
 
 namespace UnityNeuroSpeech.Runtime
@@ -59,7 +57,12 @@ namespace UnityNeuroSpeech.Runtime
         private ControllerTTSModule _ttsModule;
         private ControllerJsonDataModule _jsonModule;
         #endregion
-
+        
+        // Custom
+        private const string _blank = "[BLANK_AUDIO]";
+        private const string _empty = "";
+        private const string _augment = " answer in less than 2000 characters";
+        
         #region Unity methods
         private void Start()
         {
@@ -97,15 +100,30 @@ namespace UnityNeuroSpeech.Runtime
         /// </summary>
         private async UniTask MainCycle(AudioChunk recordedAudio)
         {
+            RadioActions.OnRadioReady?.Invoke(false);
+            
             var whisperResult = await GetWhisperResult(recordedAudio);
 
-            var llmResponse = await SendMessageToOllama(whisperResult.Result, whisperResult.Language, this.GetCancellationTokenOnDestroy());
+            var whisperResultStr = whisperResult.Result;
+            
+            var invalidPrompt = whisperResultStr.Contains(_blank) || whisperResultStr.Equals(_empty);
 
+            if (invalidPrompt)
+            {
+                RadioActions.OnRadioReady?.Invoke(true);
+                _processingOtherActions = false;
+                return;
+            }
+            
+            var llmResponse = await SendMessageToOllama(whisperResult.Result, whisperResult.Language, this.GetCancellationTokenOnDestroy());
+            
             var ttsCaller = new InworldTtsCaller(_ttsAudioSource, _apiKey);
 
             await ttsCaller.PostAndPlayToInworldVoice(llmResponse);
+            RadioActions.ResponseGenerated?.Invoke(llmResponse);
             AfterTTS?.Invoke();
-
+            
+            RadioActions.OnRadioReady?.Invoke(true);
             _processingOtherActions = false;
             
             // Don't need ttsModule
@@ -122,7 +140,7 @@ namespace UnityNeuroSpeech.Runtime
         /// <returns>Response from LLM</returns>
         private async UniTask<string> SendMessageToOllama(string userPrompt, string lang, CancellationToken token)
         {
-            var ollamaResult = await _ollamaModule.SendMessageModular(userPrompt, lang, token);
+            var ollamaResult = await _ollamaModule.SendMessageModular(userPrompt + _augment, lang, token);
 
             _jsonModule.UpdateJsonDialogHistoryModular(lastDialog: new(ollamaResult.userPrompt, ollamaResult.agentMessage));
 
@@ -173,32 +191,6 @@ namespace UnityNeuroSpeech.Runtime
             _processingOtherActions = true;
             // _micButton.image.sprite = _disableMicSprite;
         }
-
-        #endregion
-
-        #region TTS
-
-#if ENABLE_MONO
-
-        /// <summary>
-        /// Monitors TTS process. When process exits, will play generated audio and then delete it.
-        /// </summary>
-        private async UniTask MonitorTTSProcess(string lang, Process ttsProcess)
-        {
-            await UniTask.SwitchToThreadPool();
-
-            ttsProcess.WaitForExit();
-
-            await UniTask.SwitchToMainThread();
-
-            await _ttsModule.CheckTTSProcessMonoModular(lang, ttsProcess);
-
-            LogUtils.LogMessage($"Invoking AfterTTS() for agent");
-            AfterTTS?.Invoke();
-
-            _processingOtherActions = false;
-        }
-#endif
 
         #endregion
     }

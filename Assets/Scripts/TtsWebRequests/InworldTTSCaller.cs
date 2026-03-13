@@ -40,34 +40,33 @@ namespace TtsWebRequests
             PlayVoiceClip(response);
         }
         
-        private async UniTask<DownloadHandler> PostToInworldVoice(string text)
+        private async UniTask<string> PostToInworldVoice(string text)
         {
-            Debug.Log("Started Post");
-            var postRequest = CreatePostRequest(text);
-            await postRequest.SendWebRequest();
+            using var postRequest = CreatePostRequest(text);
+            
+            await postRequest.SendWebRequest(); // Error occuring here
+            
+            Debug.Log("Sent Request");
             // -> downloadHandler.text = audioContent{<BYTES>}
 
-            try
+            if (postRequest.result != UnityWebRequest.Result.Success)
             {
-                Debug.Log(postRequest.result is UnityWebRequest.Result.ConnectionError
-                    or UnityWebRequest.Result.ProtocolError
-                    ? postRequest.error
-                    : postRequest.downloadHandler.text);
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e.Message);
+                Debug.LogError("TTS request failed: " + postRequest.error);
+                Debug.LogError("Response: " + postRequest.downloadHandler.text);
+                throw new Exception(postRequest.error);
+                
             }
             
-            var response = postRequest.downloadHandler;
-            return response;
+            Debug.Log("TTS Response OK");
+            
+            return postRequest.downloadHandler.text;
         }
 
 
-        private void PlayVoiceClip(DownloadHandler response)
+        private void PlayVoiceClip(String responseText)
         {
             // Response.data contains audioContent{...} in base64 contains "RIFF" header
-            var responseJson = JsonUtility.FromJson<PostResponseJson>(response.text);
+            var responseJson = JsonUtility.FromJson<PostResponseJson>(responseText);
             // audioContent is encoded in base64
             var audioBytes = Convert.FromBase64String(responseJson.audioContent);
             
@@ -82,12 +81,16 @@ namespace TtsWebRequests
         {
             // AI generated helper function
             
-            var sampleCount = audioBytes.Length / 2 - HeaderOffset;
+            var sampleCount = (audioBytes.Length / 2) - HeaderOffset;
             float[] samples = new float[sampleCount];
 
-            for (int i = HeaderOffset+1; i < sampleCount; i++)
+            // i = HeaderOffset+1
+            
+            for (int i = 0; i < sampleCount; i++)
             {
-                var sample = (short)(audioBytes[i * 2] | (audioBytes[i * 2 + 1] << 8));
+                int byteIndex = (i + HeaderOffset) * 2;
+                // replaced i*2 with byte index
+                var sample = (short)(audioBytes[i * 2] | (audioBytes[byteIndex + 1] << 8));
                 samples[i] = sample / 32768f; // normalize to -1..1
             }
 
@@ -147,7 +150,7 @@ namespace TtsWebRequests
                 applyTextNormalization = TextNormalization,
             });
             
-            // Debug.Log(jsonData);
+            Debug.Log(jsonData);
 
             return jsonData;
         }
