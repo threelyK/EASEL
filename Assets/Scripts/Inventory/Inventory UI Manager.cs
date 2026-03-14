@@ -7,12 +7,13 @@ namespace Inventory
     public class InventoryUIManager : Singleton<InventoryUIManager>
     {
         // Pages are manually made
-        // TODO: first page has 3 artifacts
 
-        [SerializeField] private GameObject _mainPage; // Used to show/hide whenever the inventory is brought up
+        [SerializeField] 
+        private GameObject _mainPage; // Used to show/hide whenever the inventory is brought up
         public ItemPage[] _pages;
 
-        [SerializeField] private TMP_Text _pageNumberText;
+        [SerializeField] 
+        private TMP_Text _pageNumberText;
         
         private int _pageCount; // 2 pages = index 0,1
         private int pageIndex; // First page = 0

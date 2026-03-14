@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace Inventory
@@ -11,18 +10,24 @@ namespace Inventory
     {
         public int pageNumber;
 
-        [SerializeField] private TMP_Text[] _nameTexts;
-        [SerializeField] private Image[] _sprites;
-        [SerializeField] private TMP_Text[] _descTexts;
+        [SerializeField] 
+        private TMP_Text[] _nameTexts;
+        [SerializeField] 
+        private Image[] _sprites;
+        [SerializeField] 
+        private TMP_Text[] _descTexts;
         
-        [SerializeField] private int _numberOfPageItems = 3;
+        [SerializeField] 
+        private int _numberOfPageItems = 3;
         private InventoryItem[] _pageItems; // size of this does not reflect the page number
         private ItemSO[] _itemSOs;
         
         private string[] _names;
         
-        [SerializeField] private int _indexStart; // Can be used to find the true index from the local index
-        [SerializeField] private int _indexEnd;
+        [SerializeField] 
+        private int _indexStart; // Can be used to find the true index from the local index
+        [SerializeField] 
+        private int _indexEnd;
         
         private InventoryManager _inventoryManager;
 

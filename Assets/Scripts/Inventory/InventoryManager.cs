@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEngine;
 
 namespace Inventory
 {
@@ -14,6 +15,7 @@ namespace Inventory
         // Tracks possession of items
         public InventoryItem[] inventoryItems;
         public ItemSO[] items;
+        
         
         private void PickupItem(ItemSO item)
         {
