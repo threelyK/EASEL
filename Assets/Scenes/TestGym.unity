@@ -6391,7 +6391,7 @@ GameObject:
   - component: {fileID: 1024890788}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -13128,7 +13128,7 @@ PrefabInstance:
       objectReference: {fileID: 1441331851}
     - target: {fileID: 3863200640733522692, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4196531689914293179, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
@@ -13165,6 +13165,10 @@ PrefabInstance:
     - target: {fileID: 7152659504178525839, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189243991059372680, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7982636858369236150, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
@@ -13950,7 +13954,7 @@ PrefabInstance:
       objectReference: {fileID: 1441331853}
     - target: {fileID: 3863200640733522692, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4210982683370501458, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: _updateAfter
@@ -13991,6 +13995,10 @@ PrefabInstance:
     - target: {fileID: 7152659504178525839, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189243991059372680, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7982636858369236150, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
@@ -14038,7 +14046,7 @@ MonoBehaviour:
   _maxGrabPoints: -1
   _rigidbody: {fileID: 4496846246267885234}
   _kinematicWhileSelected: 0
-  _throwWhenUnselected: 0
+  _throwWhenUnselected: 1
   _forceKinematicDisabled: 0
 --- !u!23 &2383136861192590341
 MeshRenderer:
@@ -14899,8 +14907,8 @@ Rigidbody:
   m_GameObject: {fileID: 4927868910038711809}
   serializedVersion: 5
   m_Mass: 0.2
-  m_LinearDamping: 1
-  m_AngularDamping: 1
+  m_LinearDamping: 0.5
+  m_AngularDamping: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -16087,7 +16095,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bots.BotController
   _speed: 1
   targetPosition: {x: 0, y: 0, z: 0}
-  _grabInteractable: {fileID: 294081454211261297}
 --- !u!95 &7304732557202689954
 Animator:
   serializedVersion: 7
@@ -16101,7 +16108,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 67f99d81ecf535542aea175b3a76a737, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0

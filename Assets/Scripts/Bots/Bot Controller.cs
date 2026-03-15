@@ -56,7 +56,7 @@ namespace Bots
 
         private void MoveToSnap(Transform snapTransform)
         {
-            gameObject.transform.position = snapTransform.position;
+            _agent.Warp(snapTransform.position);
         }
 
         private void HandleGrabbed(PointerEvent evt)
@@ -64,15 +64,18 @@ namespace Bots
             switch (evt.Type)
             {
                 case PointerEventType.Select:
-                    Debug.Log("Grabbed detected");
                     UpdateAnimToGrabbed();
                     break;
                 case PointerEventType.Unselect:
-                    // launch in direction interactor was in
                     _isGrounded = false;
                     _agent.enabled = false;
                     break;
             }
+        }
+
+        private void GoToDestination(Vector3 targetPos)
+        {
+            if (_isGrounded && _agent.isActiveAndEnabled) _agent.SetDestination(targetPos);
         }
 
         private void OnCollisionEnter(Collision other)
@@ -80,6 +83,7 @@ namespace Bots
             if (other.gameObject.CompareTag("Ground"))
             {
                 _isGrounded = true;
+                _agent.enabled = true;
             }
         }
 
@@ -120,13 +124,7 @@ namespace Bots
         private void Update()
         {
             HandleVelocityAnimations();
-            // isGrounded = true when collide with ground / ground layer
-            if (_isGrounded)
-            {
-                Debug.Log("Grounded");
-                _agent.enabled = true;
-            }
-            if (_isGrounded) _agent.SetDestination(targetPosition);
+            GoToDestination(targetPosition);
         }
 
         private void OnEnable()
