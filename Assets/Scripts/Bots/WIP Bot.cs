@@ -4,17 +4,6 @@ using UnityEngine;
 
 namespace Bots
 {
-    internal class PartCondition
-    {
-        public readonly BotPartType _partType;
-        public bool _condition;
-
-        public PartCondition(BotPartType partType, bool condition)
-        {
-            _partType = partType;
-            _condition = condition;
-        }
-    }
     public class WIPBot : MonoBehaviour
     {
         // Has collider that interacts with triggers on component objects
@@ -51,6 +40,18 @@ namespace Bots
         private bool IsComplete()
         {
             return _partConditions.All(partCondition => partCondition._condition);
+        }
+    }
+    
+    internal class PartCondition
+    {
+        public readonly BotPartType _partType;
+        public bool _condition;
+
+        public PartCondition(BotPartType partType, bool condition)
+        {
+            _partType = partType;
+            _condition = condition;
         }
     }
 }

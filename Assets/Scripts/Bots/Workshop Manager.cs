@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace Bots
 {
-    public class WorkshopManager : MonoBehaviour
+    public class WorkshopManager : Singleton<WorkshopManager>
     {
         [SerializeField] private Transform _spawnLocation;
         
@@ -25,6 +25,11 @@ namespace Bots
         {
             _spawnLocation.position = newPosition;
             _spawnLocation.rotation = newRotation;
+        }
+
+        private void Start()
+        {
+            if (_spawnLocation == null) Debug.LogError("Spawn Location is missing");
         }
 
         private void OnEnable()
