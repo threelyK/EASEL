@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using UnityEngine;
 
 namespace Inventory
 {
@@ -12,17 +12,29 @@ namespace Inventory
         public static Action<ItemSO> OnItemDrop;
 
         // Tracks possession of items
-        public InventoryItem[] inventoryItems;
+        public InventoryItem[] inventoryItems; // TODO Do I need to expose this?
         public ItemSO[] items;
+        
+        [SerializeField] private GameObject _SpawnPosObj;
         
         private void PickupItem(ItemSO item)
         {
-            inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemPickedUp(); 
+            var foundItem = Array.Find(inventoryItems, inventoryItem => inventoryItem._itemSo == item);
+            
+            if  (foundItem == null) throw new Exception("Can't find item in inventoryItems");
+            foundItem?.ItemPickedUp();
         }
-        
+
         private void DropItem(ItemSO item)
         {
-            inventoryItems.First(inventoryItem => inventoryItem._itemSo.id == item.id).ItemDropped(); 
+            var foundItem = Array.Find(inventoryItems, invItem =>
+                invItem._itemSo == item && invItem.GetItemStatus() == ItemStatus.HELD);
+
+            if (foundItem == null) throw new Exception("Can't find item in inventoryItems");
+            Debug.Log("Dropping item");
+            
+            Instantiate(foundItem._itemSo.worldPrefab, _SpawnPosObj.transform.position, _SpawnPosObj.transform.rotation);
+            foundItem?.ItemDropped();
         }
         
         private void Start()

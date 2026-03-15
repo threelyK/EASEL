@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Inventory
@@ -11,21 +11,29 @@ namespace Inventory
     {
         public int pageNumber;
 
-        [SerializeField] private TMP_Text[] _nameTexts;
-        [SerializeField] private Image[] _sprites;
-        [SerializeField] private TMP_Text[] _descTexts;
+        [SerializeField] 
+        private TMP_Text[] _nameTexts;
+        [SerializeField] 
+        private Image[] _sprites;
+        [SerializeField] 
+        private TMP_Text[] _descTexts;
+
+        [SerializeField] 
+        private int _indexStart; // Can be used to find the true index from the local index
+        [SerializeField, Tooltip("Is inclusive.")]
+        private int _indexEnd;
         
-        [SerializeField] private int _numberOfPageItems = 3;
-        private InventoryItem[] _pageItems; // size of this does not reflect the page number
+        private int _numberOfItems;
+        
+        // Collections for caching
+        private InventoryItem[] _pageItems; // size of this does not reflect the page number -  Holds a reference to the itemStatuses
+
+        // These values shouldn't change after setup
         private ItemSO[] _itemSOs;
-        
         private string[] _names;
-        
-        [SerializeField] private int _indexStart; // Can be used to find the true index from the local index
-        [SerializeField] private int _indexEnd;
-        
         private InventoryManager _inventoryManager;
 
+        
         private void UpdatePage(int pageNum)
         {
             if (pageNum != pageNumber) return;
@@ -62,13 +70,36 @@ namespace Inventory
                 }
             }
         }
-        
+
+        private void UpdateAllButtonEvents(bool isEnabled)
+        {
+            for (var i = 0; i < _sprites.Length; i++)
+            {
+                if (_itemSOs[i] == null) return;
+                var relatedItemSO =  _itemSOs[i];
+                switch (isEnabled)
+                {
+                    case true:
+                        _sprites[i].GetComponent<Button>().onClick.AddListener(() => InventoryManager.OnItemDrop?.Invoke(relatedItemSO));
+                        break;
+                    case false:
+                        _sprites[i].GetComponent<Button>().onClick.RemoveAllListeners();
+                        break;
+                }
+            }
+        }
+
+        #region Unity Methods
+
         private void Start()
         {
-            _pageItems = new InventoryItem[_numberOfPageItems];
-            _names = new string[_numberOfPageItems];
             
-            _itemSOs =  new ItemSO[_numberOfPageItems];
+            _numberOfItems = (_indexEnd + 1) - _indexStart;
+            
+            _pageItems = new InventoryItem[_numberOfItems];
+            
+            _itemSOs =  new ItemSO[_numberOfItems];
+            _names = new string[_numberOfItems];
             
             _inventoryManager = InventoryManager.Instance;
             
@@ -77,15 +108,20 @@ namespace Inventory
             for (var i = _indexStart; i <= _indexEnd; i++)
             {
                 var localIndex = i - _indexStart;
+                
+                // Setting up caches
                 _pageItems[localIndex] = _inventoryManager.inventoryItems[i];
                 _itemSOs[localIndex] = _pageItems[localIndex]._itemSo;
 
+                // Setting up visuals
                 _nameTexts[localIndex].text = "???";
                 _names[localIndex] = _inventoryManager.items[i].displayName;
-                _sprites[localIndex].sprite = _inventoryManager.items[i].icon;
                 _descTexts[localIndex].text = _inventoryManager.items[i].description;
+                
+                _sprites[localIndex].sprite = _inventoryManager.items[i].icon;
             }
 
+            UpdateAllButtonEvents(true);
             UpdateCurrentPage();
         }
 
@@ -101,6 +137,11 @@ namespace Inventory
             InventoryUIManager.OnPageChanged -= UpdatePage;
             InventoryManager.OnItemPickup -= UpdatePageWithItem;
             InventoryManager.OnItemDrop -= UpdatePageWithItem;
+            UpdateAllButtonEvents(false);
         }
+
+        #endregion
+        
+        
     }
 }

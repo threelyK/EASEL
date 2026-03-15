@@ -8,13 +8,13 @@ namespace PlayerInteraction
         private bool _inRange;
         private bool _isTalking;
 
-        private const string PlayerRangeTag = "PlayerInteractable";
+        private const string RadioTrigger = "RadioRange";
         public static event Action OnPlayerTalking;
         public static event Action OnPlayerStoppedTalking;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(PlayerRangeTag))
+            if (other.CompareTag(RadioTrigger))
             {
                 _inRange = true;
             }
@@ -22,7 +22,7 @@ namespace PlayerInteraction
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(PlayerRangeTag))
+            if (other.CompareTag(RadioTrigger))
             {
                 _inRange = false;
             }
