@@ -8511,7 +8511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399856573}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.49, y: 0.05, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8526,7 +8526,7 @@ Transform:
   - {fileID: 97897797}
   - {fileID: 1099014755}
   - {fileID: 1041403577}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1702608924}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1404760847
 GameObject:
@@ -10562,6 +10562,7 @@ Transform:
   - {fileID: 1783411856}
   - {fileID: 888611626}
   - {fileID: 1136995649}
+  - {fileID: 1399856574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704012729
@@ -13125,6 +13126,10 @@ PrefabInstance:
       propertyPath: _iModifyDataFromSourceMono
       value: 
       objectReference: {fileID: 1441331851}
+    - target: {fileID: 3863200640733522692, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4196531689914293179, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -13137,6 +13142,10 @@ PrefabInstance:
       propertyPath: _iModifyDataFromSourceMono
       value: 
       objectReference: {fileID: 1387114038}
+    - target: {fileID: 4285379164539477521, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4544440628775069585, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_Name
       value: RightInteractions
@@ -13939,6 +13948,10 @@ PrefabInstance:
       propertyPath: _iModifyDataFromSourceMono
       value: 
       objectReference: {fileID: 1441331853}
+    - target: {fileID: 3863200640733522692, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4210982683370501458, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: _updateAfter
       value: 
@@ -13947,6 +13960,10 @@ PrefabInstance:
       propertyPath: _iModifyDataFromSourceMono
       value: 
       objectReference: {fileID: 1387114039}
+    - target: {fileID: 4285379164539477521, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4544440628775069585, guid: fb864c4eb0f6fb84db931b10b5a8b5b1, type: 3}
       propertyPath: m_Name
       value: LeftInteractions
@@ -16070,6 +16087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bots.BotController
   _speed: 1
   targetPosition: {x: 0, y: 0, z: 0}
+  _grabInteractable: {fileID: 294081454211261297}
 --- !u!95 &7304732557202689954
 Animator:
   serializedVersion: 7
@@ -16467,5 +16485,4 @@ SceneRoots:
   - {fileID: 1956882919}
   - {fileID: 6939462995378672868}
   - {fileID: 1404760851}
-  - {fileID: 1399856574}
   - {fileID: 7304732557202689951}

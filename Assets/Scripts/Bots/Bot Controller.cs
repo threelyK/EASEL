@@ -1,6 +1,5 @@
-using System;
+
 using Oculus.Interaction;
-using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,13 +12,15 @@ namespace Bots
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
         private static readonly int IsGrabbed = Animator.StringToHash("isGrabbed");
         private static readonly int IsDeployed = Animator.StringToHash("isDeployed");
+
+        private bool _isGrounded;
         
         private Animator _animator;
         private Rigidbody _rb;
         [SerializeField] private float _speed = 1f;
         private NavMeshAgent _agent;
         public Vector3 targetPosition;
-        private HandGrabInteractable _grabbable;
+        private Grabbable _grabbable;
         
         private void HandleVelocityAnimations()
         {
@@ -28,6 +29,7 @@ namespace Bots
             if (_rb.linearVelocity.y != 0)
             {
                 _animator.SetBool(IsFalling, true);
+                _isGrounded = true;
             } 
             else
             {
@@ -57,11 +59,36 @@ namespace Bots
             gameObject.transform.position = snapTransform.position;
         }
 
-        private void DetectIfGrabbed(IInteractorView _)
+        private void HandleGrabbed(PointerEvent evt)
         {
-            Debug.Log("Grabbed detected");
-            UpdateAnimToGrabbed();
-            _agent.enabled = false;
+            switch (evt.Type)
+            {
+                case PointerEventType.Select:
+                    Debug.Log("Grabbed detected");
+                    UpdateAnimToGrabbed();
+                    break;
+                case PointerEventType.Unselect:
+                    // launch in direction interactor was in
+                    _isGrounded = false;
+                    _agent.enabled = false;
+                    break;
+            }
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                _isGrounded = true;
+            }
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            if (other.gameObject.CompareTag("Ground"))
+            {
+                _isGrounded = false;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -75,10 +102,17 @@ namespace Bots
             MoveToSnap(snapTransform);
         }
 
+
+        private void Awake()
+        {
+            _grabbable = GetComponent<Grabbable>();
+        }
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
             _agent = GetComponent<NavMeshAgent>();
+            _animator =  GetComponent<Animator>();
             
             _agent.speed = _speed;
         }
@@ -86,16 +120,23 @@ namespace Bots
         private void Update()
         {
             HandleVelocityAnimations();
-        }
-        
-        private void LateUpdate()
-        {
-            _agent.SetDestination(targetPosition);
+            // isGrounded = true when collide with ground / ground layer
+            if (_isGrounded)
+            {
+                Debug.Log("Grounded");
+                _agent.enabled = true;
+            }
+            if (_isGrounded) _agent.SetDestination(targetPosition);
         }
 
         private void OnEnable()
         {
-            _grabbable.WhenSelectingInteractorViewAdded += DetectIfGrabbed;
+            if (_grabbable != null) _grabbable.WhenPointerEventRaised += HandleGrabbed;
+        }
+        
+        private void OnDisable()
+        {
+            if (_grabbable != null) _grabbable.WhenPointerEventRaised -= HandleGrabbed;
         }
     }
 }
