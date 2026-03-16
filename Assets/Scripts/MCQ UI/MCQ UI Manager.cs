@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace MCQ_UI
 {
-    public class MCQUIManager : MonoBehaviour
+    public class MCQUIManager: Singleton<MCQUIManager>
     {
         // Should handle loads exam page using scriptable obj onto UI
         // Handle UI updates
@@ -32,10 +32,10 @@ namespace MCQ_UI
         [SerializeField] private TMP_Text OptionDText;
         
         // Options
-        public Color colorA =  Color.lightGreen;
-        public Color colorB =  Color.lightBlue;
-        public Color colorC =  Color.yellowNice;
-        public Color colorD =  Color.lightCoral;
+        private Color _colorA =  Color.lightGreen;
+        private Color _colorB =  Color.yellowNice;
+        private Color _colorC =  Color.lightBlue;
+        private Color _colorD =  Color.lightCoral;
 
         // Option initial texts
         private string _prefixA;
@@ -53,7 +53,7 @@ namespace MCQ_UI
         // Question tracking
         private int _currentQIndex;
         private int _lastQIndex;
-        private List<int> _QsSeen;
+        private List<int> _QsSeen = new ();
         
         // Answer tracking
         private OptionChoice[] _userAnswers;
@@ -62,9 +62,9 @@ namespace MCQ_UI
         
         // Actions
         public static Action<string> OnMCQComplete;
-        public static Action<OptionChoice> OnMCQAnswer;
+        public static Action<OptionChoice> OnAnswerSent;
         
-        private void PrevPage()
+        public void PrevPage()
         {
             if (_currentQIndex <= 0) return;
             
@@ -72,7 +72,7 @@ namespace MCQ_UI
             UpdatePage(_currentQIndex);
         }
 
-        private void NextPage()
+        public void NextPage()
         {
             // Log current page into QsSeen
             _QsSeen.Add(_currentQIndex);
@@ -113,7 +113,7 @@ namespace MCQ_UI
                 // Handling if they've seen the question or not before
                 if (!_QsSeen.Contains(questionIndex))
                 {
-                    ChosenAnswerText.text = null;
+                    ChosenAnswerText.text = "";
                     NextPageButton.interactable = false;
                 }
                 else
@@ -168,10 +168,10 @@ namespace MCQ_UI
             _sessionID = MasterManager.Instance.SessionID;
             
             // Colours
-            _prefixA = $"<color={colorA.ToHexString()}>A</color>";
-            _prefixB = $"<color={colorB.ToHexString()}>B</color>";
-            _prefixC = $"<color={colorC.ToHexString()}>C</color>";
-            _prefixD = $"<color={colorD.ToHexString()}>D</color>";
+            _prefixA = $"<color=#{_colorA.ToHexString()}>A</color>";
+            _prefixB = $"<color=#{_colorB.ToHexString()}>B</color>";
+            _prefixC = $"<color=#{_colorC.ToHexString()}>C</color>";
+            _prefixD = $"<color=#{_colorD.ToHexString()}>D</color>";
 
             _lastQIndex = questionCount-1;
             
@@ -180,6 +180,9 @@ namespace MCQ_UI
             _optionBStrings = new string[questionCount];
             _optionCStrings = new string[questionCount];
             _optionDStrings = new string[questionCount];
+            
+            // Answers
+            _userAnswers = new OptionChoice[questionCount];
             _trueAnswers = new OptionChoice[questionCount];
 
             for (int i = 0; i < questionCount; i++)
@@ -192,27 +195,20 @@ namespace MCQ_UI
                 _optionCStrings[i] = MCQExam.questions[i].optionC;
                 _optionDStrings[i] = MCQExam.questions[i].optionD;
             }
-            
+
+            NextPageButton.interactable = false;
             UpdatePage(0);
         }
 
         private void OnEnable()
         {
-            OnMCQAnswer += HandleAnswer;
+            OnAnswerSent += HandleAnswer;
         }
         
         private void OnDisable()
         {
-            OnMCQAnswer += HandleAnswer;
+            OnAnswerSent -= HandleAnswer;
         }
-    }
-
-    public enum OptionChoice
-    {
-        A,
-        B,
-        C,
-        D
     }
 
     [Serializable]
