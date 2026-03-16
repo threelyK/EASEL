@@ -1,0 +1,226 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace MCQ_UI
+{
+    public class MCQUIManager : MonoBehaviour
+    {
+        // Should handle loads exam page using scriptable obj onto UI
+        // Handle UI updates
+        
+        [SerializeField] private MCQExamTemplate MCQExam; // Which Exam it should load
+        private string _examID;
+        private string _sessionID;
+        
+        // UI elements
+        [SerializeField] private Button NextPageButton;
+        [SerializeField] private Button PrevPageButton;
+        
+        [SerializeField] private TMP_Text QuestionNumberText;
+        [SerializeField] private TMP_Text QuestionText;
+        [SerializeField] private TMP_Text ChosenAnswerText;
+        [SerializeField] private TMP_Text OptionAText;
+        [SerializeField] private TMP_Text OptionBText;
+        [SerializeField] private TMP_Text OptionCText;
+        [SerializeField] private TMP_Text OptionDText;
+        
+        // Options
+        public Color colorA =  Color.lightGreen;
+        public Color colorB =  Color.lightBlue;
+        public Color colorC =  Color.yellowNice;
+        public Color colorD =  Color.lightCoral;
+
+        // Option initial texts
+        private string _prefixA;
+        private string _prefixB;
+        private string _prefixC;
+        private string _prefixD;
+        
+        // String loading
+        private string[] _questionStrings;
+        private string[] _optionAStrings;
+        private string[] _optionBStrings;
+        private string[] _optionCStrings;
+        private string[] _optionDStrings;
+        
+        // Question tracking
+        private int _currentQIndex;
+        private int _lastQIndex;
+        private List<int> _QsSeen;
+        
+        // Answer tracking
+        private OptionChoice[] _userAnswers;
+        private OptionChoice[] _trueAnswers;
+        private int _score;
+        
+        // Actions
+        public static Action<string> OnMCQComplete;
+        public static Action<OptionChoice> OnMCQAnswer;
+        
+        private void PrevPage()
+        {
+            if (_currentQIndex <= 0) return;
+            
+            _currentQIndex--;
+            UpdatePage(_currentQIndex);
+        }
+
+        private void NextPage()
+        {
+            // Log current page into QsSeen
+            _QsSeen.Add(_currentQIndex);
+            
+            if (_currentQIndex != _lastQIndex)
+            {
+                // Changing current index
+                _currentQIndex++;
+                
+                // Loading next page
+                UpdatePage(_currentQIndex);
+            }
+
+            if (_currentQIndex == _lastQIndex)
+            {
+                // Close Page
+                OnMCQComplete?.Invoke(_examID); // For triggering doors
+                CalculateScore();
+                SaveUserExam();
+            }
+        }
+
+        private void UpdatePage(int questionIndex)
+        {
+            // Check question number is within bounds
+            bool isWithinBounds = questionIndex >= 0 && questionIndex <= _lastQIndex;
+            if (isWithinBounds)
+            {
+                // Update page
+                QuestionNumberText.text = questionIndex == _lastQIndex ? "Last Question" : $"Question #{questionIndex+1}";
+                QuestionText.text = _questionStrings[questionIndex];
+                
+                OptionAText.text =_prefixA + " - " + _optionAStrings[questionIndex];
+                OptionBText.text =_prefixB + " - " + _optionBStrings[questionIndex];
+                OptionCText.text =_prefixC + " - " + _optionCStrings[questionIndex];
+                OptionDText.text =_prefixD + " - " + _optionDStrings[questionIndex];
+                
+                // Handling if they've seen the question or not before
+                if (!_QsSeen.Contains(questionIndex))
+                {
+                    ChosenAnswerText.text = null;
+                    NextPageButton.interactable = false;
+                }
+                else
+                {
+                    ChosenAnswerText.text = $"Choice: {_userAnswers[questionIndex]}";
+                    NextPageButton.interactable = true;
+                }
+                
+                return;
+            }
+
+            throw new IndexOutOfRangeException("questionNum: " + questionIndex + " is out of bounds!");
+        }
+
+        private void HandleAnswer(OptionChoice choice)
+        {
+            _userAnswers[_currentQIndex] = choice;
+            NextPage();
+        }
+
+        private void CalculateScore()
+        {
+            var counter = _trueAnswers.Where((t, i) => _userAnswers[i] == t).Count();
+            _score = counter;
+        }
+        
+        ///
+        /// <summary>Saves sessionID, examID, examScore, examAns</summary>
+        ///
+        private void SaveUserExam()
+        {
+            var savePath = Path.Combine(Application.persistentDataPath, $"{_sessionID}_{_examID}_Save.json");
+            
+            // Enums represented with an integer
+            var saveData = new ExamSaveData
+            {
+                sessionID = _sessionID,
+                examID = _examID,
+                examScore = _score,
+                userAnswers = _userAnswers
+            };
+            
+            var json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+            
+            File.WriteAllText(savePath, json);
+        }
+
+        private void Start()
+        {
+            var questionCount = MCQExam.questions.Length;
+            _examID = MCQExam.ExamID;
+            _sessionID = MasterManager.Instance.SessionID;
+            
+            // Colours
+            _prefixA = $"<color={colorA.ToHexString()}>A</color>";
+            _prefixB = $"<color={colorB.ToHexString()}>B</color>";
+            _prefixC = $"<color={colorC.ToHexString()}>C</color>";
+            _prefixD = $"<color={colorD.ToHexString()}>D</color>";
+
+            _lastQIndex = questionCount-1;
+            
+            _questionStrings =  new string[questionCount];
+            _optionAStrings = new string[questionCount];
+            _optionBStrings = new string[questionCount];
+            _optionCStrings = new string[questionCount];
+            _optionDStrings = new string[questionCount];
+            _trueAnswers = new OptionChoice[questionCount];
+
+            for (int i = 0; i < questionCount; i++)
+            {
+                _trueAnswers[i] = MCQExam.questions[i].answer;
+                
+                _questionStrings[i] = MCQExam.questions[i].question;
+                _optionAStrings[i] = MCQExam.questions[i].optionA;
+                _optionBStrings[i] = MCQExam.questions[i].optionB;
+                _optionCStrings[i] = MCQExam.questions[i].optionC;
+                _optionDStrings[i] = MCQExam.questions[i].optionD;
+            }
+            
+            UpdatePage(0);
+        }
+
+        private void OnEnable()
+        {
+            OnMCQAnswer += HandleAnswer;
+        }
+        
+        private void OnDisable()
+        {
+            OnMCQAnswer += HandleAnswer;
+        }
+    }
+
+    public enum OptionChoice
+    {
+        A,
+        B,
+        C,
+        D
+    }
+
+    [Serializable]
+    public class ExamSaveData
+    {
+        public string sessionID;
+        public string examID;
+        public int examScore;
+        public OptionChoice[] userAnswers;
+    }
+}
