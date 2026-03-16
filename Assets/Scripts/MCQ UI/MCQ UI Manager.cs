@@ -34,8 +34,8 @@ namespace MCQ_UI
         // Options
         private Color _colorA =  Color.lightGreen;
         private Color _colorB =  Color.yellowNice;
-        private Color _colorC =  Color.lightBlue;
-        private Color _colorD =  Color.lightCoral;
+        private Color _colorC =  Color.dodgerBlue;
+        private Color _colorD =  Color.crimson;
 
         // Option initial texts
         private string _prefixA;
