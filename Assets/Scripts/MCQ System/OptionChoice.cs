@@ -1,5 +1,5 @@
 
-namespace MCQ_UI
+namespace MCQ_System
 {
     public enum OptionChoice
     {

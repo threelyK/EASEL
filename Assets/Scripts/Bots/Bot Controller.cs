@@ -8,12 +8,13 @@ namespace Bots
     public class BotController : MonoBehaviour
     {
         
-        private static readonly int IsFalling = Animator.StringToHash("isFalling");
+        private readonly int IsFalling = Animator.StringToHash("isFalling");
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
         private static readonly int IsGrabbed = Animator.StringToHash("isGrabbed");
         private static readonly int IsDeployed = Animator.StringToHash("isDeployed");
 
         private bool _isGrounded;
+        private bool _reachedDestination;
         
         private Animator _animator;
         private Rigidbody _rb;
@@ -21,7 +22,9 @@ namespace Bots
         private NavMeshAgent _agent;
         public Vector3 targetPosition;
         private Grabbable _grabbable;
-        
+
+        #region Animations
+
         private void HandleVelocityAnimations()
         {
             if (_rb.linearVelocity.magnitude == 0) return;
@@ -54,7 +57,9 @@ namespace Bots
             _animator.SetBool(IsFalling, false);
         }
 
-        private void MoveToSnap(Transform snapTransform)
+        #endregion
+        
+        public void MoveToSnap(Transform snapTransform)
         {
             _agent.Warp(snapTransform.position);
         }
@@ -73,11 +78,47 @@ namespace Bots
             }
         }
 
-        private void GoToDestination(Vector3 targetPos)
+        private void CheckReachedDestination()
         {
-            if (_isGrounded && _agent.isActiveAndEnabled) _agent.SetDestination(targetPos);
+            if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance && _agent.velocity.sqrMagnitude == 0 )
+            {
+                _reachedDestination = true;
+            }
+            
         }
 
+        private void GoToDestination(Vector3 targetPos)
+        {
+            if (_isGrounded && _agent.isActiveAndEnabled && !_reachedDestination) _agent.SetDestination(targetPos);
+        }
+
+        public void SetNewDestination(Vector3 targetPos)
+        {
+            _reachedDestination = false;
+            targetPosition = targetPos;
+        }
+
+        private void Awake()
+        {
+            _grabbable = GetComponent<Grabbable>();
+        }
+
+        private void Start()
+        {
+            _rb = GetComponent<Rigidbody>();
+            _agent = GetComponent<NavMeshAgent>();
+            _animator =  GetComponent<Animator>();
+            
+            _agent.speed = _speed;
+        }
+
+        private void Update()
+        {
+            HandleVelocityAnimations();
+            CheckReachedDestination();
+            GoToDestination(targetPosition);
+        }
+        
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Ground"))
@@ -104,27 +145,6 @@ namespace Bots
             
             UpdateAnimToDeployed();
             MoveToSnap(snapTransform);
-        }
-
-
-        private void Awake()
-        {
-            _grabbable = GetComponent<Grabbable>();
-        }
-
-        private void Start()
-        {
-            _rb = GetComponent<Rigidbody>();
-            _agent = GetComponent<NavMeshAgent>();
-            _animator =  GetComponent<Animator>();
-            
-            _agent.speed = _speed;
-        }
-
-        private void Update()
-        {
-            HandleVelocityAnimations();
-            GoToDestination(targetPosition);
         }
 
         private void OnEnable()

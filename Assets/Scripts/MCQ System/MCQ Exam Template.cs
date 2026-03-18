@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MCQ_UI
+namespace MCQ_System
 {
     [CreateAssetMenu(fileName = "MCQExamTemplate", menuName = "Scriptable Objects/UI/MCQ Exam Template")]
     public class MCQExamTemplate : ScriptableObject

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MCQ_UI
+namespace MCQ_System
 {
     [CreateAssetMenu(fileName = "MCQTemplate", menuName = "Scriptable Objects/UI/MCQ Template")]
     public class MCQTemplate : ScriptableObject

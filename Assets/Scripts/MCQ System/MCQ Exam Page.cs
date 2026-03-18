@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MCQ_UI
+namespace MCQ_System
 {
     public class MCQExamPage : MonoBehaviour
     {

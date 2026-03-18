@@ -1,6 +1,6 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using TMPro;
@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MCQ_UI
+namespace MCQ_System
 {
     public class MCQUIManager: Singleton<MCQUIManager>
     {
@@ -159,6 +159,7 @@ namespace MCQ_UI
             var json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
             
             File.WriteAllText(savePath, json);
+            Debug.LogWarning($"Exam \"{_examID}\" data saved at: {savePath}");
         }
 
         private void Start()
@@ -214,9 +215,10 @@ namespace MCQ_UI
     [Serializable]
     public class ExamSaveData
     {
-        public string sessionID;
-        public string examID;
-        public int examScore;
-        public OptionChoice[] userAnswers;
+        
+        [JsonRequired] public string sessionID;
+        [JsonRequired] public string examID;
+        [JsonRequired] public int examScore;
+        [JsonRequired] public OptionChoice[] userAnswers;
     }
 }
