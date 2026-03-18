@@ -1,4 +1,5 @@
 
+using System;
 using Unity.Behavior;
 using UnityEngine;
 
@@ -20,7 +21,10 @@ namespace Bots
             
             botBattery = GetComponent<BotBattery>();
             bgAgent = GetComponent<BehaviorGraphAgent>();
-            
+        }
+
+        private void Start()
+        {
             bgAgent.GetVariable("BatteryLevel", out _bgBatteryLevel);
         }
 

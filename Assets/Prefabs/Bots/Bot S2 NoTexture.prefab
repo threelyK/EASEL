@@ -288,8 +288,13 @@ GameObject:
   - component: {fileID: 7521070774768463332}
   - component: {fileID: 7730409004633819083}
   - component: {fileID: 2925019676436222814}
+  - component: {fileID: 4258824027107848400}
   - component: {fileID: 2549552066074775520}
-  - component: {fileID: 310304946315806656}
+  - component: {fileID: -1624164650685172953}
+  - component: {fileID: -6081081276221718349}
+  - component: {fileID: 6471271956970945095}
+  - component: {fileID: -1251118481410271234}
+  - component: {fileID: 6972183959515292413}
   m_Layer: 0
   m_Name: Bot S2 NoTexture
   m_TagString: Untagged
@@ -410,6 +415,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4258824027107848400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828022321489968518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!195 &2549552066074775520
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -432,7 +457,7 @@ NavMeshAgent:
   m_BaseOffset: -0.4
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &310304946315806656
+--- !u!114 &-1624164650685172953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -441,11 +466,70 @@ MonoBehaviour:
   m_GameObject: {fileID: 2828022321489968518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825d3da235eac8c46a4b50d684abd35c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f1366438b27bd641b8bd306f8251f97, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bots.BotController
+  m_EditorClassIdentifier: Assembly-CSharp::Bots.BotManager
+  botController: {fileID: 6471271956970945095}
+  botBattery: {fileID: -6081081276221718349}
+  bgAgent: {fileID: 6972183959515292413}
+--- !u!114 &-6081081276221718349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828022321489968518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c06eb064ffc7d4088147555c7d7710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bots.BotBattery
+  _batteryLevel: 100
+--- !u!114 &6471271956970945095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828022321489968518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df871580fe9bea3468ad1876040f6496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bots.BGBotController
   _speed: 1
-  targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &-1251118481410271234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828022321489968518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8162caa9367d2343889b90d8f201e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bots.BotAnimationController
+--- !u!114 &6972183959515292413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828022321489968518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: 0}
+  m_BlackboardVariableOverridesList: []
+  m_OriginalGraph: {fileID: 0}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &2874846709710395249
 GameObject:
   m_ObjectHideFlags: 0

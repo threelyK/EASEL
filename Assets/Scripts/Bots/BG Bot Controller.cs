@@ -25,7 +25,10 @@ namespace Bots
             
             // Setting up NavAgent props
             _navAgent.speed = _speed;
-            
+        }
+
+        private void Start()
+        {
             // Setting up BehaviourGraph vars
             _bgAgent.SetVariableValue("SpeedMagnitude", _speed);
             _bgAgent.GetVariable("Grabbed", out _isGrabbed);
@@ -80,7 +83,7 @@ namespace Bots
                     break;
                 case PointerEventType.Unselect:
                     // Handle released event
-                    // _navAgent.enabled = false;
+                    _isGrabbed.Value = false;
                     break;
             }
         }
