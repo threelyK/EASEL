@@ -5,6 +5,7 @@ namespace Bots.Stations
         DEAD,
         FRUIT,
         PART,
+        SLIME,
         CHARGER,
         STOCKPILE
     }

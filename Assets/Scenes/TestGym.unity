@@ -3498,7 +3498,7 @@ GameObject:
   - component: {fileID: 281686248}
   m_Layer: 0
   m_Name: Learning Bot
-  m_TagString: Untagged
+  m_TagString: Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29100,10 +29100,10 @@ GameObject:
   - component: {fileID: 2130497243}
   - component: {fileID: 2130497242}
   - component: {fileID: 2130497241}
-  - component: {fileID: 2130497240}
+  - component: {fileID: 2130497244}
   m_Layer: 0
-  m_Name: Spikes
-  m_TagString: Spikes
+  m_Name: Slime
+  m_TagString: Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29123,19 +29123,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 61357588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2130497240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130497238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 805a2a2f4e9ecc549a83028a882cf269, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bots.Stations.SpikesStation
-  _stationInUse: 0
 --- !u!65 &2130497241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29151,11 +29138,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2130497242
 MeshRenderer:
@@ -29214,6 +29201,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130497238}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2130497244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130497238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e098dcaed98bbf64abdc100053045ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bots.Stations.SlimeStation
+  _stationInUse: 0
 --- !u!1 &2139529668
 GameObject:
   m_ObjectHideFlags: 0
