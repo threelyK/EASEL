@@ -29,16 +29,7 @@ namespace StateExample
             CancelInvoke(nameof(spawnFruit));
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player")) gameObject.SetActive(true);
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Player")) gameObject.SetActive(false);
-        }
-
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.magenta;

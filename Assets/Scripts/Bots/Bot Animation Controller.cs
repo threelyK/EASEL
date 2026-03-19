@@ -1,4 +1,5 @@
 
+using System;
 using Unity.Behavior;
 using UnityEngine;
 
@@ -20,8 +21,10 @@ namespace Bots
 
         private void Awake()
         {
-            _bgAgent = GetComponent<BehaviorGraphAgent>();
+            _animator = GetComponent<Animator>();
+            _rb = GetComponent<Rigidbody>();
             
+            _bgAgent = GetComponent<BehaviorGraphAgent>();
             _bgAgent.GetVariable("Grounded", out _isGrounded);
             _bgAgent.GetVariable("Grabbed", out _isGrabbed);
         }
@@ -33,7 +36,7 @@ namespace Bots
 
         private void OnEnable()
         {
-            if (_bgAgent != null)
+            if (_isGrabbed != null)
             {
                 _isGrabbed.OnValueChanged += HandleGrabbed;
             }
@@ -41,7 +44,7 @@ namespace Bots
         
         private void OnDisable()
         {
-            if (_bgAgent != null)
+            if (_isGrabbed != null)
             {
                 _isGrabbed.OnValueChanged -= HandleGrabbed;
             }

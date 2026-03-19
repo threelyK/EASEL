@@ -1,5 +1,5 @@
 using System;
-using Bots;
+using Bots.Stations;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -12,26 +12,17 @@ public partial class SetStationActiveBotAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Target;
     [SerializeReference] public BlackboardVariable<GameObject> Self;
 
+    private GameObject _target;
+    
     protected override Status OnStart()
     {
+        _target = Target.Value;
         
-        var obj = Target.Value;
-        if (obj == null) return Status.Failure;
-        
-        var station = obj.GetComponent<Station>();
+        var station = _target.GetComponent<Station>();
         if (station == null) return Status.Failure;
-        station.activeBot = Self;
         
-        return Status.Running;
-    }
-
-    protected override Status OnUpdate()
-    {
+        station.SetActiveBot(Self.Value);
         return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }
 

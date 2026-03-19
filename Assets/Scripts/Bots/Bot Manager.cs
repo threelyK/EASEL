@@ -1,53 +1,26 @@
 
-using System;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Bots
 {
     public class BotManager : MonoBehaviour
     {
         public BGBotController botController;
-        private BotAnimationController _animationController;
-    
-        public BotBattery botBattery;
+        private protected BotAnimationController _animationController;
         public BehaviorGraphAgent bgAgent;
-        private BlackboardVariable<float> _bgBatteryLevel;
+        public NavMeshAgent navMeshAgent;
 
-        private void Awake()
+        private protected void Awake()
         {
             botController = GetComponent<BGBotController>();
             _animationController = GetComponent<BotAnimationController>();
-            
-            botBattery = GetComponent<BotBattery>();
             bgAgent = GetComponent<BehaviorGraphAgent>();
+
+            LoadExtras();
         }
 
-        private void Start()
-        {
-            bgAgent.GetVariable("BatteryLevel", out _bgBatteryLevel);
-        }
-
-        private void OnEnable()
-        {
-            if (botBattery != null)
-            {
-                botBattery.OnBatteryLevelChanged += UpdateBGBatteryLevel;
-            }
-        }
-        
-        private void OnDisable()
-        {
-            if (botBattery != null)
-            {
-                botBattery.OnBatteryLevelChanged -= UpdateBGBatteryLevel;
-            }
-        }
-
-        private void UpdateBGBatteryLevel()
-        {
-            _bgBatteryLevel.Value = botBattery.GetBatteryLevel();
-        }
-        
+        private protected virtual void LoadExtras(){}
     }
 }

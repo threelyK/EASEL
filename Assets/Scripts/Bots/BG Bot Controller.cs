@@ -37,6 +37,7 @@ namespace Bots
         
         private void OnCollisionEnter(Collision other)
         {
+            if (_isGrabbed == null || _isGrounded) return;
             if (other.gameObject.CompareTag("Ground") && !_isGrabbed)
             {
                 _isGrounded.Value = true;
@@ -46,6 +47,7 @@ namespace Bots
         
         private void OnCollisionExit(Collision other)
         {
+            if (_isGrabbed == null || _isGrounded) return;
             if (other.gameObject.CompareTag("Ground"))
             {
                 _isGrounded.Value = false;
@@ -87,6 +89,5 @@ namespace Bots
                     break;
             }
         }
-        
     }
 }
