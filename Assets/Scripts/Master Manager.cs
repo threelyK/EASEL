@@ -1,5 +1,6 @@
 
 using System;
+using MCQ_System;
 using UnityEngine;
 
 public class MasterManager : Singleton<MasterManager>
@@ -11,7 +12,7 @@ public class MasterManager : Singleton<MasterManager>
         if (SessionID != null)
         {
             Debug.Log("SessionID: " + SessionID);
-            if (SessionID == "Test") Debug.LogWarning("Using Test SessionID");
+            if (SessionID == "TEST") Debug.LogWarning("Using TEST SessionID");
             return;
         }
         Debug.LogError("SessionID not set");

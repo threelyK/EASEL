@@ -143,7 +143,7 @@ namespace MCQ_System
         ///
         /// <summary>Saves sessionID, examID, examScore, examAns</summary>
         ///
-        private void SaveUserExam()
+        public void SaveUserExam()
         {
             var savePath = Path.Combine(Application.persistentDataPath, $"{_sessionID}_{_examID}_Save.json");
             
