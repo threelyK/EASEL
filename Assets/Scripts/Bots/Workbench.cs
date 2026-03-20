@@ -38,7 +38,6 @@ namespace Bots
                 // Disable poke interactable on head
                 
                 
-                
             }
         }
 
