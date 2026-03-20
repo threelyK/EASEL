@@ -5,6 +5,8 @@ namespace Bots.Stations
     public abstract class Station : MonoBehaviour
     {
         public GameObject activeBot { get; private set; } // Bot currently using this
+        public int zone;
+        
         private protected BGBotController _botController;
         private protected BotManager _botManager;
         

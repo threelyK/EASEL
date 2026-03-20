@@ -19,12 +19,7 @@ public partial class PickRandomTargetInTargetsAction : Action
         if (objs.Count == 0) return Status.Failure;
 
         Target.Value = objs[Random.Range(0, objs.Count)];
-        
-        return Status.Running;
-    }
 
-    protected override Status OnUpdate()
-    {
         return Status.Success;
     }
 

@@ -1,4 +1,5 @@
 
+using System;
 using Bots.Stations;
 using Oculus.Interaction;
 using Unity.Behavior;
@@ -13,7 +14,9 @@ namespace Bots
         private BlackboardVariable<bool> _isGrabbed;
         private BlackboardVariable<bool> _isGrounded;
         private BlackboardVariable<float> _bgSpeed;
+        private BlackboardVariable<float> _bgSearchRange;
         
+        [SerializeField] private float _searchRadius = 5;
         private NavMeshAgent _navAgent;
         private Grabbable _grabbable;
         
@@ -46,6 +49,9 @@ namespace Bots
             _bgAgent.SetVariableValue("SpeedMagnitude", _animSpeed);
             _bgAgent.GetVariable("Grabbed", out _isGrabbed);
             _bgAgent.GetVariable("Grounded", out _isGrounded);
+            _bgAgent.GetVariable("SearchRange", out _bgSearchRange);
+
+            _bgSearchRange.Value = _searchRadius;
         }
 
         private void Update()
@@ -97,6 +103,12 @@ namespace Bots
                 _grabbable.WhenPointerEventRaised -= HandleGrabbed;
             }
             SlimeStation.OnSlimed -= GotSlimed;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _searchRadius);
         }
 
         public void MoveToSnap(Transform snapTransform)
