@@ -49,9 +49,11 @@ namespace Bots
             _bgAgent.SetVariableValue("SpeedMagnitude", _animSpeed);
             _bgAgent.GetVariable("Grabbed", out _isGrabbed);
             _bgAgent.GetVariable("Grounded", out _isGrounded);
-            _bgAgent.GetVariable("SearchRange", out _bgSearchRange);
 
-            _bgSearchRange.Value = _searchRadius;
+            if (_bgAgent.GetVariable("SearchRange", out _bgSearchRange))
+            {
+                _bgSearchRange.Value = _searchRadius;
+            }
         }
 
         private void Update()

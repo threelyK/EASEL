@@ -29510,6 +29510,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &2844998621238473699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6366041137286454423, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
+  m_PrefabInstance: {fileID: 4987199224212233041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2874846708610972366
 GameObject:
   m_ObjectHideFlags: 0
@@ -30768,6 +30773,10 @@ PrefabInstance:
       propertyPath: '_objectsToActivate.Array.data[0]'
       value: 
       objectReference: {fileID: 1550425562}
+    - target: {fileID: 50497487983526090, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
+      propertyPath: '_objectsToActivate.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2844998621238473699}
     - target: {fileID: 1945574749917355343, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.96
@@ -30812,6 +30821,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agent State Example
       objectReference: {fileID: 0}
+    - target: {fileID: 5608606351576559354, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366041137286454423, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
+      propertyPath: m_Name
+      value: Stan Bot
+      objectReference: {fileID: 0}
     - target: {fileID: 6840143986223605686, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -30843,6 +30860,10 @@ PrefabInstance:
     - target: {fileID: 7572584006140371661, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
       propertyPath: m_Name
       value: FruitSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572584006140371661, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9134456647454547122, guid: 5d6adcb72f5740a43a5fbef5b8184917, type: 3}
       propertyPath: m_AnchorMax.y
@@ -30885,7 +30906,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa59b4354562b249b4290904aa86e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelManager
-  _panels: []
+  _panels:
+  - panel_ID: 
+    PanelPrefab: {fileID: 182760398}
 --- !u!114 &5199978491800011624
 MonoBehaviour:
   m_ObjectHideFlags: 0
