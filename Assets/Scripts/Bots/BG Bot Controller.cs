@@ -115,6 +115,11 @@ namespace Bots
         {
             _navAgent.Warp(snapTransform.position);
         }
+        
+        public void MoveToSnap(Vector3 location)
+        {
+            _navAgent.Warp(location);
+        }
 
         private void GotSlimed(GameObject bot)
         {
