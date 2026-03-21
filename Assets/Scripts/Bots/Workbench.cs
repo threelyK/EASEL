@@ -38,7 +38,6 @@ namespace Bots
             isWorkbenchBusy = true;
                     
             // Snap bot into place
-            
             if (_brokenBot.TryGetComponent<BGBotController>(out var botController))
             {
                 botController.MoveToSnap(_snapLocation);

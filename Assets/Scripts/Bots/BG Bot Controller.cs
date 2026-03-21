@@ -15,7 +15,7 @@ namespace Bots
         private BehaviorGraphAgent _bgAgent;
         private BlackboardVariable<bool> _isGrabbed;
         private BlackboardVariable<bool> _isGrounded;
-        private BlackboardVariable<bool> _isOnWorkbench;
+        // private BlackboardVariable<bool> _isOnWorkbench;
         private BlackboardVariable<float> _bgSpeed;
         private BlackboardVariable<float> _bgSearchRange;
         
@@ -44,7 +44,10 @@ namespace Bots
         {
             _slimeSpeed = _startSpeed * 0.5f;
             
-            if (_navAgent) _navAgent.speed = _startSpeed;
+            if (_navAgent)
+            {
+                _navAgent.speed = _startSpeed;
+            }
             
             // Setting up BehaviourGraph vars
             if (_bgAgent is not null)
@@ -55,12 +58,13 @@ namespace Bots
                 _bgAgent.SetVariableValue("SpeedMagnitude", _animSpeed);
                 _bgAgent.GetVariable("Grabbed", out _isGrabbed);
                 _bgAgent.GetVariable("Grounded", out _isGrounded);
-                _bgAgent.GetVariable("OnWorkbench", out _isOnWorkbench);
+                // _bgAgent.GetVariable("OnWorkbench", out _isOnWorkbench);
 
                 if (_bgAgent.GetVariable("SearchRange", out _bgSearchRange))
                 {
                     _bgSearchRange.Value = _searchRadius;
                 }
+
                 
                 return;
             }
