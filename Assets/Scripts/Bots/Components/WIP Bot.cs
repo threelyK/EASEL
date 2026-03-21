@@ -1,57 +1,58 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Bots
+namespace Bots.Components
 {
     public class WIPBot : MonoBehaviour
     {
-        // Has collider that interacts with triggers on component objects
         
-        private PartCondition[] _partConditions = 
+        [SerializeField] private MissingPartType _missingOnePart = MissingPartType.All;
+
+        private Dictionary<MissingPartType, bool> _partConditions;
+        
+        public bool isOnWorkbench;
+        
+        public static Action<int> OnBotRepaired;
+
+        private void Start()
         {
-            new (BotPartType.PERCEPTION, false),
-            new (BotPartType.REASONING, false),
-            new (BotPartType.TOOLS, false),
-            new (BotPartType.MEMORY, false),
-            new (BotPartType.LEARNING, false)
-        };
-        
-        public static Action OnCompleteBot;
-        
-        
-        public void OnPartAdded(BotPartType part)
+            _partConditions = new Dictionary<MissingPartType, bool>
+            {
+                { MissingPartType.Perception, false },
+                { MissingPartType.Reasoning, false },
+                { MissingPartType.Tools, false },
+                { MissingPartType.Memory, false },
+                { MissingPartType.Learning, false }
+            };
+            if (_missingOnePart == MissingPartType.All) return;
+
+            foreach (var key in _partConditions.Keys.ToList().Where(key => key != _missingOnePart))
+            {
+                _partConditions[key] = true;
+            }
+        }
+
+        public void OnPartAdded(MissingPartType part)
         {
-            var targetPart = Array.Find(_partConditions, partCondition => partCondition._partType == part);
-            targetPart._condition = true;
+            _partConditions[part] = true;
 
             if (!IsComplete()) return;
             
             // Do things if complete
-            OnCompleteBot?.Invoke();
+            OnBotRepaired?.Invoke(gameObject.GetInstanceID());
             Destroy(gameObject);
         }
 
-        public bool hasPart(BotPartType part)
+        public bool hasPart(MissingPartType part)
         {
-            return Array.Find(_partConditions, partCondition => partCondition._partType == part)._condition;
+            return _partConditions[part];
         }
 
         private bool IsComplete()
         {
-            return _partConditions.All(partCondition => partCondition._condition);
-        }
-    }
-    
-    internal class PartCondition
-    {
-        public readonly BotPartType _partType;
-        public bool _condition;
-
-        public PartCondition(BotPartType partType, bool condition)
-        {
-            _partType = partType;
-            _condition = condition;
+            return !_partConditions.ContainsValue(false);
         }
     }
 }

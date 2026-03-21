@@ -7,17 +7,15 @@ namespace Bots.Stations
         public GameObject activeBot { get; private set; } // Bot currently using this
         public int zone;
         
-        private protected BGBotController _botController;
         private protected BotManager _botManager;
-        
+
         public bool _stationInUse;
-        
+
         public void UseStation(GameObject bot)
         {
             if (activeBot != bot) return;
             
             _botManager = bot.GetComponent<BotManager>();
-            _botController = _botManager.botController;
             
             _stationInUse = true;
             ExecuteStationProcess();
@@ -30,7 +28,6 @@ namespace Bots.Stations
         private void ResetBotVariables()
         {
             SetActiveBot(null);
-            _botController = null;
             _botManager = null;
         }
         

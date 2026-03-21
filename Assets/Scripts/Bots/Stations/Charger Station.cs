@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 namespace Bots.Stations
 {
     public class ChargerStation : Station
@@ -8,6 +10,13 @@ namespace Bots.Stations
         private BotBattery _battery;
         private BatteryBotManager _bBotManager;
         
+        [SerializeField] private protected Transform _snapLocation;
+        
+        private protected void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellowNice;
+            Gizmos.DrawWireCube(_snapLocation.position, new Vector3(0.5f, 0.5f, 0.5f));
+        }
         private protected override void ExecuteStationProcess()
         {
             _bBotManager = _botManager.gameObject.GetComponent<BatteryBotManager>();
@@ -16,7 +25,7 @@ namespace Bots.Stations
             _battery = _bBotManager.botBattery;
             if (_battery == null) return;
             
-            _botController.MoveToSnap(transform);
+            _botManager.botController.MoveToSnap(_snapLocation);
             Invoke(nameof(chargeBatteryToFull), _chargeTime);
         }
     

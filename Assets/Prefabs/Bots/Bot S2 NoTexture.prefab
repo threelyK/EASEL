@@ -284,8 +284,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1172374453693616114}
-  - component: {fileID: 8538033282988590988}
   - component: {fileID: 7521070774768463332}
+  - component: {fileID: 2819780450712986118}
   - component: {fileID: 7730409004633819083}
   - component: {fileID: 2925019676436222814}
   - component: {fileID: 4258824027107848400}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 6972183959515292413}
   m_Layer: 0
   m_Name: Bot S2 NoTexture
-  m_TagString: Untagged
+  m_TagString: Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,29 +320,6 @@ Transform:
   - {fileID: 7850426073905191402}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8538033282988590988
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2828022321489968518}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!54 &7521070774768463332
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -370,6 +347,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2819780450712986118
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828022321489968518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.65, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7730409004633819083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,8 +468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bots.BotManager
   botController: {fileID: 6471271956970945095}
-  botBattery: {fileID: -6081081276221718349}
   bgAgent: {fileID: 6972183959515292413}
+  navMeshAgent: {fileID: 0}
 --- !u!114 &-6081081276221718349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df871580fe9bea3468ad1876040f6496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bots.BGBotController
-  _speed: 1
+  _searchRadius: 5
+  _startSpeed: 1
 --- !u!114 &-1251118481410271234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,7 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2140d2b457bea84881488302059889b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.Surfaces.ColliderSurface
-  _collider: {fileID: 8538033282988590988}
+  _collider: {fileID: 0}
 --- !u!1 &5503291999114114958
 GameObject:
   m_ObjectHideFlags: 0

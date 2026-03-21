@@ -20,19 +20,10 @@ namespace Bots.Actions
         {
             var obj = StationObj.Value;
             _station = obj.GetComponent<Station>();
-            if (_station == null) return Status.Failure;
+            if (!_station) return Status.Failure;
             
             _station.UseStation(Bot);
-            return Status.Running;
-        }
-
-        protected override Status OnUpdate()
-        {
             return Status.Success;
-        }
-
-        protected override void OnEnd()
-        {
         }
     }
 }

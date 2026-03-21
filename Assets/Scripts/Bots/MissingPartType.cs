@@ -1,4 +1,4 @@
-using System;
+
 using Unity.Behavior;
 
 [BlackboardEnum]
@@ -8,5 +8,6 @@ public enum MissingPartType
 	Reasoning,
 	Tools,
 	Memory,
-	Learning
+	Learning,
+	All
 }

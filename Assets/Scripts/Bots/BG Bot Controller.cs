@@ -5,14 +5,17 @@ using Oculus.Interaction;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Bots
 {
     public class BGBotController : MonoBehaviour
     {
+        // Too dependent on behaviour graph stuff
         private BehaviorGraphAgent _bgAgent;
         private BlackboardVariable<bool> _isGrabbed;
         private BlackboardVariable<bool> _isGrounded;
+        private BlackboardVariable<bool> _isOnWorkbench;
         private BlackboardVariable<float> _bgSpeed;
         private BlackboardVariable<float> _bgSearchRange;
         
@@ -26,7 +29,7 @@ namespace Bots
         private float _slimeDuration = 3f;
         private float _slimeSpeed;
 
-        [SerializeField] private float _speed = 1f;
+        [FormerlySerializedAs("_speed")] [SerializeField] private float _startSpeed = 1f;
         private float _animSpeed = 1f;
         
 
@@ -39,21 +42,30 @@ namespace Bots
 
         private void Start()
         {
-            _slimeSpeed = _speed * 0.5f;
-            _navAgent.speed = _speed;
+            _slimeSpeed = _startSpeed * 0.5f;
+            
+            if (_navAgent) _navAgent.speed = _startSpeed;
             
             // Setting up BehaviourGraph vars
-            _bgAgent.GetVariable("Speed", out _bgSpeed);
-            _bgSpeed.Value = _speed;
-            
-            _bgAgent.SetVariableValue("SpeedMagnitude", _animSpeed);
-            _bgAgent.GetVariable("Grabbed", out _isGrabbed);
-            _bgAgent.GetVariable("Grounded", out _isGrounded);
-
-            if (_bgAgent.GetVariable("SearchRange", out _bgSearchRange))
+            if (_bgAgent is not null)
             {
-                _bgSearchRange.Value = _searchRadius;
+                _bgAgent.GetVariable("Speed", out _bgSpeed);
+                _bgSpeed.Value = _startSpeed;
+            
+                _bgAgent.SetVariableValue("SpeedMagnitude", _animSpeed);
+                _bgAgent.GetVariable("Grabbed", out _isGrabbed);
+                _bgAgent.GetVariable("Grounded", out _isGrounded);
+                _bgAgent.GetVariable("OnWorkbench", out _isOnWorkbench);
+
+                if (_bgAgent.GetVariable("SearchRange", out _bgSearchRange))
+                {
+                    _bgSearchRange.Value = _searchRadius;
+                }
+                
+                return;
             }
+
+            throw new Exception("bgAgent is null");
         }
 
         private void Update()
@@ -75,7 +87,7 @@ namespace Bots
             if (other.gameObject.CompareTag("Ground") && !_isGrabbed)
             {
                 _isGrounded.Value = true;
-                _navAgent.enabled = true;
+                if (_navAgent) _navAgent.enabled = true;
             }
         }
         
@@ -85,7 +97,7 @@ namespace Bots
             if (other.gameObject.CompareTag("Ground"))
             {
                 _isGrounded.Value = false;
-                _navAgent.enabled = false;
+                if (_navAgent != null) _navAgent.enabled = false;
             }
         }
 
@@ -115,12 +127,15 @@ namespace Bots
 
         public void MoveToSnap(Transform snapTransform)
         {
-            _navAgent.Warp(snapTransform.position);
-        }
-        
-        public void MoveToSnap(Vector3 location)
-        {
-            _navAgent.Warp(location);
+            if (_navAgent) _navAgent.enabled = false;
+            if (_grabbable)
+            {
+                _grabbable.enabled = false;
+                _isGrabbed.Value = false;
+            }
+            gameObject.transform.position = snapTransform.position;
+            gameObject.transform.rotation = snapTransform.rotation;
+            if (_grabbable) _grabbable.enabled = true;
         }
 
         private void GotSlimed(GameObject bot)
@@ -132,8 +147,7 @@ namespace Bots
 
         private void ChangeSpeed(float newSpeed)
         {
-            _speed = newSpeed;
-            _navAgent.speed = _speed;
+            if (_navAgent) _navAgent.speed = newSpeed;
         }
 
         private void HandleGrabbed(PointerEvent evt)

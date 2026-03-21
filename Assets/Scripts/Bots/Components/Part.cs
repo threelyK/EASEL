@@ -1,20 +1,27 @@
 using UnityEngine;
 
-namespace Bots
+namespace Bots.Components
 {
     public class Part : MonoBehaviour
     {
-        [SerializeField] private BotPartType _type;
+        [SerializeField] private MissingPartType _partType;
 
         private void OnCollisionEnter(Collision other)
         {
-            if (!other.collider.CompareTag("PartialBot")) return;
+            if (!other.collider.CompareTag("Bot")) return;
+            
+            var obj = other.collider.gameObject;
 
-            var _incompleteBot = other.collider.gameObject.GetComponent<WIPBot>();
+            if (obj.TryGetComponent<WIPBot>(out var wipBot))
+            {
+                if (!wipBot.isOnWorkbench) return;
 
-            if (_incompleteBot.hasPart(_type)) return;
-            _incompleteBot.OnPartAdded(_type);
-            Destroy(gameObject); // Use up this part
+                if (wipBot.hasPart(_partType)) return;
+                wipBot.OnPartAdded(_partType);
+                
+                Destroy(gameObject); // Use up this part
+            }
         }
+        
     }
 }
