@@ -5,7 +5,7 @@ namespace Bots.Stations
 {
     public class SlimeStation : Station
     {
-        private StationType _stationType = StationType.SLIME;
+        public StationType _stationType = StationType.SLIME;
         
         public static Action<GameObject> OnSlimed;
         public static Action<GameObject> OnLeaveSlime;

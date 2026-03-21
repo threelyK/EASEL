@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace MCQ_System
 {
-    public class MCQUIManager: Singleton<MCQUIManager>
+    public class MCQUIManager: MonoBehaviour
     {
         // Should handle loads exam page using scriptable obj onto UI
         // Handle UI updates

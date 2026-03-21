@@ -1,12 +1,15 @@
 
 using System;
-using MCQ_System;
 using UnityEngine;
 
 public class MasterManager : Singleton<MasterManager>
 {
     public string SessionID;
-
+    public int visualScore;
+    public int auralScore;
+    public int rwScore;
+    public int kinesScore;
+    
     private void Start()
     {
         if (SessionID != null)
