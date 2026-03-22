@@ -1,5 +1,6 @@
 
 using System;
+using Bots.CD;
 using Bots.Stations;
 using Oculus.Interaction;
 using Unity.Behavior;
@@ -15,9 +16,11 @@ namespace Bots
         private BehaviorGraphAgent _bgAgent;
         private BlackboardVariable<bool> _isGrabbed;
         private BlackboardVariable<bool> _isGrounded;
-        // private BlackboardVariable<bool> _isOnWorkbench;
         private BlackboardVariable<float> _bgSpeed;
         private BlackboardVariable<float> _bgSearchRange;
+        private BlackboardVariable<BotIntent> _botIntent;
+        
+        private BotCDSO _currentCD;
         
         [SerializeField] private float _searchRadius = 5;
         private NavMeshAgent _navAgent;
@@ -59,6 +62,7 @@ namespace Bots
                 _bgAgent.GetVariable("Grabbed", out _isGrabbed);
                 _bgAgent.GetVariable("Grounded", out _isGrounded);
                 // _bgAgent.GetVariable("OnWorkbench", out _isOnWorkbench);
+                _bgAgent.GetVariable("BotIntent", out _botIntent);
 
                 if (_bgAgent.GetVariable("SearchRange", out _bgSearchRange))
                 {
@@ -111,6 +115,7 @@ namespace Bots
             {
                 _grabbable.WhenPointerEventRaised += HandleGrabbed;
             }
+
             SlimeStation.OnSlimed += GotSlimed;
         }
 
@@ -165,6 +170,25 @@ namespace Bots
                     _isGrabbed.Value = false;
                     break;
             }
+        }
+
+        public void SwitchCD(BotCDSO CD)
+        {
+            
+            // Unload CD
+            if (_currentCD is not null)
+            {
+                var offset = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                
+                var ejectedCD = Instantiate(_currentCD.CDPrefab, offset, Quaternion.identity);
+                var rb = ejectedCD.GetComponent<Rigidbody>();
+                var dir = 0.1f * -transform.forward;
+                rb.AddForce(dir, ForceMode.Impulse);
+            }
+                
+            // Load new CD
+            _currentCD = CD;
+            _botIntent.Value = _currentCD.intent;
         }
     }
 }

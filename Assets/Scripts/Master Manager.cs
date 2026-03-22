@@ -9,16 +9,31 @@ public class MasterManager : Singleton<MasterManager>
     public int auralScore;
     public int rwScore;
     public int kinesScore;
+
+    [SerializeField] private bool _enableAgenticFeatures;
+
+    public static Action OnAgenticLoad;
     
     private void Start()
     {
-        if (SessionID != null)
+        if (SessionID is null)
         {
-            Debug.Log("SessionID: " + SessionID);
-            if (SessionID == "TEST") Debug.LogWarning("Using TEST SessionID");
-            return;
+            Debug.LogError("SessionID not set or is TEST");
         }
-        Debug.LogError("SessionID not set");
-        throw new Exception("SessionID not set");
+        
+        Debug.LogWarning("SessionID: " + SessionID);
+        
+        if (_enableAgenticFeatures) OnAgenticLoad?.Invoke();
+    }
+
+    // TODO:
+    private void LoadAgenticFeatures()
+    {
+        // Display Questionnaire
+        
+        // Activate agent
+        
+        // Spawn Radio
+        
     }
 }

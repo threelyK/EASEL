@@ -56,6 +56,7 @@ namespace Questionnaire
             }
             
             UpdatePage(0);
+            _infoPage.SetActive(true);
             _mainPage.SetActive(false);
         }
 
