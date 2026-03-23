@@ -1,3 +1,6 @@
+using UnityEngine;
+using UnityEngine.Serialization;
+
 namespace MCQ_System
 {
     public class MCQButtonController : ButtonController
@@ -6,7 +9,7 @@ namespace MCQ_System
 
         private protected override void ProcessPress()
         {
-            MCQUIManager.OnAnswerSent(optionChoice);
+            MCQUIManager.OnAnswerSent(optionChoice, targetID);
         }
     }
 }

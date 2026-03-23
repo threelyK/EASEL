@@ -2827,7 +2827,7 @@ GameObject:
   - component: {fileID: 8936438821289750942}
   - component: {fileID: 6103389524838110680}
   m_Layer: 0
-  m_Name: MCQ UI Screen
+  m_Name: MCQ UI Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2842,7 +2842,7 @@ Transform:
   m_GameObject: {fileID: 6437577703858125272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -16.91006, y: 1, z: 1.133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2872,6 +2872,9 @@ MonoBehaviour:
   OptionBText: {fileID: 5125827554067747988}
   OptionCText: {fileID: 1525844691787874426}
   OptionDText: {fileID: 7358275047495339450}
+  OnMCQComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6477068849245813715
 GameObject:
   m_ObjectHideFlags: 0

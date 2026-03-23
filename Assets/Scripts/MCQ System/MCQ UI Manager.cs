@@ -64,7 +64,7 @@ namespace MCQ_System
         // Actions
         [SerializeField] private UnityEvent OnMCQComplete;
         // public static Action<string> OnMCQComplete;
-        public static Action<OptionChoice> OnAnswerSent;
+        public static Action<OptionChoice, string> OnAnswerSent;
         
         public void PrevPage()
         {
@@ -94,6 +94,7 @@ namespace MCQ_System
                 OnMCQComplete?.Invoke(); // For triggering doors
                 CalculateScore();
                 SaveUserExam();
+                Destroy(gameObject);
             }
         }
 
@@ -130,8 +131,9 @@ namespace MCQ_System
             throw new IndexOutOfRangeException("questionNum: " + questionIndex + " is out of bounds!");
         }
 
-        private void HandleAnswer(OptionChoice choice)
+        private void HandleAnswer(OptionChoice choice, string id)
         {
+            if (id != _examID) return;
             _userAnswers[_currentQIndex] = choice;
             NextPage();
         }

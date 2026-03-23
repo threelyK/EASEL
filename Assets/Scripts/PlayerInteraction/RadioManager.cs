@@ -19,6 +19,7 @@ namespace PlayerInteraction
         private float _displayTime;
 
         [SerializeField] private GameObject _radio;
+        [SerializeField] private GameObject _subtitleSnapLocation;
         [SerializeField] private GameObject _snapLocation;
         [SerializeField] private Grabbable _grabbable;
 
@@ -27,6 +28,7 @@ namespace PlayerInteraction
         {
             radioLED.SetColor("_EmissionColor", Color.green);
             MoveToSnap();
+            HideSubtitles();
         }
 
         private void Update()
@@ -34,6 +36,11 @@ namespace PlayerInteraction
             if (!_isTimerOn) return;
 
             _timer += Time.deltaTime;
+
+            if (_timer % 2 <= 1)
+            {
+                subtitlesTextBox.transform.DOMove(_subtitleSnapLocation.transform.position, 1);
+            }
             
             if (_timer >= _displayTime)
             {
@@ -63,13 +70,13 @@ namespace PlayerInteraction
 
         private void DisplaySubtitles(string subtitles)
         {
-            subtitlesTextBox.alpha = Mathf.Lerp(0, 1, 0.1f);
+            subtitlesTextBox.alpha = 1;
             subtitlesTextBox.text = subtitles;
         }
 
         private void HideSubtitles()
         {
-            subtitlesTextBox.alpha = Mathf.Lerp(1, 0, 0.5f);
+            subtitlesTextBox.alpha = 0;
         }
 
         private void StartTimer(float duration)
