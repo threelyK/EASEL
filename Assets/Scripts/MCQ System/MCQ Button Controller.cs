@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.Serialization;
-
 namespace MCQ_System
 {
     public class MCQButtonController : ButtonController

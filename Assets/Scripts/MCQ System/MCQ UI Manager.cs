@@ -204,8 +204,7 @@ namespace MCQ_System
             NextPageButton.interactable = false;
             UpdatePage(0);
         }
-
-        // TODO Will cause issues with multiple UI managers
+        
         private void OnEnable()
         {
             OnAnswerSent += HandleAnswer;
