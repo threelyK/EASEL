@@ -90,7 +90,6 @@ namespace Bots
         {
             var botModel = _botPrefabs[Random.Range(0, _botPrefabs.Length)];
             
-            // TODO check rotation is correct
             Instantiate(botModel, _snapLocation.position, _snapLocation.rotation);
         }
         

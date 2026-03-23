@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MCQ_System
@@ -61,7 +62,8 @@ namespace MCQ_System
         private int _score;
         
         // Actions
-        public static Action<string> OnMCQComplete;
+        [SerializeField] private UnityEvent OnMCQComplete;
+        // public static Action<string> OnMCQComplete;
         public static Action<OptionChoice> OnAnswerSent;
         
         public void PrevPage()
@@ -89,7 +91,7 @@ namespace MCQ_System
             if (_currentQIndex == _lastQIndex)
             {
                 // Close Page
-                OnMCQComplete?.Invoke(_examID); // For triggering doors
+                OnMCQComplete?.Invoke(); // For triggering doors
                 CalculateScore();
                 SaveUserExam();
             }
@@ -201,6 +203,7 @@ namespace MCQ_System
             UpdatePage(0);
         }
 
+        // TODO Will cause issues with multiple UI managers
         private void OnEnable()
         {
             OnAnswerSent += HandleAnswer;

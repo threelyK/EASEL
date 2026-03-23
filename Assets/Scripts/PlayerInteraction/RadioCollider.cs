@@ -30,12 +30,12 @@ namespace PlayerInteraction
         
         void Update()
         {
-            if (_inRange && !_isTalking && OVRInput.GetDown(OVRInput.Button.Two))
+            if (_inRange && !_isTalking && OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
             {
                 // Debug.Log("InRange and Pressing");
                 OnPlayerTalking?.Invoke();
                 _isTalking = true;
-            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.Two) || !_inRange))
+            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger) || !_inRange))
             {
                 // Debug.Log("OutRange or StoppedPressing");
                 OnPlayerStoppedTalking?.Invoke();

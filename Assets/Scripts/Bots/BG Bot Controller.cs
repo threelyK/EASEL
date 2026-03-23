@@ -87,6 +87,11 @@ namespace Bots
                 ChangeSpeed(_slimeSpeed*2);
                 timer = 0f;
             }
+
+            if (_isGrounded)
+            {
+                _navAgent.enabled = true;
+            }
         }
 
         private void OnCollisionEnter(Collision other)
@@ -171,7 +176,7 @@ namespace Bots
                     break;
             }
         }
-
+        
         public void SwitchCD(BotCDSO CD)
         {
             

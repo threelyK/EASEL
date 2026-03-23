@@ -3,7 +3,6 @@
 #region Usings
 
 using System;
-using System.Diagnostics;
 using UnityEngine;
 using Whisper.Utils;
 using UnityNeuroSpeech.Runtime.Ollama;
