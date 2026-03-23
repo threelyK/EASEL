@@ -74,7 +74,7 @@ namespace TtsWebRequests
             var clip = ProcessLinear16Audio(audioBytes);
             
             _ttsAudioSource.clip = clip;
-            RadioActions.OnClipGenerated?.Invoke(_ttsAudioSource.clip.length);
+            RadioActions.OnClipGenerated?.Invoke(clip);
             _ttsAudioSource.Play();
         }
 

@@ -60,7 +60,8 @@ namespace UnityNeuroSpeech.Runtime
         // Custom
         private const string _blank = "[BLANK_AUDIO]";
         private const string _empty = "";
-        private const string _augment = " answer in less than 2000 characters";
+        private string _augment = "";
+        
         
         #region Unity methods
         private void Start()
@@ -81,13 +82,15 @@ namespace UnityNeuroSpeech.Runtime
 
         private void OnEnable()
         {
-            RadioCollider.OnPlayerTalking += OnButtonPressed;
-            RadioCollider.OnPlayerStoppedTalking += OnButtonRelease;
+            Radio.OnPlayerTalking += OnButtonPressed;
+            Radio.OnPlayerStoppedTalking += OnButtonRelease;
+            MasterManager.OnVARKScoreChanged += UpdateAugment;
         }
         
         private void OnDisable() {
-            RadioCollider.OnPlayerTalking -= OnButtonPressed;
-            RadioCollider.OnPlayerStoppedTalking -= OnButtonRelease;
+            Radio.OnPlayerTalking -= OnButtonPressed;
+            Radio.OnPlayerStoppedTalking -= OnButtonRelease;
+            MasterManager.OnVARKScoreChanged -= UpdateAugment;
         }
 
         #endregion
@@ -127,6 +130,12 @@ namespace UnityNeuroSpeech.Runtime
             
             // Don't need ttsModule
             // StartCoroutine(_ttsModule.StartTTSProcessMonoModular(llmResponse));
+        }
+
+        private void UpdateAugment()
+        {
+            var bestVark = MasterManager.Instance.bestVARK;
+            _augment = $"The user's VARK questionnaire preference is {bestVark}";
         }
 
         #endregion

@@ -14,6 +14,7 @@ namespace PlayerInteraction
         [SerializeField]
         private TMP_Text subtitlesTextBox;
 
+        private bool _isGrabbed;
         private bool _isTimerOn;
         private float _timer;
         private float _displayTime;
@@ -21,13 +22,11 @@ namespace PlayerInteraction
         [SerializeField] private GameObject _radio;
         [SerializeField] private GameObject _subtitleSnapLocation;
         [SerializeField] private GameObject _snapLocation;
-        [SerializeField] private Grabbable _grabbable;
 
 
         private void Start()
         {
             radioLED.SetColor("_EmissionColor", Color.green);
-            MoveToSnap();
             HideSubtitles();
         }
 
@@ -52,15 +51,15 @@ namespace PlayerInteraction
         private void OnEnable()
         {
             RadioActions.OnRadioReady += HandleStatus;
-            RadioActions.OnClipGenerated += StartTimer;
+            // RadioActions.OnClipGenerated += StartTimer;
             RadioActions.ResponseGenerated += DisplaySubtitles;
-            _grabbable.WhenPointerEventRaised += HandleGrab;
         }
 
         private void OnDisable()
         {
             RadioActions.OnRadioReady -= HandleStatus;
-            _grabbable.WhenPointerEventRaised -= HandleGrab;
+            // RadioActions.OnClipGenerated -= StartTimer;
+            RadioActions.ResponseGenerated -= DisplaySubtitles;
         }
 
         private void HandleStatus(bool status)
@@ -85,27 +84,6 @@ namespace PlayerInteraction
             _isTimerOn = true;
 
             _displayTime = duration + 5f;
-        }
-        
-        private void HandleGrab(PointerEvent evt)
-        {
-            switch (evt.Type)
-            {
-                case PointerEventType.Select:
-                    RadioActions.OnRadioGrabbed?.Invoke(true);
-                    // When grabbed;
-                    break;
-                case PointerEventType.Unselect:
-                    // When released;
-                    RadioActions.OnRadioGrabbed?.Invoke(false);
-                    MoveToSnap();
-                    break;
-            }
-        }
-    
-        private void MoveToSnap()
-        {
-            _radio.transform.DOMove(_snapLocation.transform.position, 2);
         }
     }
 }

@@ -2,14 +2,18 @@
 using System;
 using UnityEngine;
 
-public class MasterManager : Singleton<MasterManager>
+public class MasterManager : MonoBehaviour
 {
     public string SessionID;
     public int visualScore;
     public int auralScore;
     public int rwScore;
     public int kinesScore;
+    public string bestVARK;
 
+    private static MasterManager _instance;
+    public static MasterManager Instance => _instance;
+    
     [SerializeField] private GameObject _embodiedFeatures;
     [SerializeField] private GameObject _radio;
 
@@ -17,11 +21,19 @@ public class MasterManager : Singleton<MasterManager>
 
     public static Action OnAgenticLoad;
     public static Action OnVARKScoreChanged;
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+    }
     
     private void Start()
     {
-        _embodiedFeatures.SetActive(false);
-        _radio.SetActive(false);
+        if (_embodiedFeatures) _embodiedFeatures.SetActive(true); else Debug.LogError("missing Embodied");
+        if (_radio) _radio.SetActive(false); else Debug.LogError("missing Radio");
         
         if (SessionID is null)
         {
@@ -32,16 +44,16 @@ public class MasterManager : Singleton<MasterManager>
 
         if (_enableEmbodiedFeatures) LoadAgenticFeatures();
     }
-
-    // TODO:
+    
     private void LoadAgenticFeatures()
     {
         _embodiedFeatures.SetActive(true);
+        // Display Questionnaire
+        // Activate agent
+        
         _radio.SetActive(true);
         
-        // Display Questionnaire
-        
-        // Activate agent
+
         
         // Spawn Radio
         

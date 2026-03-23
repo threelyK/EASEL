@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -123,12 +124,40 @@ namespace Questionnaire
         
         }
 
+        private void DisplayScorePage()
+        {
+            _scorePage.SetActive(true);
+        }
+
         private void UpdateSessionScores()
         {
+            int[] scores = { _vScore, _aScore, _rScore, _kScore };
+            var max = scores.Max();
+
+            string bestVARK;
+            
+            if (max == _vScore)
+            {
+                bestVARK = $"visual with a score of {_vScore}. Adapt your response to this using just plaintext no figures. Include more imagery in your explanation";
+            } else if (max == _aScore)
+            {
+                bestVARK = $"aural with a score of {_aScore}. Adapt your response to this using just plaintext no figures.";
+            } else if (max == _rScore)
+            {
+                bestVARK = $"read/write with a score of {_rScore}. Adapt your response to this using just plaintext no figures.";
+            } else
+            {
+                bestVARK = $"kinesthetic with a score of {_kScore}. Adapt your response to this using just plaintext no figures. Include examples in your explanation";
+            }
+            
+            MasterManager.Instance.bestVARK = bestVARK;
+            
             MasterManager.Instance.visualScore = _vScore;
             MasterManager.Instance.auralScore = _aScore;
             MasterManager.Instance.rwScore = _rScore;
             MasterManager.Instance.kinesScore = _kScore;
+            
+            MasterManager.OnVARKScoreChanged?.Invoke();
         }
     
     }
