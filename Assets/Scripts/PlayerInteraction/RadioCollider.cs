@@ -5,42 +5,41 @@ namespace PlayerInteraction
 {
     public class RadioCollider : MonoBehaviour
     {
-        private bool _inRange;
+        private bool _inHand;
         private bool _isTalking;
-
-        private const string RadioTrigger = "RadioRange";
+        
         public static event Action OnPlayerTalking;
         public static event Action OnPlayerStoppedTalking;
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag(RadioTrigger))
-            {
-                _inRange = true;
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag(RadioTrigger))
-            {
-                _inRange = false;
-            }
-        }
+        
         
         void Update()
         {
-            if (_inRange && !_isTalking && OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
+            if (_inHand && !_isTalking && OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
             {
                 // Debug.Log("InRange and Pressing");
                 OnPlayerTalking?.Invoke();
                 _isTalking = true;
-            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger) || !_inRange))
+            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger) || !_inHand))
             {
                 // Debug.Log("OutRange or StoppedPressing");
                 OnPlayerStoppedTalking?.Invoke();
                 _isTalking = false;
             }
+        }
+        
+        private void OnEnable()
+        {
+            RadioActions.OnRadioGrabbed += HandleRadioInHand;
+        }
+
+        private void OnDisable()
+        {
+            RadioActions.OnRadioGrabbed -= HandleRadioInHand;
+        }
+
+        private void HandleRadioInHand(bool radioInHand)
+        {
+            _inHand = radioInHand;
         }
     }
 }

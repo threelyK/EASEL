@@ -9,6 +9,7 @@ namespace Questionnaire
         [SerializeField] private VARKSO _questionnaire;
         [SerializeField] private GameObject _infoPage;
         [SerializeField] private GameObject _mainPage;
+        [SerializeField] private GameObject _scorePage;
     
         private string[] _questions;
         private string[] _visual;

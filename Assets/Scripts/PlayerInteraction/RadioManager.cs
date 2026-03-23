@@ -92,10 +92,12 @@ namespace PlayerInteraction
             switch (evt.Type)
             {
                 case PointerEventType.Select:
+                    RadioActions.OnRadioGrabbed?.Invoke(true);
                     // When grabbed;
                     break;
                 case PointerEventType.Unselect:
                     // When released;
+                    RadioActions.OnRadioGrabbed?.Invoke(false);
                     MoveToSnap();
                     break;
             }

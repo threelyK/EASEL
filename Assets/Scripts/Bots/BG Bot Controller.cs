@@ -170,6 +170,7 @@ namespace Bots
             {
                 case PointerEventType.Select:
                     _isGrabbed.Value = true;
+                    _isGrounded.Value = false;
                     break;
                 case PointerEventType.Unselect:
                     _isGrabbed.Value = false;
