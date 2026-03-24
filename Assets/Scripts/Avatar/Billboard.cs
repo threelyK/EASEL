@@ -5,6 +5,7 @@ namespace Avatar
     public class Billboard : MonoBehaviour
     {
         [SerializeField] private Transform targetCamera;
+        
         void LateUpdate()
         {
             if (targetCamera == null) return;

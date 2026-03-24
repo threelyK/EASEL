@@ -30,6 +30,7 @@ public class AvatarController : MonoBehaviour
 
     private void OnEnable()
     {
+        HandleClip(testClip); // TODO FOR TESTING
         RadioActions.OnClipGenerated += HandleClip;
         RadioActions.ResponseGenerated += StoreResponse;
     }
