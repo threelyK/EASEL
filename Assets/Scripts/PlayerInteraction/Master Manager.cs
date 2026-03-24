@@ -41,6 +41,8 @@ public class MasterManager : MonoBehaviour
         }
         
         Debug.LogWarning("SessionID: " + SessionID);
+        
+        
 
         if (_enableEmbodiedFeatures) LoadAgenticFeatures();
     }
