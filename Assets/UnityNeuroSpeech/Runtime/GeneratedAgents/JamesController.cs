@@ -84,13 +84,11 @@ namespace UnityNeuroSpeech.Runtime
         {
             Radio.OnPlayerTalking += OnButtonPressed;
             Radio.OnPlayerStoppedTalking += OnButtonRelease;
-            MasterManager.OnVARKScoreChanged += UpdateAugment;
         }
         
         private void OnDisable() {
             Radio.OnPlayerTalking -= OnButtonPressed;
             Radio.OnPlayerStoppedTalking -= OnButtonRelease;
-            MasterManager.OnVARKScoreChanged -= UpdateAugment;
         }
 
         #endregion

@@ -24,12 +24,12 @@ namespace PlayerInteraction
 
         private void Update()
         {
-            if (_inHand && !_isTalking && OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
+            if (_inHand && !_isTalking && OVRInput.GetDown(OVRInput.Button.Two))
             {
                 Debug.Log("In hand and Pressing");
                 OnPlayerTalking?.Invoke();
                 _isTalking = true;
-            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger) || !_inHand))
+            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.Two) || !_inHand))
             {
                 Debug.Log("Not in hand or StoppedPressing");
                 OnPlayerStoppedTalking?.Invoke();

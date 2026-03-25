@@ -1,6 +1,7 @@
 
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MasterManager : MonoBehaviour
 {
@@ -28,21 +29,38 @@ public class MasterManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        var id_1 = Random.Range(0, 255);
+        var id_2 = Random.Range(0, 255);
+        var id_3 = Random.Range(0, 255);
+        var id_4 = Random.Range(0, 255);
+        
+        
+        var randVal = Random.value;
+        if (randVal <= 0.5)
+        {
+            _enableEmbodiedFeatures = true;
+            SessionID = $"{id_1}_{id_2}_{id_3}_{id_4}AI_ID_";
+        }
+        else
+        {
+            _enableEmbodiedFeatures = false;
+            SessionID = $"{id_1}_{id_2}_{id_3}_{id_4}ID_";
+        }
+        
+        Debug.LogWarning("SessionID: " + SessionID);
+
     }
     
     private void Start()
     {
-        if (_embodiedFeatures) _embodiedFeatures.SetActive(true); else Debug.LogError("missing Embodied");
+        if (_embodiedFeatures) _embodiedFeatures.SetActive(false); else Debug.LogError("missing Embodied");
         if (_radio) _radio.SetActive(false); else Debug.LogError("missing Radio");
         
         if (SessionID is null)
         {
             Debug.LogError("SessionID not set or is TEST");
         }
-        
-        Debug.LogWarning("SessionID: " + SessionID);
-        
-        
 
         if (_enableEmbodiedFeatures) LoadAgenticFeatures();
     }
@@ -50,14 +68,6 @@ public class MasterManager : MonoBehaviour
     private void LoadAgenticFeatures()
     {
         _embodiedFeatures.SetActive(true);
-        // Display Questionnaire
-        // Activate agent
-        
         _radio.SetActive(true);
-        
-
-        
-        // Spawn Radio
-        
     }
 }

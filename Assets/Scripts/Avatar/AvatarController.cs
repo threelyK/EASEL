@@ -15,7 +15,7 @@ public class AvatarController : MonoBehaviour
     [SerializeField] private Sprite _mouthOpen;
 
     [SerializeField] private GameObject _avatar;
-    [SerializeField] private TMP_Text _subtitleText;
+    // [SerializeField] private TMP_Text _subtitleText;
     
     private string _response;
     
@@ -24,13 +24,10 @@ public class AvatarController : MonoBehaviour
     void Start()
     {
         _avatar.SetActive(false); // Only show when talking
-        
-        HandleClip(testClip);
     }
 
     private void OnEnable()
     {
-        HandleClip(testClip); // TODO FOR TESTING
         RadioActions.OnClipGenerated += HandleClip;
         RadioActions.ResponseGenerated += StoreResponse;
     }
