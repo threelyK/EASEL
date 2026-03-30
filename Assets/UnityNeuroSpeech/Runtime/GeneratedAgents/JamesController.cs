@@ -30,7 +30,7 @@ namespace UnityNeuroSpeech.Runtime
         /// Generated ScriptableObject
         /// </summary>
         [Header("General")]
-        public AgentSettings agentSettings;
+        public AgentSettings agentSettings; // If you want to change the model go to "OllamaRequests.cs"
         public string JsonDialogHistoryFileName { get; set; } = string.Empty;
         public string EncryptionHistoryKey { get; set; } = string.Empty;
 
