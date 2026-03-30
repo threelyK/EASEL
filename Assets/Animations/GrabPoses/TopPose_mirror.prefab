@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8552279390564038193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2152993763939562906}
+  - component: {fileID: 6917232307086168274}
+  m_Layer: 0
+  m_Name: TopPose_mirror
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2152993763939562906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552279390564038193}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.087144345, y: 0.97603697, z: -0.19541043, w: -0.039655488}
+  m_LocalPosition: {x: 0.96720386, y: 0.45223224, z: 8.255627}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6917232307086168274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552279390564038193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.HandGrab.HandGrabPose
+  _surface: {fileID: 0}
+  _relativeTo: {fileID: 0}
+  _usesHandPose: 1
+  _handPose:
+    _handedness: 0
+    _fingersFreedom: 0200000002000000010000000100000000000000
+    _jointRotations:
+    - {x: -0.06665304, y: 0.3969201, z: -0.5750258, w: 0.71229}
+    - {x: 0.2201137, y: -0.05016914, z: 0.08162888, w: 0.9707573}
+    - {x: 0.1129198, y: 0.05065549, z: -0.0791567, w: 0.9891499}
+    - {x: 0, y: 0, z: 0, w: 1}
+    - {x: 0.151882, y: 0.07698268, z: -0.0411778, w: 0.9845354}
+    - {x: 0.1307591, y: -0.003759917, z: 0.02628858, w: 0.9910585}
+    - {x: -0.003017978, y: -0.02607772, z: 0.0164322, w: 0.9995203}
+    - {x: 0, y: 0, z: 0, w: 1}
+    - {x: 0.1896454, y: -0.0117154, z: 0.009750124, w: 0.9817344}
+    - {x: 0.2042747, y: -0.001967482, z: 0.0123084, w: 0.9788343}
+    - {x: -0.03223448, y: -0.001938704, z: 0.040453, w: 0.9986595}
+    - {x: 0, y: 0, z: 0, w: 1}
+    - {x: 0.08123156, y: -0.08615339, z: 0.05587993, w: 0.9913912}
+    - {x: 0.3017412, y: 0.007293773, z: 0.03955524, w: 0.9525411}
+    - {x: 0.09175414, y: 0.02957179, z: 0.008965106, w: 0.9953021}
+    - {x: 0.01833355, y: -0.1403366, z: 0.2070356, w: 0.9680423}
+    - {x: -0.06267674, y: -0.05101484, z: -0.09903724, w: 0.9917967}
+    - {x: 0.3602582, y: -0.025497, z: 0.06776039, w: 0.930039}
+    - {x: 0.1151107, y: 0.04873112, z: -0.001109484, w: 0.992156}
+  _targetHandPose:
+    _handedness: 0
+    _fingersFreedom: 0200000002000000010000000100000000000000
+    _jointRotations:
+    - {x: 0.17024375, y: 0.390855, z: -0.6723627, w: 0.6051263}
+    - {x: 0.05661964, y: -0.12981121, z: -0.025398554, w: 0.989595}
+    - {x: 0.42141408, y: 0.0008118321, z: -0.06761168, w: 0.9043441}
+    - {x: -0.015665006, y: 0.057094008, z: -0.000000008309167, w: 0.9982459}
+    - {x: 0.40037015, y: -0.058618475, z: -0.03373782, w: 0.9138541}
+    - {x: 0.49475598, y: 0.062768936, z: 0.05992396, w: 0.8646882}
+    - {x: 0.3094402, y: 0.013510296, z: 0.04723346, w: 0.94964904}
+    - {x: -0.052261986, y: -0.006945011, z: 0.08703499, w: 0.9948092}
+    - {x: 0.37040713, y: -0.035648447, z: -0.066330686, w: 0.92581207}
+    - {x: 0.31301492, y: -0.034260795, z: 0.016241651, w: 0.9489911}
+    - {x: 0.16534464, y: -0.018056002, z: 0.044701383, w: 0.9850568}
+    - {x: -0.032042034, y: -0.070494, z: 0.12150302, w: 0.989566}
+    - {x: 0.25731677, y: 0.058556613, z: -0.16888821, w: 0.94965047}
+    - {x: 0.42454976, y: 0.0315956, z: 0.052665588, w: 0.9033192}
+    - {x: 0.21431088, y: 0.015360274, z: 0.010224702, w: 0.9765912}
+    - {x: 0.018311974, y: -0.14034306, z: 0.20703606, w: 0.96804166}
+    - {x: 0.15420689, y: 0.13192104, z: -0.30461413, w: 0.9306059}
+    - {x: 0.33963692, y: 0.058966957, z: 0.05166898, w: 0.93728334}
+    - {x: 0.34285155, y: 0.086457014, z: 0.21241179, w: 0.9109661}
+  _ghostProvider: {fileID: 0}
+  _handGhostProvider: {fileID: 11400000, guid: 9b9df4f150839de48af887d742aabf53, type: 2}
+  _ovrOffsetMode: 0

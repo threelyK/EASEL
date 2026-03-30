@@ -1,16 +1,26 @@
+
+using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class BotManager : MonoBehaviour
+namespace Bots
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class BotManager : MonoBehaviour
     {
-        
-    }
+        public BGBotController botController;
+        private protected BotAnimationController _animationController;
+        public BehaviorGraphAgent bgAgent;
+        public NavMeshAgent navMeshAgent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private protected void Awake()
+        {
+            botController = GetComponent<BGBotController>();
+            _animationController = GetComponent<BotAnimationController>();
+            bgAgent = GetComponent<BehaviorGraphAgent>();
+
+            LoadExtras();
+        }
+
+        private protected virtual void LoadExtras(){}
     }
 }

@@ -3,7 +3,6 @@
 #region Usings
 
 using System;
-using System.Diagnostics;
 using UnityEngine;
 using Whisper.Utils;
 using UnityNeuroSpeech.Runtime.Ollama;
@@ -31,7 +30,7 @@ namespace UnityNeuroSpeech.Runtime
         /// Generated ScriptableObject
         /// </summary>
         [Header("General")]
-        public AgentSettings agentSettings;
+        public AgentSettings agentSettings; // If you want to change the model go to "OllamaRequests.cs"
         public string JsonDialogHistoryFileName { get; set; } = string.Empty;
         public string EncryptionHistoryKey { get; set; } = string.Empty;
 
@@ -61,7 +60,8 @@ namespace UnityNeuroSpeech.Runtime
         // Custom
         private const string _blank = "[BLANK_AUDIO]";
         private const string _empty = "";
-        private const string _augment = " answer in less than 2000 characters";
+        private string _augment = "";
+        
         
         #region Unity methods
         private void Start()
@@ -82,13 +82,13 @@ namespace UnityNeuroSpeech.Runtime
 
         private void OnEnable()
         {
-            RadioCollider.OnPlayerTalking += OnButtonPressed;
-            RadioCollider.OnPlayerStoppedTalking += OnButtonRelease;
+            Radio.OnPlayerTalking += OnButtonPressed;
+            Radio.OnPlayerStoppedTalking += OnButtonRelease;
         }
         
         private void OnDisable() {
-            RadioCollider.OnPlayerTalking -= OnButtonPressed;
-            RadioCollider.OnPlayerStoppedTalking -= OnButtonRelease;
+            Radio.OnPlayerTalking -= OnButtonPressed;
+            Radio.OnPlayerStoppedTalking -= OnButtonRelease;
         }
 
         #endregion
@@ -128,6 +128,12 @@ namespace UnityNeuroSpeech.Runtime
             
             // Don't need ttsModule
             // StartCoroutine(_ttsModule.StartTTSProcessMonoModular(llmResponse));
+        }
+
+        private void UpdateAugment()
+        {
+            var bestVark = MasterManager.Instance.bestVARK;
+            _augment = $"The user's VARK questionnaire preference is {bestVark}";
         }
 
         #endregion

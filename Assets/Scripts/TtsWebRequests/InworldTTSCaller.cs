@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
+using PlayerInteraction;
 
 namespace TtsWebRequests
 {
@@ -44,7 +44,7 @@ namespace TtsWebRequests
         {
             using var postRequest = CreatePostRequest(text);
             
-            await postRequest.SendWebRequest(); // Error occuring here
+            await postRequest.SendWebRequest();
             
             Debug.Log("Sent Request");
             // -> downloadHandler.text = audioContent{<BYTES>}
@@ -74,6 +74,7 @@ namespace TtsWebRequests
             var clip = ProcessLinear16Audio(audioBytes);
             
             _ttsAudioSource.clip = clip;
+            RadioActions.OnClipGenerated?.Invoke(clip);
             _ttsAudioSource.Play();
         }
 
