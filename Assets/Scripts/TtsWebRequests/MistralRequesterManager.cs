@@ -4,6 +4,7 @@ using UnityEngine;
 public class MistralRequesterManager : MonoBehaviour
 {
     private MistralRequest _mistralRequest;
+    
     private string[] _sysPrompts;
     
     private void Awake()
@@ -11,9 +12,11 @@ public class MistralRequesterManager : MonoBehaviour
         _mistralRequest = MistralRequest.Instance;
     }
 
-    public void SetSystemPrompt(string newPrompt)
+    private void UpdateGameContext(int id)
     {
-        _mistralRequest._systemPrompt = newPrompt;
+        var newContext = _sysPrompts[id];
+        _mistralRequest.AppendToGameContext(newContext);
     }
+    
     
 }

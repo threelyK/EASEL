@@ -14,9 +14,10 @@ namespace TtsWebRequests
         private static string _apiKey;
 
 
-        private string personality = "You are a narrator in a game where you must teach the player";
+        private string _personality = "You are a narrator in a game where you must teach the player. Do NOT include " +
+                                     "stage directions";
 
-        private string gameContext = "Game: The player has just witnessed a robot demonstrate an agentic ai trait of " +
+        private string _gameContext = "Game: The player has just witnessed a robot demonstrate an agentic ai trait of " +
                                      "self-organisation by watching them arranges boxes to move to the button that let" +
                                      " the player enter the next room.";
 
@@ -37,30 +38,41 @@ namespace TtsWebRequests
                 Debug.LogError("MISTRAL_API_KEY environment variable not set");
             }
 
-            // SetupSystem();
+            SetupSystem();
         }
 
         private void SetupSystem()
         {
             // Sets up the system parts of the chat history.
-            _chatHistory.Add(new message("system", personality)); // index 0
-            _chatHistory.Add(new message("system", gameContext)); // index 1
+            AddSystemPrompt(_personality); // index 0
+            AddSystemPrompt(_gameContext); // index 1
         }
-        
+
+        private void AddSystemPrompt(string message)
+        {
+            _chatHistory.Add(new message("system", message));
+        }
+
+        private void SetGameContext(string message)
+        {
+            _chatHistory[1].content = message;
+        }
+
+        /// <summary>
+        /// Used to update the agent's knowledge of the robot and lessons the player has learnt.
+        /// </summary>
+        /// <param name="message">The string to append</param>
+        public void AppendToGameContext(string message)
+        {
+            _chatHistory[1].content += " " + message;
+        }
         
 
         private UnityWebRequest CreatePostReq(string userPrompt)
         {
             _systemPrompt ??= "";
             
-            message SystemMessage = new message("system", _systemPrompt);
             message UserMessage = new message("user", userPrompt);
-
-            if (SystemMessage != _lastSystemPrompt)
-            {
-                _chatHistory.Add(SystemMessage);
-                _lastSystemPrompt = SystemMessage;
-            }
             _chatHistory.Add(UserMessage);
             
             var jsonReqBody = JsonUtility.ToJson(new MistralReqBody

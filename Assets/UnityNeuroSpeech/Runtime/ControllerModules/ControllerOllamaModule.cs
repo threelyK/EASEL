@@ -8,13 +8,12 @@ namespace UnityNeuroSpeech.Runtime.Ollama
     internal class ControllerOllamaModule
     {
         private int _responseCount;
-        private OllamaRequests _ollamaRequester;
+        // private OllamaRequests _ollamaRequester;
         private MistralRequest _mistralRequester;
         
         public void InitOllamaModular(string systemPrompt)
         {
-            // Init LLM client
-            _ollamaRequester = new OllamaRequests(systemPrompt);
+            // _ollamaRequester = new OllamaRequests(systemPrompt);
             
             // Init mistral client
             _mistralRequester = MistralRequest.Instance;
