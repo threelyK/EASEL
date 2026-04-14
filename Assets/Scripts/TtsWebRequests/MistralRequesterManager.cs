@@ -1,3 +1,4 @@
+using System;
 using TtsWebRequests;
 using UnityEngine;
 
@@ -12,6 +13,12 @@ public class MistralRequesterManager : MonoBehaviour
         _mistralRequest = MistralRequest.Instance;
     }
 
+    private void OnEnable()
+    {
+        throw new NotImplementedException();
+    }
+
+    // TODO: Will listen for when player entry in trigger zone
     private void UpdateGameContext(int id)
     {
         var newContext = _sysPrompts[id];

@@ -15,7 +15,7 @@ namespace TtsWebRequests
         
         void Start()
         {
-            RunTest();
+            _ = RunTest();
         }
 
         private async UniTask RunTest()

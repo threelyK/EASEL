@@ -1,5 +1,4 @@
 
-using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
@@ -9,12 +8,8 @@ namespace PlayerInteraction
     public class RadioManager : MonoBehaviour
     {
         [SerializeField]
-        private Material radioLED;
-
-        [SerializeField]
         // private TMP_Text subtitlesTextBox;
-
-        private bool _isGrabbed;
+        
         private bool _isTimerOn;
         private float _timer;
         private float _displayTime;
@@ -26,27 +21,19 @@ namespace PlayerInteraction
 
         private void Start()
         {
-            radioLED.SetColor("_EmissionColor", Color.green);
             // HideSubtitles();
         }
 
         private void OnEnable()
         {
-            RadioActions.OnRadioReady += HandleStatus;
             // RadioActions.OnClipGenerated += StartTimer;
             // RadioActions.ResponseGenerated += DisplaySubtitles;
         }
 
         private void OnDisable()
         {
-            RadioActions.OnRadioReady -= HandleStatus;
             // RadioActions.OnClipGenerated -= StartTimer;
             // RadioActions.ResponseGenerated -= DisplaySubtitles;
-        }
-
-        private void HandleStatus(bool status)
-        {
-            radioLED.SetColor("_EmissionColor", status ? Color.green : Color.red);
         }
         
         /*
