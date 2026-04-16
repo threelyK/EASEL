@@ -79,9 +79,9 @@ public class BuddyBot : MonoBehaviour
 
         ProjectorColourEnum guess;
         
-        if (colourGuesses > 5)
+        if (colourGuesses > 5 && hasPerception)
         {
-            // Always guess correctly now
+            // Always guess correctly
             guess = newColour;
         }
         else
@@ -89,7 +89,6 @@ public class BuddyBot : MonoBehaviour
             guess = colours[Random.Range(0, 4)];
         }
         
-        // wait to guess
         ColourGuesser.OnBotColourGuess?.Invoke(guess);
         colourGuesses++;
     }
