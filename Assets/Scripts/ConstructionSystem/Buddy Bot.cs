@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BuddyBot : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class BuddyBot : MonoBehaviour
     [SerializeField] private GameObject _rArm;
     [SerializeField] private GameObject _eyes;
 
+    private int colourGuesses;
+    
     private void Start()
     {
         _lArm.SetActive(false);
@@ -25,17 +28,20 @@ public class BuddyBot : MonoBehaviour
     private void OnEnable()
     {
         OnBotComponentAdd += AddComponent;
+        ProjectorColour.OnPColourChange += GuessColour;
     }
 
     private void OnDisable()
     {
         OnBotComponentAdd -= AddComponent;
+        ProjectorColour.OnPColourChange -= GuessColour;
     }
 
     private void AddComponent(BotComponentType type)
     {
         switch (type)
         {
+            // TODO: Add nicer animations rather than instant pop in
             case BotComponentType.Perception:
                 hasPerception = true;
                 AddEyes();
@@ -59,6 +65,33 @@ public class BuddyBot : MonoBehaviour
         if (!hasPerception || !hasTools || !hasMemoryLearning || !hasReasoning) return;
         Debug.Log("Robot complete");
         PlayBootupAnimation();
+    }
+
+    private void GuessColour(ProjectorColourEnum newColour)
+    {
+        var colours = new [] 
+        {
+            ProjectorColourEnum.Red,
+            ProjectorColourEnum.Blue,
+            ProjectorColourEnum.Green,
+            ProjectorColourEnum.Yellow
+        };
+
+        ProjectorColourEnum guess;
+        
+        if (colourGuesses > 5)
+        {
+            // Always guess correctly now
+            guess = newColour;
+        }
+        else
+        {
+            guess = colours[Random.Range(0, 4)];
+        }
+        
+        // wait to guess
+        ColourGuesser.OnBotColourGuess?.Invoke(guess);
+        colourGuesses++;
     }
 
     private void AddEyes()

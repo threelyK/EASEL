@@ -8,14 +8,17 @@ namespace TtsWebRequests
 {
     public class MistralRequest
     {
+        public static Action<string> OnResponseReceived;
+        
         private static string _endpoint = "https://api.mistral.ai/v1/chat/completions";
         private static string _model = "mistral-small-2603";
         private static string _reasoningEffort = "none";
         private static string _apiKey;
 
 
-        private string _personality = "You are a narrator in a game where you must teach the player. Do NOT include " +
-                                     "stage directions";
+        private string _personality = "You are a narrator in a game where your overall aim is to teach the player " +
+                                      "agentic AI. You should try teaching using subtle reflective questioning. Do " +
+                                      "NOT include stage directions";
 
         private string _gameContext = "Game: The player has just witnessed a robot demonstrate an agentic ai trait of " +
                                      "self-organisation by watching them arranges boxes to move to the button that let" +
@@ -108,6 +111,7 @@ namespace TtsWebRequests
             var responseContent = responseJson.choices[0].message.content;
             _chatHistory.Add( new message("assistant", responseContent));
             
+            RadioActions.ResponseGenerated?.Invoke(responseContent);
             return responseContent;
         }
         

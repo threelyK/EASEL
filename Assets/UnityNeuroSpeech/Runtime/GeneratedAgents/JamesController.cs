@@ -120,10 +120,9 @@ namespace UnityNeuroSpeech.Runtime
             var ttsCaller = new InworldTtsCaller(_ttsAudioSource, _apiKey);
 
             await ttsCaller.PostAndPlayToInworldVoice(llmResponse);
-            RadioActions.ResponseGenerated?.Invoke(llmResponse);
             AfterTTS?.Invoke();
             
-            RadioActions.OnRadioReady?.Invoke(true);
+            // RadioActions.OnRadioReady?.Invoke(true);
             _processingOtherActions = false;
             
             // Don't need ttsModule

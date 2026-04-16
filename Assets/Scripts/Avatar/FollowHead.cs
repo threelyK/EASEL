@@ -9,6 +9,15 @@ namespace Avatar
         [SerializeField] private Vector3 _worldOffset;
         [SerializeField] private float smoothing = 8f;
 
+
+        private void Start()
+        {
+            if (_followTarget is null)
+            {
+                Debug.LogError($"{gameObject}.FollowHead: _followTarget is null");
+            }
+        }
+
         private void LateUpdate()
         {
             var targetPos = _followTarget.position + _followTarget.TransformDirection(_worldOffset);
