@@ -81,8 +81,7 @@ public class BuddyBot : MonoBehaviour
         
         if (colourGuesses > 5 && hasPerception)
         {
-            // Always guess correctly
-            guess = newColour;
+            guess = newColour; // Always guesses correctly
         }
         else
         {
