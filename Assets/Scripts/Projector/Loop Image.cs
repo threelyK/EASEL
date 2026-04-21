@@ -38,7 +38,7 @@ public class LoopImage : MonoBehaviour
         // public so a Unity Button can call it
         if (gameObject != loopImage) return;
 
-        if (currentIndex != sprites.Length)
+        if (currentIndex != sprites.Length - 1)
         {
             currentIndex++;
         }

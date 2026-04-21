@@ -2,8 +2,6 @@ using System;
 
 public class ProjectorColour
 {
-    public static Action<ProjectorColourEnum> OnPColourChange;
-        
     public ProjectorColourEnum colour = ProjectorColourEnum.Red;
     
     public void NextColour()
@@ -16,8 +14,6 @@ public class ProjectorColour
             ProjectorColourEnum.Yellow => ProjectorColourEnum.Red,
             _ => throw new ArgumentOutOfRangeException()
         };
-        
-        OnPColourChange?.Invoke(colour);
     }
     
     public void PrevColour()
@@ -31,7 +27,6 @@ public class ProjectorColour
             _ => throw new ArgumentOutOfRangeException()
         };
         
-        OnPColourChange?.Invoke(colour);
     }
 }
 

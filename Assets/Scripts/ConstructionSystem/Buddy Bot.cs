@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Serialization;
+using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
 
 public class BuddyBot : MonoBehaviour
 {
-    // Bot player interacts with throughout gameplay
+    // Bot interacts with player throughout gameplay
     public static Action<BotComponentType> OnBotComponentAdd;
     
     public bool hasPerception;
@@ -16,6 +19,12 @@ public class BuddyBot : MonoBehaviour
     [SerializeField] private GameObject _rArm;
     [SerializeField] private GameObject _eyes;
 
+    [SerializeField] private PlayableDirector _addArms;
+    [SerializeField] private PlayableDirector _addEyes;
+    [SerializeField] private PlayableDirector _addBrain;
+    [SerializeField] private PlayableDirector _addMemory;
+    
+    private Animator _animator;
     private int colourGuesses;
     
     private void Start()
@@ -23,25 +32,26 @@ public class BuddyBot : MonoBehaviour
         _lArm.SetActive(false);
         _rArm.SetActive(false);
         _eyes.SetActive(false);
+        
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
         OnBotComponentAdd += AddComponent;
-        ProjectorColour.OnPColourChange += GuessColour;
+        ProjectorDemo.OnPColourChanged += GuessColour;
     }
 
     private void OnDisable()
     {
         OnBotComponentAdd -= AddComponent;
-        ProjectorColour.OnPColourChange -= GuessColour;
+        ProjectorDemo.OnPColourChanged -= GuessColour;
     }
 
     private void AddComponent(BotComponentType type)
     {
         switch (type)
         {
-            // TODO: Add nicer animations rather than instant pop in
             case BotComponentType.Perception:
                 hasPerception = true;
                 AddEyes();
@@ -49,13 +59,14 @@ public class BuddyBot : MonoBehaviour
             case BotComponentType.Tools:
                 hasTools = true;
                 AddArms();
-                SpinArms();
                 break;
             case BotComponentType.MemoryLearning:
                 hasMemoryLearning = true;
+                AddMemory();
                 break;
             case BotComponentType.Reasoning:
                 hasReasoning = true;
+                AddBrain();
                 break;
             default:
                 Debug.LogError("Unknown bot component type");
@@ -79,7 +90,7 @@ public class BuddyBot : MonoBehaviour
 
         ProjectorColourEnum guess;
         
-        if (colourGuesses > 5 && hasPerception)
+        if (colourGuesses >= 5 && hasPerception)
         {
             guess = newColour; // Always guesses correctly
         }
@@ -88,25 +99,28 @@ public class BuddyBot : MonoBehaviour
             guess = colours[Random.Range(0, 4)];
         }
         
-        ColourGuesser.OnBotColourGuess?.Invoke(guess);
+        GuessDisplayer.OnBotColourGuess?.Invoke(guess);
         colourGuesses++;
     }
 
     private void AddEyes()
     {
-        _eyes.SetActive(true);
+        _addEyes.Play();
     }
     
     private void AddArms()
     {
-        _lArm.SetActive(true);
-        _rArm.SetActive(true);
+        _addArms.Play();
     }
-    
 
-    public void SpinArms()
+    private void AddMemory()
     {
-        // play animation
+        _addMemory.Play();
+    }
+
+    private void AddBrain()
+    {
+        _addBrain.Play();
     }
 
     private void PlayBootupAnimation()
