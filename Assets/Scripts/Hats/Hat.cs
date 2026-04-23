@@ -21,6 +21,7 @@ public class Hat : MonoBehaviour
     
     
     private Grabbable _grabbable;
+    private GrabInteractable _grabInteractable;
 
     private int _ownID;
     
@@ -35,10 +36,13 @@ public class Hat : MonoBehaviour
     private const float FloatTime = 5f;
     private const float RotationTime = 10f;
 
+    private bool _grabEventListening;
+
     private void Start()
     {
         _ownID = gameObject.GetInstanceID();
         _grabbable = GetComponent<Grabbable>();
+        _grabInteractable = GetComponentInChildren<GrabInteractable>();
         _renderer = GetComponent<Renderer>();
         _material = _renderer.material;
 
@@ -47,6 +51,12 @@ public class Hat : MonoBehaviour
         SnapToShop();
         Blackout();
         StartSpinning();
+
+        if (!_grabEventListening)
+        {
+            _grabbable.WhenPointerEventRaised += GrabHat;
+            _grabEventListening = true;
+        }
     }
 
     private void OnEnable()
@@ -57,6 +67,7 @@ public class Hat : MonoBehaviour
         
         if (_grabbable)
         {
+            _grabEventListening = true;
             _grabbable.WhenPointerEventRaised += GrabHat;
         }
     }
@@ -70,6 +81,7 @@ public class Hat : MonoBehaviour
         if (_grabbable)
         {
             _grabbable.WhenPointerEventRaised -= GrabHat;
+            _grabEventListening = false;
         }
     }
     
@@ -78,7 +90,6 @@ public class Hat : MonoBehaviour
         switch (evt.Type)
         {
             case PointerEventType.Select:
-                Debug.Log("Hat Selected");
                 ForceDeselect();
                 if (_purchased)
                 {
@@ -170,7 +181,7 @@ public class Hat : MonoBehaviour
     private void Blackout()
     {
         _renderer.material = blackMat;
-        Debug.Log(_material);
+        Debug.Log(_material.color);
     }
 
     private void DefaultMat()
@@ -180,7 +191,8 @@ public class Hat : MonoBehaviour
     
     private void ForceDeselect()
     {
-        _grabbable.enabled = false;
+        _grabInteractable.enabled = false;
+        _grabInteractable.enabled = true;
     }
     
     private void SnapToBot()
