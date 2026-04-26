@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c939bc7a5c4807542ac11cbbeeefd10c, type: 3}
+  m_Name: Q5-3
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionTemplate
+  QuestionType: 0
+  Question: Imagine you want to write a short story but don't know where to start.
+    The task that you give the system is "Please write me a story that involves a
+    chameleon in a pizza shop", which MAS arrangement would be best for giving you
+    different ideas on the story?
+  OptA: Use the centralised orchestrator arrangement that breaks down the task into
+    writing a paragraph about the chameleon, and then a pizza shop.
+  OptB: Use the baton passing workflow to produce 1 short story that has been planned,
+    written, and reviewed by 3 agents in that order.
+  OptC: Use the council of agents (Sci-fi, Horror, and Romance) to provide 3 different
+    versions of the story.
+  OptD: None of the above.
+  Ans: 2

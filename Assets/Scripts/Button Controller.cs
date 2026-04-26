@@ -15,7 +15,7 @@ public class ButtonController : MonoBehaviour
     private protected bool _isPressed;
     [SerializeField] private UnityEvent eventToInvoke;
     
-    private protected void HandlePoke(InteractableStateChangeArgs args)
+    private protected virtual void HandlePoke(InteractableStateChangeArgs args)
     {
         if (args.NewState == InteractableState.Select && !_isPressed)
         {
@@ -32,7 +32,7 @@ public class ButtonController : MonoBehaviour
 
     private protected virtual void ProcessPress()
     {
-        eventToInvoke.Invoke();
+        eventToInvoke?.Invoke();
     }
     
     private protected void Awake()
@@ -40,7 +40,7 @@ public class ButtonController : MonoBehaviour
         _pokeInteractable = GetComponent<PokeInteractable>();
     }
 
-    private protected void Start()
+    private protected virtual void Start()
     {
         _initialPos = transform.localPosition;
         _pressedPos = transform.localPosition - new Vector3(0, 0.03f, 0);

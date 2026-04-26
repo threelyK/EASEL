@@ -34,13 +34,27 @@ public class AvatarController : MonoBehaviour
     private void OnEnable()
     {
         RadioActions.OnClipGenerated += HandleClip;
+        RadioActions.OnRadioReady += HandleThinking;
     }
 
     private void OnDisable()
     {
         RadioActions.OnClipGenerated -= HandleClip;
+        RadioActions.OnRadioReady -= HandleThinking;
     }
 
+    private void HandleThinking(bool isRadioReady)
+    {
+        if (isRadioReady)
+        {
+            // hide thinking video
+        }
+        else
+        {
+            // show thinking video
+        }
+    }
+    
     private void HandleClip(AudioClip clip)
     {
         if (clip == null) return;

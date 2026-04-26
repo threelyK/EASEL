@@ -5,6 +5,7 @@ namespace Avatar
 {
     public class FollowHead : MonoBehaviour
     {
+        [Tooltip("Camera Centre")]
         [SerializeField] private Transform _followTarget;
         [SerializeField] private Vector3 _worldOffset;
         [SerializeField] private float smoothing = 8f;

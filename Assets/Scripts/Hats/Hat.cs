@@ -12,7 +12,7 @@ public class Hat : MonoBehaviour
     private bool _purchased;
     private bool _wearing;
     
-    [SerializeField] private int price;
+    public int price;
     
     [SerializeField] private Transform shopHatSnap;
     [SerializeField] private Transform botHatSnap;
@@ -43,7 +43,7 @@ public class Hat : MonoBehaviour
         _ownID = gameObject.GetInstanceID();
         _grabbable = GetComponent<Grabbable>();
         _grabInteractable = GetComponentInChildren<GrabInteractable>();
-        _renderer = GetComponent<Renderer>();
+        _renderer = GetComponentInChildren<Renderer>();
         _material = _renderer.material;
 
         if (botHatSnap is null) Debug.LogError("Bot hat location is null");
