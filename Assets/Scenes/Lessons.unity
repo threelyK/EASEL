@@ -424,7 +424,7 @@ Transform:
   m_GameObject: {fileID: 246414019}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -7}
+  m_LocalPosition: {x: 0, y: 1, z: -6}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1281,6 +1281,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NextLessonTopic
   nextTopicID: C3
   nextTopicObj: {fileID: 435219821}
+--- !u!1001 &983638659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270715091283278074, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378769260586726651, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
+      propertyPath: m_Name
+      value: L4-DvRHybrid
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d7e1b3ddeb553547a5986ef4c844ce2, type: 3}
 --- !u!1 &1018292096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,6 +1590,10 @@ PrefabInstance:
     - target: {fileID: 580349434590924205, guid: d78cc4ceb08a1d44492071594c84be9c, type: 3}
       propertyPath: m_Name
       value: L4-IntroReact
+      objectReference: {fileID: 0}
+    - target: {fileID: 580349434590924205, guid: d78cc4ceb08a1d44492071594c84be9c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7346976338139735638, guid: d78cc4ceb08a1d44492071594c84be9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3289,6 +3350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: L4.1-B1
       objectReference: {fileID: 0}
+    - target: {fileID: 6576427590553940273, guid: 78007506a424215448c30bc6056dc887, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3401,7 +3466,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8833283196045480999, guid: 7c8aefbd608256a47b39b7a552f51011, type: 3}
       propertyPath: m_Name
-      value: L4.2-B2
+      value: L4.1-B2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833283196045480999, guid: 7c8aefbd608256a47b39b7a552f51011, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3424,3 +3493,4 @@ SceneRoots:
   - {fileID: 1029214514}
   - {fileID: 6452360303405388824}
   - {fileID: 8225670541720112962}
+  - {fileID: 983638659}
