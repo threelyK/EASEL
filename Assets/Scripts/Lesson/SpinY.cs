@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class SpinY : MonoBehaviour
@@ -8,18 +9,9 @@ public class SpinY : MonoBehaviour
     
     private void Start()
     {
-        var rot = _anticlockwise?
-
-        if (_anticlockwise) rot *= -1;
+        var rot = _anticlockwise ? new Vector3(0, -360, 0) : new Vector3(0, 360, 0);
         
         gameObject.transform.DOLocalRotate(rot, _interval, RotateMode.LocalAxisAdd)
             .SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
-
-        foreach (Transform child in gameObject.transform)
-        {
-            child.DOLocalRotate(rot * -1, _interval, RotateMode.LocalAxisAdd)
-                .SetEase(Ease.Linear)
-                .SetLoops(-1, LoopType.Incremental);
-        }
     }
 }
