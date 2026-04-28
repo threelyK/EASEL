@@ -13,7 +13,12 @@ public class ButtonController : MonoBehaviour
     private protected Vector3 _initialPos;
     private protected Vector3 _pressedPos;
     private protected bool _isPressed;
+    
     [SerializeField] private UnityEvent eventToInvoke;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
+    
+    
     
     private protected virtual void HandlePoke(InteractableStateChangeArgs args)
     {
@@ -33,6 +38,7 @@ public class ButtonController : MonoBehaviour
     private protected virtual void ProcessPress()
     {
         eventToInvoke?.Invoke();
+        _audioSource?.PlayOneShot(_audioClip);
     }
     
     private protected void Awake()
