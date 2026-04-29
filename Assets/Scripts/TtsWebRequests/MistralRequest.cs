@@ -38,7 +38,7 @@ namespace TtsWebRequests
         private MistralRequest()
         {
             _chatHistory = new List<message>();
-            _apiKey = Environment.GetEnvironmentVariable("MISTRAL_API_KEY");
+            _apiKey = "GbydiT5MU3hgjJkwwGNTxzcYlc6NBVRY"; // Environment.GetEnvironmentVariable("MISTRAL_API_KEY");
 
             if (string.IsNullOrEmpty(_apiKey))
             {

@@ -29,12 +29,14 @@ public class LessonOrb : MonoBehaviour
     private bool _grabEventListening;
     
     private LessonManager _activeLessonManager;
+    private MasterContainer _masterContainer;
     
     private void Start()
     {
         _ownID = gameObject.GetInstanceID();
         
         _grabbable = GetComponent<Grabbable>();
+        _masterContainer = FindFirstObjectByType<MasterContainer>();
 
         if (!_grabEventListening) _grabbable.WhenPointerEventRaised += HandleGrabbableEvent;
     }
@@ -92,7 +94,7 @@ public class LessonOrb : MonoBehaviour
         _activeLessonManager = lessonManagerObj.AddComponent<LessonManager>();
         
         // Spawns prefab on this transform
-        Transform masterContainerLoc = FindFirstObjectByType<MasterContainer>().transform;
+        Transform masterContainerLoc = _masterContainer.transform;
 
         _activeLessonManager.SetLesson(_lessonConfig, masterContainerLoc);
         _activeLessonManager.OnLessonComplete += HandleLessonComplete;
@@ -106,12 +108,26 @@ public class LessonOrb : MonoBehaviour
             Destroy(_activeLessonManager.gameObject);
             _activeLessonManager = null;
         }
+        
+        DestroyChildrenInMasterContainer();
     }
 
     private void HandleLessonComplete()
     {
         OnLessonCompleteUnity?.Invoke();
+
+        DestroyChildrenInMasterContainer();
+        
         HideLesson();
+    }
+
+    private void DestroyChildrenInMasterContainer()
+    {
+        var masterContainerLoc = _masterContainer.transform;
+        foreach (Transform child in masterContainerLoc)
+        {
+            Destroy(child.gameObject);
+        }
     }
     
 }
