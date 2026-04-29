@@ -67,6 +67,8 @@ public class QuestionScreen : MonoBehaviour
     {
         _sessionID = MasterManagerV2.Instance.sessionID;
         
+        if (examID == "NOT_SET") Debug.LogError("Exam ID is not set");
+        
         _lastQIndex =  questions.Count - 1;
         
         _userAns = new OptionChoice[questions.Count];
@@ -114,6 +116,7 @@ public class QuestionScreen : MonoBehaviour
         } else {
             CalculateScore();
             SaveUserExam();
+            onComplete?.Invoke();
             Destroy(gameObject);
         }
     }

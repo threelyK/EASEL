@@ -525,9 +525,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4446046395847629474}
   - component: {fileID: 6347390693801994675}
-  - component: {fileID: 7142454913754791021}
   - component: {fileID: 4419323560026885364}
   - component: {fileID: 7289396951018361019}
+  - component: {fileID: 9071626514838956441}
   m_Layer: 0
   m_Name: Reasoning 1
   m_TagString: BotComponent
@@ -573,19 +573,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7142454913754791021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2285862623285022845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6163ffd700526894b918157803cb2ae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bots.Part
-  _partType: 1
 --- !u!54 &4419323560026885364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -636,6 +623,19 @@ MonoBehaviour:
   _kinematicWhileSelected: 0
   _throwWhenUnselected: 1
   _forceKinematicDisabled: 0
+--- !u!114 &9071626514838956441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2285862623285022845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cc591b8507e864fbe3fbe71456b0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotComponent
+  componentType: 3
 --- !u!1 &3002347960031456988
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 4904833617792022582}
   - component: {fileID: 6595126838146018825}
   - component: {fileID: 610676263256308204}
+  - component: {fileID: 7469230844128207550}
   m_Layer: 0
   m_Name: L2-Reasoning
   m_TagString: Untagged
@@ -778,6 +779,8 @@ PlayableDirector:
     value: {fileID: 6331694066497850650}
   - key: {fileID: -7124804404285296576, guid: 68da6987fa188e14c8e7263035fdc1e2, type: 2}
     value: {fileID: 6544802826465591232}
+  - key: {fileID: 7042960403490612359, guid: 68da6987fa188e14c8e7263035fdc1e2, type: 2}
+    value: {fileID: 7469230844128207550}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &610676263256308204
@@ -794,6 +797,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChapterBase
   _timeline: {fileID: 6595126838146018825}
   _hasInteractiveButton: 1
+--- !u!82 &7469230844128207550
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276684456579013121}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4047493888413061429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,7 +2177,8 @@ GameObject:
   - component: {fileID: 412629668133617921}
   - component: {fileID: 2168925383297632387}
   - component: {fileID: 5591392700339204850}
-  m_Layer: 0
+  - component: {fileID: 5194016199018590925}
+  m_Layer: 3
   m_Name: Reasoning V2a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2092,7 +2193,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8919819192485291404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.1399999}
+  m_LocalPosition: {x: 0, y: 0, z: 0.16}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2101,7 +2202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3.989, y: 2}
+  m_AnchoredPosition: {x: 5.85, y: 2}
   m_SizeDelta: {x: 180, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &412629668133617921
@@ -2167,6 +2268,34 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5194016199018590925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919819192485291404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee10491ef6d5d1d49a270cf6b09bdc19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oculus.VR::OVROverlayCanvas
+  _mipmapMode: 1
+  _dynamicResolution: 0
+  _redrawResolutionThreshold: 2147483647
+  rectTransform: {fileID: 3702723291346465204}
+  maxTextureSize: 2048
+  manualRedraw: 1
+  renderInterval: 1
+  renderIntervalFrameOffset: 0
+  superSample: 0
+  layer: 5
+  opacity: 2
+  shape: 0
+  curveRadius: 1
+  overlapMask: 0
+  compositionMode: 2
+  _overlayEnabled: 1
 --- !u!1001 &4033772673854078552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2218,6 +2347,26 @@ PrefabInstance:
     - target: {fileID: 1101983831102887952, guid: 30862f3d399cc154b8be8a9e583102e9, type: 3}
       propertyPath: m_Name
       value: Pillar Next
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552764111923681047, guid: 30862f3d399cc154b8be8a9e583102e9, type: 3}
+      propertyPath: eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552764111923681047, guid: 30862f3d399cc154b8be8a9e583102e9, type: 3}
+      propertyPath: eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 610676263256308204}
+    - target: {fileID: 2552764111923681047, guid: 30862f3d399cc154b8be8a9e583102e9, type: 3}
+      propertyPath: eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnNextButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552764111923681047, guid: 30862f3d399cc154b8be8a9e583102e9, type: 3}
+      propertyPath: eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChapterBase, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552764111923681047, guid: 30862f3d399cc154b8be8a9e583102e9, type: 3}
+      propertyPath: eventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

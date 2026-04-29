@@ -24,11 +24,12 @@ public class TLXManager : MonoBehaviour
 
     private void Start()
     {
-        _sessionID = MasterManager.Instance.SessionID;
+        _sessionID = MasterManagerV2.Instance.sessionID;
     }
 
     private void OnEnable()
     {
+        _sessionID = MasterManagerV2.Instance.sessionID;
         mentalSlider.onValueChanged.AddListener(UpdateMental);
         physicalSlider.onValueChanged.AddListener(UpdatePhysical);
         timeSlider.onValueChanged.AddListener(UpdateTime);

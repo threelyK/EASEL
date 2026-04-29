@@ -10,7 +10,6 @@ public class LessonOrb : MonoBehaviour
     // Restarts entire lesson when picked up again
     
     public static Action<int> OnLessonHide;
-    public static Action<int> OnLessonComplete; // Affects point giver and next lesson orb shows up
 
     public UnityEvent OnLessonCompleteUnity;
     
@@ -42,7 +41,7 @@ public class LessonOrb : MonoBehaviour
 
     private void OnEnable()
     {
-        OnLessonComplete += CheckLessonComplete;
+        // OnLessonComplete += CheckLessonComplete; // Removed function
         
         if (!_grabEventListening && _grabbable)
         {
@@ -83,10 +82,6 @@ public class LessonOrb : MonoBehaviour
         }
     }
     
-    private void CheckLessonComplete(int id)
-    {
-        if (id == _ownID) _hasCompleted = true;
-    }
 
     public void StartLesson()
     {
@@ -96,6 +91,7 @@ public class LessonOrb : MonoBehaviour
         var lessonManagerObj = new GameObject($"LessonManager_{_lessonNumber}");
         _activeLessonManager = lessonManagerObj.AddComponent<LessonManager>();
         
+        // Spawns prefab on this transform
         Transform masterContainerLoc = FindFirstObjectByType<MasterContainer>().transform;
 
         _activeLessonManager.SetLesson(_lessonConfig, masterContainerLoc);
@@ -114,7 +110,6 @@ public class LessonOrb : MonoBehaviour
 
     private void HandleLessonComplete()
     {
-        OnLessonComplete?.Invoke(_ownID);
         OnLessonCompleteUnity?.Invoke();
         HideLesson();
     }

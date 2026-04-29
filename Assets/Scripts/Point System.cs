@@ -1,6 +1,9 @@
 
+using System;
+
 public class PointSystem : Singleton<PointSystem>
 {
+    public event Action onPointChange;
     public int _points;
     
     public int GetPoints()
@@ -21,6 +24,7 @@ public class PointSystem : Singleton<PointSystem>
         } else
         {
             _points -= amount;
+            onPointChange?.Invoke();
             // sufficient funds
         }
     }
@@ -28,6 +32,7 @@ public class PointSystem : Singleton<PointSystem>
     public void GainPoints(int amount)
     {
         _points += amount;
+        onPointChange?.Invoke();
     }
     
 }

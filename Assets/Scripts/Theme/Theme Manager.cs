@@ -6,8 +6,6 @@ public class ThemeManager : Singleton<ThemeManager>
     // Should only update dialogue systems once at the beginning
     public static Action<ThemeType> OnThemeChange;
     [SerializeField] private bool _isEnabled = true;
-    
-
     public ThemeType _themeChoice;
 
     public ThemeType GetTheme()

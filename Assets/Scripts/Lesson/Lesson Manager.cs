@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LessonManager : MonoBehaviour
 {
-    public Action OnLessonComplete;
+    public event Action OnLessonComplete;
     
     [SerializeField] private Transform _chapterSpawnLocation;
 
@@ -13,7 +13,6 @@ public class LessonManager : MonoBehaviour
     
     
     private GameObject _activeChapterInstance;
-    private ThemeManager _themeManager;
 
     public void SetLesson(LessonConfig lesson, Transform chapterSpawnLocation)
     {
@@ -24,10 +23,17 @@ public class LessonManager : MonoBehaviour
     
     public void LoadChapter(int chapterIndex)
     {
+        if (chapterIndex == -1)
+        {
+            OnLessonComplete?.Invoke();
+            return;
+        }
+        
         ChapterNode chapter = _currentLesson.GetChapter(chapterIndex);
         if (chapter == null)
         {
             Debug.Log("Lesson complete!");
+            OnLessonComplete?.Invoke();
             return;
         }
 
@@ -37,7 +43,7 @@ public class LessonManager : MonoBehaviour
         if (_activeChapterInstance != null) Destroy(_activeChapterInstance);
 
         // Get prefab based on theme
-        var prefab = chapter.GetPrefabForTheme(_themeManager._themeChoice);
+        var prefab = chapter.GetPrefabForTheme(ThemeManager.Instance._themeChoice);
         _activeChapterInstance = Instantiate(prefab, _chapterSpawnLocation);
 
         // Register for timeline completion
@@ -47,13 +53,13 @@ public class LessonManager : MonoBehaviour
             chapterComponent.OnChapterComplete += GoToNextChapter;
         }
 
-        Debug.Log($"Loaded Chapter {chapterIndex} ({_themeManager.GetTheme()})");
+        Debug.Log($"Loaded Chapter {chapterIndex} ({ThemeManager.Instance._themeChoice})");
     }
 
     private void GoToNextChapter()
     {
         ChapterNode currentChapter = _currentLesson.GetChapter(_currentChapterIndex);
-        int nextIndex = currentChapter.GetNextChapterIndex(_themeManager._themeChoice);
+        int nextIndex = currentChapter.GetNextChapterIndex(ThemeManager.Instance._themeChoice);
         
         LoadChapter(nextIndex);
     }
