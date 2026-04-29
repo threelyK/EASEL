@@ -9,16 +9,16 @@ public class LessonOrb : MonoBehaviour
     // Restarts entire lesson when picked up again
     
     public static Action<int> OnLessonHide;
-    public static Action<int> OnLessonComplete; // Affects pt giver and next lesson orb shows up
-
+    public static Action<int> OnLessonComplete; // Affects point giver and next lesson orb shows up
+    
+    [SerializeField] private LessonConfig _lessonConfig;
     [SerializeField] private string _lessonName;
     [SerializeField] private int _lessonNumber;
 
     [SerializeField] private TMP_Text _infoText;
-    [SerializeField] private Animator _animator; // Used to switch timeline states/slides
 
     private int _ownID;
-    private bool hasCompleted;
+    private bool _hasCompleted;
     
     public Transform snapTarget; // Updated by snap location trigger
     public bool inLessonZone;
@@ -26,10 +26,11 @@ public class LessonOrb : MonoBehaviour
     private Grabbable _grabbable;
     private bool _grabEventListening;
     
+    private LessonManager _activeLessonManager;
+    
     private void Start()
     {
         _ownID = gameObject.GetInstanceID();
-        _animator.enabled = false;
         
         _grabbable = GetComponent<Grabbable>();
 
@@ -51,6 +52,8 @@ public class LessonOrb : MonoBehaviour
     {
         _grabbable.WhenPointerEventRaised -= HandleGrabbableEvent;
         _grabEventListening = false;
+        
+        if (_activeLessonManager != null) Destroy(_activeLessonManager.gameObject);
     }
 
     private void HandleGrabbableEvent(PointerEvent evt)
@@ -72,25 +75,42 @@ public class LessonOrb : MonoBehaviour
             
             case PointerEventType.Select:
                 OnLessonHide?.Invoke(_ownID);
+                HideLesson();
                 break;
         }
     }
     
     private void CheckLessonComplete(int id)
     {
-        if (id == _ownID) hasCompleted = true;
+        if (id == _ownID) _hasCompleted = true;
     }
 
     public void StartLesson()
     {
-        _animator.enabled = true;
+        if (_activeLessonManager != null || !inLessonZone) return;
+        
+        // Creates lesson manager for this lesson
+        var lessonManagerObj = new GameObject($"LessonManager_{_lessonNumber}");
+        _activeLessonManager = lessonManagerObj.AddComponent<LessonManager>();
+
+        _activeLessonManager.SetLesson(_lessonConfig);
+        _activeLessonManager.OnLessonComplete += HandleLessonComplete;
     }
     
     private void HideLesson()
     {
-        // If orb picked up the lesson is hidden
-        // TODO: Maybe animator moves to a hidden state
-        _animator.enabled = false;
+        if (_activeLessonManager != null)
+        {
+            _activeLessonManager.OnLessonComplete -= HandleLessonComplete;
+            Destroy(_activeLessonManager.gameObject);
+            _activeLessonManager = null;
+        }
+    }
+
+    private void HandleLessonComplete()
+    {
+        OnLessonComplete?.Invoke(_ownID);
+        HideLesson();
     }
     
 }
