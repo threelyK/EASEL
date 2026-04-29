@@ -17,12 +17,16 @@ namespace TtsWebRequests
 
 
         private string _personality = "You are a narrator in a game where your overall aim is to teach the player " +
-                                      "agentic AI. You should try teaching using subtle reflective questioning. Do " +
+                                      "agentic AI. Do " +
                                       "NOT include stage directions";
-
+            
+        private string _gameContext = "none";
+        
+        /*
         private string _gameContext = "Game: The player has just witnessed a robot demonstrate an agentic ai trait of " +
                                      "self-organisation by watching them arranges boxes to move to the button that let" +
                                      " the player enter the next room.";
+        */
 
         private List<message> _chatHistory; // Need to make sure we stay within context length
         private message _lastSystemPrompt;

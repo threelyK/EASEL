@@ -2,6 +2,7 @@ using System;
 using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LessonOrb : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class LessonOrb : MonoBehaviour
     
     public static Action<int> OnLessonHide;
     public static Action<int> OnLessonComplete; // Affects point giver and next lesson orb shows up
+
+    public UnityEvent OnLessonCompleteUnity;
     
     [SerializeField] private LessonConfig _lessonConfig;
     [SerializeField] private string _lessonName;
@@ -92,8 +95,10 @@ public class LessonOrb : MonoBehaviour
         // Creates lesson manager for this lesson
         var lessonManagerObj = new GameObject($"LessonManager_{_lessonNumber}");
         _activeLessonManager = lessonManagerObj.AddComponent<LessonManager>();
+        
+        Transform masterContainerLoc = FindFirstObjectByType<MasterContainer>().transform;
 
-        _activeLessonManager.SetLesson(_lessonConfig);
+        _activeLessonManager.SetLesson(_lessonConfig, masterContainerLoc);
         _activeLessonManager.OnLessonComplete += HandleLessonComplete;
     }
     
@@ -110,6 +115,7 @@ public class LessonOrb : MonoBehaviour
     private void HandleLessonComplete()
     {
         OnLessonComplete?.Invoke(_ownID);
+        OnLessonCompleteUnity?.Invoke();
         HideLesson();
     }
     

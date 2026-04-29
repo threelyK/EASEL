@@ -15,9 +15,10 @@ public class LessonManager : MonoBehaviour
     private GameObject _activeChapterInstance;
     private ThemeManager _themeManager;
 
-    public void SetLesson(LessonConfig lesson)
+    public void SetLesson(LessonConfig lesson, Transform chapterSpawnLocation)
     {
         _currentLesson = lesson;
+        _chapterSpawnLocation = chapterSpawnLocation;
         LoadChapter(0);
     }
     
