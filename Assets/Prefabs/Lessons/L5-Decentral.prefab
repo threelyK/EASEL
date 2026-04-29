@@ -46,6 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6768993667386044449}
   - component: {fileID: 4084266930363110645}
+  - component: {fileID: 4958871902426944702}
   m_Layer: 0
   m_Name: L5-Decentral
   m_TagString: Untagged
@@ -96,6 +97,20 @@ PlayableDirector:
     value: {fileID: 7113597999643079717}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &4958871902426944702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729295431955217799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc6defe070b73468e6719984016c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterBase
+  _timeline: {fileID: 4084266930363110645}
+  _hasInteractiveButton: 0
 --- !u!1001 &1457661493056368875
 PrefabInstance:
   m_ObjectHideFlags: 0

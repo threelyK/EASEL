@@ -721,6 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4904833617792022582}
   - component: {fileID: 6595126838146018825}
+  - component: {fileID: 610676263256308204}
   m_Layer: 0
   m_Name: L2-Reasoning
   m_TagString: Untagged
@@ -779,6 +780,20 @@ PlayableDirector:
     value: {fileID: 6544802826465591232}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &610676263256308204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276684456579013121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc6defe070b73468e6719984016c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterBase
+  _timeline: {fileID: 6595126838146018825}
+  _hasInteractiveButton: 1
 --- !u!1 &4047493888413061429
 GameObject:
   m_ObjectHideFlags: 0

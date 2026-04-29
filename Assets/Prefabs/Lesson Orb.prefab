@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4520150325936679656}
   - component: {fileID: 278859980188620155}
   - component: {fileID: 7844209232136464017}
-  - component: {fileID: 2723962679470210007}
   m_Layer: 0
   m_Name: Lesson Orb
   m_TagString: LessonOrb
@@ -181,34 +180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09c95961a9dc54468ada07e801de546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LessonOrb
+  _lessonConfig: {fileID: 0}
   _lessonName: Agent Components
   _lessonNumber: 1
   _infoText: {fileID: 8992472358646849454}
-  _animator: {fileID: 2723962679470210007}
   snapTarget: {fileID: 0}
   inLessonZone: 0
---- !u!95 &2723962679470210007
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4265768633063790563}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4915387490446262458
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,8 +255,8 @@ MonoBehaviour:
 
     Agent Components'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bbdd15ae4960c0f43b5c88a7a811a333, type: 2}
+  m_sharedMaterial: {fileID: 5462096026412126575, guid: bbdd15ae4960c0f43b5c88a7a811a333, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

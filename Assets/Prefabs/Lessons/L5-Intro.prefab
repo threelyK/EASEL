@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4275851622714946412}
   - component: {fileID: 6263097088098204070}
+  - component: {fileID: 860298383830476295}
   m_Layer: 0
   m_Name: L5-Intro
   m_TagString: Untagged
@@ -68,6 +69,20 @@ PlayableDirector:
     value: {fileID: 8004820971658863413}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &860298383830476295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2477263773128883182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc6defe070b73468e6719984016c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterBase
+  _timeline: {fileID: 6263097088098204070}
+  _hasInteractiveButton: 0
 --- !u!1 &4988278883379875375
 GameObject:
   m_ObjectHideFlags: 0

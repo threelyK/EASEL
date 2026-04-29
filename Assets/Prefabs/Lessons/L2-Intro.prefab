@@ -439,6 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3792087975793911243}
   - component: {fileID: 7585187145438037055}
+  - component: {fileID: 1223754843562614101}
   m_Layer: 0
   m_Name: L2-Intro
   m_TagString: Untagged
@@ -497,6 +498,20 @@ PlayableDirector:
     value: {fileID: 8135887080767972364}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &1223754843562614101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290253258365348657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc6defe070b73468e6719984016c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterBase
+  _timeline: {fileID: 7585187145438037055}
+  _hasInteractiveButton: 0
 --- !u!1 &7532941360456111675
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3842791914523531765}
   - component: {fileID: 68978755154433222}
+  - component: {fileID: 2059393158270537247}
   m_Layer: 0
   m_Name: L1.2-B2
   m_TagString: Untagged
@@ -132,6 +133,20 @@ PlayableDirector:
     value: {fileID: 2911497185126577636}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &2059393158270537247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399973818698436568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfc6defe070b73468e6719984016c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChapterBase
+  _timeline: {fileID: 68978755154433222}
+  _hasInteractiveButton: 0
 --- !u!1 &2089279641376374907
 GameObject:
   m_ObjectHideFlags: 0
