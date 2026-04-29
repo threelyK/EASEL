@@ -17,23 +17,17 @@ public class BuddyBot : MonoBehaviour
 
     [SerializeField] private GameObject _lArm;
     [SerializeField] private GameObject _rArm;
-    [SerializeField] private GameObject _eyes;
 
-    [SerializeField] private PlayableDirector _addArms;
-    [SerializeField] private PlayableDirector _addEyes;
-    [SerializeField] private PlayableDirector _addBrain;
-    [SerializeField] private PlayableDirector _addMemory;
-    
-    private Animator _animator;
+    // [SerializeField] private PlayableDirector _playableDirector;
+    // [SerializeField] private Animation _addEyes;
+
+    [SerializeField] private Animator _buddyBotAnimator;
     private int colourGuesses;
     
     private void Start()
     {
-        _lArm.SetActive(false);
-        _rArm.SetActive(false);
-        _eyes.SetActive(false);
-        
-        _animator = GetComponent<Animator>();
+        _lArm.SetActive(hasTools);
+        _rArm.SetActive(hasTools);
     }
 
     private void OnEnable()
@@ -105,22 +99,22 @@ public class BuddyBot : MonoBehaviour
 
     private void AddEyes()
     {
-        _addEyes.Play();
+        _buddyBotAnimator.Play("Eyes On");
     }
     
     private void AddArms()
     {
-        _addArms.Play();
+        _buddyBotAnimator.Play("Arms Attach");
     }
 
     private void AddMemory()
     {
-        _addMemory.Play();
+        _buddyBotAnimator.Play("Head Open B"); // Must use head animator not buddybot or botv3
     }
 
     private void AddBrain()
     {
-        _addBrain.Play();
+        _buddyBotAnimator.Play("Head Open B");
     }
 
     private void PlayBootupAnimation()
