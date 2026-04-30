@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ChoiceUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _choiceText;
+    [SerializeField] private TMP_Text _themeText;
     [SerializeField] private Image _image;
 
     [SerializeField] private Sprite _foodImg;
@@ -38,7 +38,7 @@ public class ChoiceUI : MonoBehaviour
     {
         string choice;
         Sprite sprite;
-        
+
         switch (theme)
         {
             case ThemeType.Food:
@@ -53,7 +53,7 @@ public class ChoiceUI : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(theme), theme, null);
         }
 
-        _choiceText.text = $"Theme: {choice}";
+        _themeText.text = $"Theme: {choice}";
         _image.sprite = sprite;
         
         _page1.SetActive(false);

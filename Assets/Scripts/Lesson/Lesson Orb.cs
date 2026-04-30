@@ -22,7 +22,8 @@ public class LessonOrb : MonoBehaviour
     private int _ownID;
     private bool _hasCompleted;
 
-    [SerializeField] private Transform _initialSnap;
+    private Vector3 _initialSnapPos;
+    private Quaternion _initialSnapRot;
     public Transform snapTarget; // Updated by snap location trigger
     public bool inLessonZone;
     
@@ -35,6 +36,9 @@ public class LessonOrb : MonoBehaviour
     private void Start()
     {
         _ownID = gameObject.GetInstanceID();
+
+        _initialSnapPos = gameObject.transform.position;
+        _initialSnapRot = gameObject.transform.rotation;
         
         _grabbable = GetComponent<Grabbable>();
         _masterContainer = FindFirstObjectByType<MasterContainer>();
@@ -75,7 +79,11 @@ public class LessonOrb : MonoBehaviour
                 if (snapTarget is not null) MoveToTarget(snapTarget.position, snapTarget.rotation);
             
                 // Play lesson
-                if (inLessonZone) StartLesson();
+                if (inLessonZone)
+                {
+                    DestroyChildrenInMasterContainer();
+                    StartLesson();
+                }
                 break;
             
             case PointerEventType.Select:
@@ -125,6 +133,7 @@ public class LessonOrb : MonoBehaviour
         DestroyChildrenInMasterContainer();
         
         HideLesson();
+        SnapToOrigin();
     }
 
     private void DestroyChildrenInMasterContainer()
@@ -135,10 +144,12 @@ public class LessonOrb : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-
-    public void SnapBackToOrigin()
+    
+    [ContextMenu("Snap to Origin")]
+    public void SnapToOrigin()
     {
-        MoveToTarget(_initialSnap.position, _initialSnap.rotation);
+        MoveToTarget(_initialSnapPos, _initialSnapRot);
+        inLessonZone = false;
     }
     
 }
