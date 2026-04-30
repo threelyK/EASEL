@@ -12,12 +12,13 @@ public class ChoiceUI : MonoBehaviour
     [SerializeField] private Sprite _foodImg;
     [SerializeField] private Sprite _gamesImg;
 
+    [SerializeField] private GameObject _menu; // Used to disable ray interactions
+    
     [SerializeField] private GameObject _page1;
     [SerializeField] private GameObject _page2;
     
     private CanvasGroup _canvasGroup;
-
-
+    
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -60,5 +61,7 @@ public class ChoiceUI : MonoBehaviour
         
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.DOFade(0, 3f).SetEase(Ease.Linear);
+        
+        _menu.SetActive(false);
     }
 }

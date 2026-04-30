@@ -16,9 +16,10 @@ namespace TtsWebRequests
         private static string _apiKey;
 
 
-        private string _personality = "You are a narrator in a game where your overall aim is to teach the player " +
-                                      "agentic AI. Do " +
-                                      "NOT include stage directions";
+        private string _personality = "You are a nice tutor in a game where your overall aim is to teach the player " +
+                                      "agentic AI. The player will be asking you questions so if it makes sense to " +
+                                      "answer the question in the context of agentic AI, DO THAT. " +
+                                      "Do NOT include stage directions or emojis.";
             
         private string _gameContext = "none";
         
