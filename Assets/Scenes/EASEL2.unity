@@ -901,7 +901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToLessonSpace
+      value: TeleportToLessonSpace
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1225,7 +1225,7 @@ Transform:
   m_GameObject: {fileID: 52967698}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.495, y: -2.2500198, z: 5.269001}
+  m_LocalPosition: {x: -7.495, y: -3.5, z: 5.269001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2571,6 +2571,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 409034, guid: a4c18952442944083b1fddc06ba477c2, type: 3}
   m_PrefabInstance: {fileID: 198678303}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &202785023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202785024}
+  m_Layer: 0
+  m_Name: StartLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &202785024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202785023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062238685}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &203054042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6757312710134649169, guid: 3142a2d9a9135844196118b08a9bde1c, type: 3}
@@ -4663,7 +4694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToQuizSpace
+      value: TeleportToQuizSpace
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -5256,7 +5287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToLessonSpace
+      value: TeleportToLessonSpace
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -6160,7 +6191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 549745584}
   m_Layer: 0
-  m_Name: Room 2
+  m_Name: Main Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6724,7 +6755,7 @@ Transform:
   m_GameObject: {fileID: 671671244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.701, y: -0.881, z: 0.567}
+  m_LocalPosition: {x: -2.701, y: -2.1, z: 0.567}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6990,7 +7021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToQuizSpace
+      value: TeleportToQuizSpace
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -8529,7 +8560,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -8545,7 +8576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
@@ -8566,7 +8597,7 @@ PrefabInstance:
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 203054042}
+      objectReference: {fileID: 198658630}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -8593,7 +8624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToQuizSpace
+      value: TeleportToQuizSpace
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -8605,7 +8636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: SetActive
+      value: AppendGameContext
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
@@ -8625,7 +8656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: AgentContextManager, TtsWebRequests
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
@@ -8646,6 +8677,12 @@ PrefabInstance:
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
+      value: In lesson 1 - The player has learnt about what agent, environment, state,
+        and action means in the context of agentic systems. Where they have seen
+        a robot character embody an agent.
       objectReference: {fileID: 0}
     - target: {fileID: 3985618232066647692, guid: 893d543eb6da85c4e8715ceeda343fe4, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_StringArgument
@@ -9666,7 +9703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062238685}
   m_Layer: 0
-  m_Name: Room 1
+  m_Name: Start Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9689,6 +9726,7 @@ Transform:
   - {fileID: 397487375}
   - {fileID: 247310588}
   - {fileID: 1361162332}
+  - {fileID: 202785024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1068100712 stripped
@@ -10363,6 +10401,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 428500, guid: c27c7521daec24863af069554ea1fb47, type: 3}
   m_PrefabInstance: {fileID: 1132754487}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1136470570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4013048510982387748, guid: f2f6012b468192e45ab7688acad9985f, type: 3}
+  m_PrefabInstance: {fileID: 528786168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a2955cc1374944a4634c6f312985a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1139235706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13092,7 +13141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToQuizSpace
+      value: TeleportToQuizSpace
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -14364,7 +14413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToLessonSpace
+      value: TeleportToLessonSpace
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -15649,7 +15698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToLessonSpace
+      value: TeleportToLessonSpace
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -18002,8 +18051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7132776d56de448b0405df163973bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeleportSystem
-  _playerRig: {fileID: 0}
-  _playerController: {fileID: 0}
+  _playerLocomotor: {fileID: 1136470570}
+  _shouldUseStartingTransform: 1
+  _startingTransform: {fileID: 202785024}
   _lessonSpace: {fileID: 52967699}
   _quizSpace: {fileID: 671671245}
 --- !u!1001 &1807914199
@@ -18844,7 +18894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6709930031608126436, guid: 3142a2d9a9135844196118b08a9bde1c, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToQuizSpace
+      value: TeleportToQuizSpace
       objectReference: {fileID: 0}
     - target: {fileID: 6709930031608126436, guid: 3142a2d9a9135844196118b08a9bde1c, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -21569,7 +21619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TeleportPlayerToLessonSpace
+      value: TeleportToLessonSpace
       objectReference: {fileID: 0}
     - target: {fileID: 8266967575992188279, guid: e39a15ff46108e04e85df9703eb78f66, type: 3}
       propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

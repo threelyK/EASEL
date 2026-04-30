@@ -21,7 +21,8 @@ public class LessonOrb : MonoBehaviour
 
     private int _ownID;
     private bool _hasCompleted;
-    
+
+    [SerializeField] private Transform _initialSnap;
     public Transform snapTarget; // Updated by snap location trigger
     public bool inLessonZone;
     
@@ -71,7 +72,7 @@ public class LessonOrb : MonoBehaviour
         {
             case PointerEventType.Unselect:
                 // Snap to snapTarget 
-                if (snapTarget is not null) transform.SetPositionAndRotation(snapTarget.position, snapTarget.rotation);
+                if (snapTarget is not null) MoveToTarget(snapTarget.position, snapTarget.rotation);
             
                 // Play lesson
                 if (inLessonZone) StartLesson();
@@ -82,6 +83,11 @@ public class LessonOrb : MonoBehaviour
                 HideLesson();
                 break;
         }
+    }
+
+    private void MoveToTarget(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        transform.SetPositionAndRotation(targetPosition, targetRotation);
     }
     
 
@@ -128,6 +134,11 @@ public class LessonOrb : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void SnapBackToOrigin()
+    {
+        MoveToTarget(_initialSnap.position, _initialSnap.rotation);
     }
     
 }
