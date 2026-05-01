@@ -47,7 +47,9 @@ namespace UnityNeuroSpeech.Runtime
         [Header("TTS")]
         [SerializeField] private AudioSource _ttsAudioSource;
 
-        private readonly string _apiKey = Environment.GetEnvironmentVariable("INWORLD_API_KEY");
+        private readonly string _apiKey =
+            "U1F6R2lpT1VWQVcxSWlZUENIUEx3QW5SbnpxV1VFOHg6MGVINTJ6YkppTmNEMWFmSjYyeUtZeTF6eVRLNFpreE5mc3NyQzVjaTgya1k3RmRrV2lQWHBsRjhhelI2Q0Z2VQ==";
+        // Environment.GetEnvironmentVariable("INWORLD_API_KEY");
         public Action<AgentState> BeforeTTS { get; set; }
         public Action AfterTTS { get; set; }
 
@@ -120,7 +122,6 @@ namespace UnityNeuroSpeech.Runtime
             var ttsCaller = new InworldTtsCaller(_ttsAudioSource, _apiKey);
 
             await ttsCaller.PostAndPlayToInworldVoice(llmResponse);
-            RadioActions.ResponseGenerated?.Invoke(llmResponse);
             AfterTTS?.Invoke();
             
             RadioActions.OnRadioReady?.Invoke(true);

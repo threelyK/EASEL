@@ -1,85 +1,50 @@
 using System;
-using DG.Tweening;
-using Oculus.Interaction;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PlayerInteraction
 {
     public class Radio : MonoBehaviour
     {
-        private bool _inHand;
         private bool _isTalking;
-        // public Transform beltAnchor;
+        private bool _agentReady;
+        [SerializeField] private Image micImage;
+        [SerializeField] private Sprite micShow;
+        [SerializeField] private Sprite micHid;
         
         public static event Action OnPlayerTalking;
         public static event Action OnPlayerStoppedTalking;
-        
-        [SerializeField] private Grabbable _grabbable;
-        private Rigidbody _rb;
 
-        private void Awake()
+        private void Start()
         {
-            _rb = GetComponent<Rigidbody>();
+            DimMic();
         }
 
         private void Update()
         {
-            if (_inHand && !_isTalking && OVRInput.GetDown(OVRInput.Button.Two))
+            if (!_isTalking && OVRInput.GetDown(OVRInput.Button.Two))
             {
-                Debug.Log("In hand and Pressing");
+                Debug.Log("Pressing voice button");
                 OnPlayerTalking?.Invoke();
+                ShowMic();
                 _isTalking = true;
-            } else if (_isTalking && (OVRInput.GetUp(OVRInput.Button.Two) || !_inHand))
+            } else if (_isTalking && OVRInput.GetUp(OVRInput.Button.Two))
             {
-                Debug.Log("Not in hand or StoppedPressing");
+                Debug.Log("Released voice button");
                 OnPlayerStoppedTalking?.Invoke();
+                DimMic();
                 _isTalking = false;
             }
         }
 
-        private void OnEnable()
+        private void ShowMic()
         {
-            _grabbable.WhenPointerEventRaised += HandleGrab;
+            micImage.sprite = micShow;
         }
 
-        private void OnDisable()
+        private void DimMic()
         {
-            _grabbable.WhenPointerEventRaised -= HandleGrab;
+            micImage.sprite = micHid;
         }
-        
-        private void HandleGrab(PointerEvent evt)
-        {
-            switch (evt.Type)
-            {
-                case PointerEventType.Select:
-                    // When grabbed;
-                    _inHand = true;
-                    
-                    break;
-                case PointerEventType.Unselect:
-                    // When released;
-                    _inHand  = false;
-                    break;
-            }
-        }
-
-        private void OnGrab()
-        {
-            _inHand = true;
-            transform.SetParent(null);
-            if (_rb) _rb.isKinematic = true;
-        }
-
-        /*
-        private void OnRelease()
-        {
-            transform.SetParent(beltAnchor, true);
-            if (_rb) _rb.isKinematic = true; // keep physics off while snapping
-            Vector3 targetPos = beltAnchor.transform.position;
-            transform.position = targetPos;
-            transform.SetParent(beltAnchor, false);
-            if (_rb) _rb.isKinematic = false;
-        }
-        */
     }
 }

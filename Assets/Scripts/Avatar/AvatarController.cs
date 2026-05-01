@@ -15,41 +15,55 @@ public class AvatarController : MonoBehaviour
     [SerializeField] private Sprite _mouthOpen;
 
     [SerializeField] private GameObject _avatar;
-    // [SerializeField] private TMP_Text _subtitleText;
-    
-    private string _response;
-    
+    [SerializeField] private bool alwaysDisplayAvatar;
     private Coroutine mouthRoutine;
     
     void Start()
     {
-        _avatar.SetActive(false); // Only show when talking
+        if (alwaysDisplayAvatar)
+        {
+            _avatar.SetActive(true);
+            mouthImage.sprite = _mouthClosed;
+        }
+        else
+        {
+            _avatar.SetActive(false); // Only show when talking
+        }
     }
 
     private void OnEnable()
     {
         RadioActions.OnClipGenerated += HandleClip;
-        RadioActions.ResponseGenerated += StoreResponse;
-    }
-
-    private void StoreResponse(string response)
-    {
-        _response = response;
+        RadioActions.OnRadioReady += HandleThinking;
     }
 
     private void OnDisable()
     {
         RadioActions.OnClipGenerated -= HandleClip;
-        RadioActions.ResponseGenerated -= StoreResponse;
+        RadioActions.OnRadioReady -= HandleThinking;
     }
 
+    private void HandleThinking(bool isRadioReady)
+    {
+        if (isRadioReady)
+        {
+            // hide thinking video
+        }
+        else
+        {
+            // show thinking video
+        }
+    }
+    
     private void HandleClip(AudioClip clip)
     {
         if (clip == null) return;
         if (mouthRoutine != null) StopCoroutine(mouthRoutine);
-        _avatar.SetActive(true);
+        if (!alwaysDisplayAvatar)
+        {
+            _avatar.SetActive(true);
+        }
 
-        // _subtitleText.text = _response;
         mouthRoutine = StartCoroutine(AnimateMouth(clip.length));
         StartCoroutine(StopMouth(clip.length + 0.2f));
     }
@@ -74,7 +88,10 @@ public class AvatarController : MonoBehaviour
     private IEnumerator StopMouth(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        _avatar.SetActive(false);
+        if (!alwaysDisplayAvatar)
+        {
+            _avatar.SetActive(false);
+        }
         mouthRoutine = null;
     }
 }
