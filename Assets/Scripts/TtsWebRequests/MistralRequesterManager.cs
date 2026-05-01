@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MistralRequesterManager : MonoBehaviour
 {
+    
     private MistralRequest _mistralRequest;
     
     private string[] _sysPrompts;
@@ -17,8 +18,7 @@ public class MistralRequesterManager : MonoBehaviour
     {
         throw new NotImplementedException();
     }
-
-    // TODO: Will listen for when player entry in trigger zone
+    
     private void UpdateGameContext(int id)
     {
         var newContext = _sysPrompts[id];
