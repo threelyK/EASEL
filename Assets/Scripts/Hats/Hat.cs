@@ -37,6 +37,7 @@ public class Hat : MonoBehaviour
     private const float RotationTime = 10f;
 
     private bool _grabEventListening;
+    private PointSystem _pointSystem;
 
     private void Start()
     {
@@ -57,6 +58,8 @@ public class Hat : MonoBehaviour
             _grabbable.WhenPointerEventRaised += GrabHat;
             _grabEventListening = true;
         }
+        
+        _pointSystem = PointSystem.Instance;
     }
 
     private void OnEnable()
@@ -107,9 +110,10 @@ public class Hat : MonoBehaviour
     [ContextMenu("Test Buy Hat")]
     private void BuyHat()
     {
-        if (PointSystem.Instance.EnoughPoints(price))
+        if (_pointSystem.EnoughPoints(price))
         {
             _purchased = true;
+            _pointSystem.SpendPoints(price);
             
             // Remove black overlay
             DefaultMat();
