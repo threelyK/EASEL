@@ -11,15 +11,19 @@ public class ObjectController : MonoBehaviour
         UpdateObjects();
     }
 
+    [ContextMenu("Increase Count")]
     public void Increase()
     {
-        count = Mathf.Min(count + 1, objects.Length);
+        if (count == objects.Length) return;
+        count++;
         UpdateObjects();
     }
 
+    [ContextMenu("Decrease Count")]
     public void Decrease()
     {
-        count = Mathf.Max(count - 1, 1);
+        if (count == 1) return;
+        count--;
         UpdateObjects();
     }
 
