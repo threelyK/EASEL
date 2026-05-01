@@ -67,11 +67,6 @@ public class LessonOrb : MonoBehaviour
 
     private void HandleGrabbableEvent(PointerEvent evt)
     {
-        if (evt.Type == PointerEventType.Unselect)
-        {
-            
-        }
-
         switch (evt.Type)
         {
             case PointerEventType.Unselect:
@@ -87,9 +82,13 @@ public class LessonOrb : MonoBehaviour
                 break;
             
             case PointerEventType.Select:
-                OnLessonHide?.Invoke(_ownID);
-                HideLesson();
+                if (inLessonZone)
+                {
+                    OnLessonHide?.Invoke(_ownID);
+                    HideLesson();
+                }
                 break;
+            
         }
     }
 
@@ -101,7 +100,7 @@ public class LessonOrb : MonoBehaviour
 
     public void StartLesson()
     {
-        if (_activeLessonManager != null || !inLessonZone) return;
+        if (_activeLessonManager || !inLessonZone) return;
         
         // Creates lesson manager for this lesson
         var lessonManagerObj = new GameObject($"LessonManager_{_lessonNumber}");
@@ -116,7 +115,7 @@ public class LessonOrb : MonoBehaviour
     
     private void HideLesson()
     {
-        if (_activeLessonManager != null)
+        if (_activeLessonManager)
         {
             _activeLessonManager.OnLessonComplete -= HandleLessonComplete;
             Destroy(_activeLessonManager.gameObject);

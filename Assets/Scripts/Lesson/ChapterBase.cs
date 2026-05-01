@@ -11,7 +11,7 @@ public class ChapterBase : MonoBehaviour, IChapter
 
     private void Start()
     {
-        if (_timeline != null && !_hasInteractiveButton)
+        if (_timeline && !_hasInteractiveButton)
         {
             _timeline.stopped += OnTimelineComplete;
         }
@@ -22,7 +22,6 @@ public class ChapterBase : MonoBehaviour, IChapter
         OnChapterComplete?.Invoke();
     }
 
-    // Callable from button
     public void OnNextButtonPressed()
     {
         OnChapterComplete?.Invoke();
