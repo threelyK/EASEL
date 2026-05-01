@@ -53,15 +53,15 @@ public class ChoiceUI : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(theme), theme, null);
         }
 
-        _themeText.text = $"Theme: {choice}";
-        _image.sprite = sprite;
+        if (_themeText) _themeText.text = $"Theme: {choice}";
+        if (_image) _image.sprite = sprite;
         
-        _page1.SetActive(false);
-        _page2.SetActive(true);
+        if (_page1) _page1.SetActive(false);
+        if (_page2) _page2.SetActive(true);
         
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.DOFade(0, 3f).SetEase(Ease.Linear);
         
-        _menu.SetActive(false);
+        if (_menu) _menu.SetActive(false);
     }
 }
