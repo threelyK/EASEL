@@ -10,7 +10,7 @@ public class Subtitles : MonoBehaviour
     // - Scrolling up after reaching max height -- Possibly using a mask layer
     // - Subtitle follows player camera w/ smoothing
     // - Don't cover entire screen
-    // - Maybe split the subtitle per sentence. New subtitle = new sentence
+    // - Every or every other sentence = new subtitle
     
     [SerializeField] private float fadeOutDuration;
 
@@ -22,12 +22,6 @@ public class Subtitles : MonoBehaviour
     private AudioClip _audioClip;
     private float _audioClipLength;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
     private void OnEnable()
     {
         RadioActions.ResponseGenerated += SetSubtitleContent;
@@ -38,12 +32,6 @@ public class Subtitles : MonoBehaviour
     {
         RadioActions.ResponseGenerated -= SetSubtitleContent;
         RadioActions.OnClipGenerated -= UpdateClipData;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SetSubtitleContent(string newContent)
