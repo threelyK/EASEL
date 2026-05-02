@@ -23,6 +23,7 @@ namespace TtsWebRequests
                                       "Do NOT include stage directions or emojis. " +
                                       "Deliver the response in plain text without any Markdown or formatting. " +
                                       "Keep to a 2000 character limit.";
+        // TODO: Add theme to game context using the theme Manager.
             
         private string _gameContext = "none";
         

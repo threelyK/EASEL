@@ -48,8 +48,6 @@ public class LessonOrb : MonoBehaviour
 
     private void OnEnable()
     {
-        // OnLessonComplete += CheckLessonComplete; // Removed function
-        
         if (!_grabEventListening && _grabbable)
         {
             _grabbable.WhenPointerEventRaised += HandleGrabbableEvent;
@@ -128,8 +126,6 @@ public class LessonOrb : MonoBehaviour
     private void HandleLessonComplete()
     {
         OnLessonCompleteUnity?.Invoke();
-
-        DestroyChildrenInMasterContainer();
         
         HideLesson();
         SnapToOrigin();

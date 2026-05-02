@@ -11,8 +11,12 @@ public class LessonManager : MonoBehaviour
     private LessonConfig _currentLesson;
     private int _currentChapterIndex;
     
-    
     private GameObject _activeChapterInstance;
+
+    private void OnDestroy()
+    {
+        UnloadActiveChapter();
+    }
 
     public void SetLesson(LessonConfig lesson, Transform chapterSpawnLocation)
     {
@@ -40,7 +44,7 @@ public class LessonManager : MonoBehaviour
         _currentChapterIndex = chapterIndex;
 
         // Removing last chapter
-        if (_activeChapterInstance != null) Destroy(_activeChapterInstance);
+        UnloadActiveChapter();
 
         // Get prefab based on theme
         var prefab = chapter.GetPrefabForTheme(ThemeManager.Instance._themeChoice);
@@ -54,6 +58,22 @@ public class LessonManager : MonoBehaviour
         }
 
         Debug.Log($"Loaded Chapter {chapterIndex} ({ThemeManager.Instance._themeChoice})");
+    }
+
+    private void UnloadActiveChapter()
+    {
+        // Check if this works
+
+        if (_activeChapterInstance)
+        {
+            IChapter chapterComponent = _activeChapterInstance.GetComponent<IChapter>();
+            if (chapterComponent != null)
+            {
+                chapterComponent.OnChapterComplete -= GoToNextChapter;
+            }
+            
+            Destroy(_activeChapterInstance);
+        }
     }
 
     private void GoToNextChapter()

@@ -7,9 +7,9 @@ public class ChapterNode
     [SerializeField] private int _chapterNumber;
     [SerializeField] private GameObject _foodThemePrefab;
     [SerializeField] private GameObject _gamesThemePrefab;
-    [SerializeField] private bool _isGeneric;
+    [SerializeField] private bool _isGeneric; // Defaults to foodThemePrefab if generic
     [SerializeField] private int _nextChapterIndexFood = -1; // -1 means lesson ends
-    [SerializeField] private int _nextChapterIndexGames = -1; // -1 means lesson ends
+    [SerializeField] private int _nextChapterIndexGames = -1;
 
     public GameObject GetPrefabForTheme(ThemeType theme)
     {
