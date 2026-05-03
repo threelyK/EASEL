@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Codice.Client.Commands.CheckIn;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
@@ -74,48 +75,62 @@ namespace TtsWebRequests
             var audioBytes = DecodeBase64(responseJson.audioContent);
             
             // Debug.Log("Response json/audioContent = " + responseJson.audioContent);
-            var clip = ProcessLinear16Audio(audioBytes);
+            AudioClip clip = ConvertBytesToFloatToClip(audioBytes);
+
+            Debug.LogWarning($"Clip length (s) = {clip.length}");
             
             _ttsAudioSource.clip = clip;
             RadioActions.OnClipGenerated?.Invoke(clip);
             _ttsAudioSource.Play();
         }
 
-        private static float[] ConvertLinear16ToFloat(byte[] audioBytes)
-        {
-            // AI generated helper function
+        private static AudioClip ConvertBytesToFloatToClip(byte[] audioBytes)
+        { 
+            int offset = FindDataOffset(audioBytes);
             
-            var sampleCount = (audioBytes.Length / 2) - HeaderOffset;
-            float[] samples = new float[sampleCount];
+            // Audio bytes are PCM16 type = 16 bits = 2 bytes per sample
+            var dataBytes = audioBytes.Length -  offset;
+            int sampleCount = dataBytes / 2; // Number of 16-bit PCM samples in the original dataBytes
             
+            float[] samples = new float[sampleCount]; // Just the data no header
+
             for (int i = 0; i < sampleCount; i++)
             {
-                int byteIndex = (i + HeaderOffset) * 2;
-                var sample = (short)(audioBytes[i * 2] | (audioBytes[byteIndex + 1] << 8));
-                samples[i] = sample / 32768f; // normalize to -1..1
+                int byteIndex = offset + i * 2; // 2 because each sample is represented by 2 bytes
+                
+                short pcm = BitConverter.ToInt16(audioBytes, byteIndex);
+                samples[i] = pcm / 32768f; // 32768 = max value of int16 --> normalizing to float between -1 to 1
             }
-
-            return samples;
-        }
-        
-        private static AudioClip ProcessLinear16Audio(byte[] audioBytes)
-        {
-            float[] samples = ConvertLinear16ToFloat(audioBytes);
-            var sampleCount = samples.Length / Channels;
             
             var audioClip = AudioClip.Create(
                 "Linear16Audio",
-                sampleCount,
+                audioBytes.Length,
                 Channels,
                 SampleRate,
                 false
             );
-            
-            audioClip.SetData(samples, 0);
 
+            audioClip.SetData(samples, 0);
             return audioClip;
         }
-        
+
+        private static int FindDataOffset(byte[] audioBytes)
+        {
+            // Finding where the data begins
+            
+            for (var i = 12; i < audioBytes.Length; i++)
+            {
+                if (audioBytes[i] == 'd' && 
+                    audioBytes[i + 1] == 'a' && 
+                    audioBytes[i + 2] == 't' &&
+                    audioBytes[i + 3] == 'a')
+                {
+                    return i + 8; // skips the headers "data"
+                }
+            }
+
+            return 44;
+        }
 
         private UnityWebRequest CreatePostRequest(string text)
         {
