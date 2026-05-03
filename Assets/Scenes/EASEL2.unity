@@ -4855,7 +4855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -4866,6 +4866,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1795836600}
@@ -4874,11 +4878,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2104959837}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 198658630}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
@@ -4890,6 +4902,10 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: AppendGameContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TeleportSystem, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -4898,8 +4914,25 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: AgentContextManager, TtsWebRequests
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: 'In Lesson 5 - The player learnt about Multi-agent systems, their traits
+        such as: adaptability, scalability, decentralized, distributed, and heterogenous.
+        They learnt about the centralized orchestrator, baton passing arrangement
+        where agents would pass on work in sequence, and then the council where all
+        agents would be given the same task and the player or another agent would
+        review it to select the best one.'
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4907,6 +4940,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844315569944440214, guid: 7b38356ba43cde249b04267dbe5a9690, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7262,7 +7299,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -7277,6 +7314,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1795836600}
@@ -7289,6 +7330,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 143356488}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 198658630}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -7298,6 +7343,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
@@ -7313,6 +7362,10 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: AppendGameContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TeleportSystem, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -7325,12 +7378,31 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: AgentContextManager, TtsWebRequests
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
+      value: In Lesson 4 - The player has learnt about reactive, deliberative, and
+        hybrid agent architecture. For reactive they were able to press a button
+        to see the bot react and change its pose. For deliberative they saw a bot
+        think about how to get around the fire and then it went around the fire.
+        For hybrid they saw 2 bots hitting each other with frying pans, 1 was reactive
+        and was able to react quickly and dodge bot 2's swings, whilst the deliberative
+        one reacted slower and got hit, but was able to use its thinking ability
+        to wait for when reactive is coming closer to then swing.
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -7342,6 +7414,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751802152700084328, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6763284334615257949, guid: aafa0d5f00995854da0ed20e0e47c508, type: 3}
@@ -13663,7 +13739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -13678,6 +13754,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1795836600}
@@ -13690,6 +13770,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 246588039}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 198658630}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -13699,6 +13783,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
@@ -13714,6 +13802,10 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: AppendGameContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TeleportSystem, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -13726,12 +13818,29 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: AgentContextManager, TtsWebRequests
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
+      value: In Lesson 3 - The player has learnt the agentic principles of agency,
+        autonomy, self-organisation (saw a robot rearrange boxes to get to the other
+        side), self-regulation (saw robot see fire and run away), self-adaptation
+        (saw robot use water to extinguish fire), self-optimisation (saw robot use
+        2 water beams from its hand to extinguish a larger fire), self-determination
+        (saw a robot on fire extinguish itself before the fire in front of it).
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -13743,6 +13852,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122336428002385840, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
+      propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4513229821071755436, guid: b423b2a26405f1c489a723789ecc9258, type: 3}
@@ -19587,10 +19700,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6709930031608126436, guid: 3142a2d9a9135844196118b08a9bde1c, type: 3}
       propertyPath: OnLessonCompleteUnity.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
-      value: 'In lesson 2 - They player has learnt about the agentic components:
-        perception as a way for the agent to see its environment; tools as a way
-        for the agent to interact with the environment; memory as a way to increase
-        transparency by logging an agents actions; learning as in being able to self-optimise
+      value: 'In lesson 2 - The player has learnt about the agentic components: perception
+        as a way for the agent to see its environment; tools as a way for the agent
+        to interact with the environment; memory as a way to increase transparency
+        by logging an agents actions; learning as in being able to self-optimise
         by analysing results of actions; and the most important one reasoning which
         is how the agent breaks down the goal into subtasks and actions.'
       objectReference: {fileID: 0}
