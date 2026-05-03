@@ -30,8 +30,7 @@ namespace TtsWebRequests
         
         private const bool Streaming = false;
         private const bool Thinking = false;
-        private const string KeepAlive = "20m"; 
-        // Might need to set this to 0 to kill the chat history after user finishes
+        private const string KeepAlive = "20m";
         private readonly string _systemPrompt;
 
         public OllamaRequests(string systemPrompt)
