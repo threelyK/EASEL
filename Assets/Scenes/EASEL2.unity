@@ -4657,6 +4657,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 555453588}
     m_Modifications:
+    - target: {fileID: 601396416347325289, guid: 155133b2d0c16d941b019b38f723792c, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 451827404}
     - target: {fileID: 3606877864030776878, guid: 155133b2d0c16d941b019b38f723792c, type: 3}
       propertyPath: m_Name
       value: Agent
@@ -5064,6 +5068,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6803847660557535803, guid: 78ba015491806734fbf523c65a561e71, type: 3}
   m_PrefabInstance: {fileID: 451390614}
   m_PrefabAsset: {fileID: 0}
+--- !u!83 &451827404
+AudioClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Linear16Audio
+  m_LoadType: 0
+  m_Channels: 1
+  m_Frequency: 16000
+  m_BitsPerSample: 32
+  m_Length: 0
+  m_IsTrackerFormat: 0
+  m_Ambisonic: 0
+  m_SubsoundIndex: 0
+  m_PreloadAudioData: 1
+  m_LoadInBackground: 0
+  m_Legacy3D: 0
+  m_Resource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_CompressionFormat: 0
+  m_EditorResource:
+    m_Source: 
+    m_Offset: 0
+    m_Size: 0
+  m_EditorCompressionFormat: 0
 --- !u!4 &452757491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5827884912706343409, guid: 57c3eccffb676cc438908e98f2c07300, type: 3}

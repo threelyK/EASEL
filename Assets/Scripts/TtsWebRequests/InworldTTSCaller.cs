@@ -15,7 +15,7 @@ namespace TtsWebRequests
         private readonly string _apiKey;    
         
         // Request parameters
-        private const string VoiceID = "Clive"; // Change to other voices maybe
+        private const string VoiceID = "Clive"; // Voice profile can be configured
         private const string ModelID = "inworld-tts-1.5-mini";
         private const string TextNormalization = "ON";
         private const string AudioEncoding = "LINEAR16"; // Linear16 = wav
@@ -24,7 +24,7 @@ namespace TtsWebRequests
         private const int SampleRate = 16000; // Difference above 16000 is not obvious
         private const int Channels = 1;
         private readonly AudioSource _ttsAudioSource;
-        private const int HeaderOffset = 24; // idk why it's 24 but the static stopped
+        private const int HeaderOffset = 24; // 24 makes static stopped
         #endregion
         
         public InworldTtsCaller(AudioSource ttsAudioSource, string apiKey)
@@ -54,7 +54,6 @@ namespace TtsWebRequests
                 Debug.LogError("TTS request failed: " + postRequest.error);
                 Debug.LogError("Response: " + postRequest.downloadHandler.text);
                 throw new Exception(postRequest.error);
-                
             }
             
             Debug.Log("TTS Response OK");
@@ -62,13 +61,17 @@ namespace TtsWebRequests
             return postRequest.downloadHandler.text;
         }
 
+        private byte[] DecodeBase64(string base64)
+        {
+            return Convert.FromBase64String(base64);
+        }
 
         private void PlayVoiceClip(String responseText)
         {
             // Response.data contains audioContent{...} in base64 contains "RIFF" header
             var responseJson = JsonUtility.FromJson<PostResponseJson>(responseText);
             // audioContent is encoded in base64
-            var audioBytes = Convert.FromBase64String(responseJson.audioContent);
+            var audioBytes = DecodeBase64(responseJson.audioContent);
             
             // Debug.Log("Response json/audioContent = " + responseJson.audioContent);
             var clip = ProcessLinear16Audio(audioBytes);
@@ -84,13 +87,10 @@ namespace TtsWebRequests
             
             var sampleCount = (audioBytes.Length / 2) - HeaderOffset;
             float[] samples = new float[sampleCount];
-
-            // i = HeaderOffset+1
             
             for (int i = 0; i < sampleCount; i++)
             {
                 int byteIndex = (i + HeaderOffset) * 2;
-                // replaced i*2 with byte index
                 var sample = (short)(audioBytes[i * 2] | (audioBytes[byteIndex + 1] << 8));
                 samples[i] = sample / 32768f; // normalize to -1..1
             }
@@ -173,7 +173,6 @@ namespace TtsWebRequests
     {
         public string audioEncoding;
         public int sampleRateHertz;
-        // Try setting sample rate to be lower
     }
 
     [Serializable]
