@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Whisper.Utils;
 using Random = UnityEngine.Random;
 
 public class AvatarController : MonoBehaviour
@@ -78,7 +79,6 @@ public class AvatarController : MonoBehaviour
     
     private void HandleClip(AudioClip clip)
     {
-        AgentLookAtPlayer(true);
         
         if (clip == null) return;
         if (mouthRoutine != null) StopCoroutine(mouthRoutine);
@@ -87,8 +87,12 @@ public class AvatarController : MonoBehaviour
             _avatar.SetActive(true);
         }
 
-        mouthRoutine = StartCoroutine(AnimateMouth(clip.length));
-        StartCoroutine(StopMouth(clip.length + 0.2f));
+        var speakAnimDuration = clip.length / 2;
+        
+        mouthRoutine = StartCoroutine(AnimateMouth(speakAnimDuration));
+        StartCoroutine(StopMouth(speakAnimDuration + 0.2f));
+        
+        AgentLookAtPlayer(true);
     }
     
     private IEnumerator AnimateMouth(float clipLength)
@@ -123,6 +127,7 @@ public class AvatarController : MonoBehaviour
     {
         if (lookAtPlayer)
         {
+            if (_normalEye == _gazeStraight) return;
             _normalEye = _gazeStraight;
             _eyeImage.sprite = _normalEye;
         }
