@@ -60,17 +60,12 @@ namespace TtsWebRequests
             return postRequest.downloadHandler.text;
         }
 
-        private byte[] DecodeBase64(string base64)
-        {
-            return Convert.FromBase64String(base64);
-        }
-
         private void PlayVoiceClip(String responseText)
         {
             // Response.data contains audioContent{...} in base64 contains "RIFF" header
             var responseJson = JsonUtility.FromJson<PostResponseJson>(responseText);
             // audioContent is encoded in base64
-            var audioBytes = DecodeBase64(responseJson.audioContent);
+            var audioBytes = Convert.FromBase64String(responseJson.audioContent);
             
             // Debug.Log("Response json/audioContent = " + responseJson.audioContent);
             AudioClip clip = ConvertBytesToFloatToClip(audioBytes);
@@ -84,7 +79,7 @@ namespace TtsWebRequests
 
         private static AudioClip ConvertBytesToFloatToClip(byte[] audioBytes)
         { 
-            int offset = FindDataOffset(audioBytes);
+            int offset = FindDataOffset(audioBytes); // Skipping past headers and finding data start
             
             // Audio bytes are PCM16 type = 16 bits = 2 bytes per sample
             var dataBytes = audioBytes.Length -  offset;
