@@ -25,9 +25,7 @@ Overview:
 
 The agent and its different faces.
 
-![Avatar 1](images/avatar.png)
-![Avatar 2](images/avatar2.png)
-![Avatar 3](images/avatar3.png)
+![Avatar's different faces](images/avatars_sm.png)
 
 Lesson orb.
 
