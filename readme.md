@@ -36,7 +36,7 @@ Lesson orb.
 Lesson examples.
 
 ![Lesson Example](images/lesson_example.png)
-![Lesson Example 2](iamges/lesson_example2.png)
+![Lesson Example 2](images/lesson_example2.png)
 
 Question examples.
 
