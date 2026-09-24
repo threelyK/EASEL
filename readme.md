@@ -1,6 +1,70 @@
 
 ### Embodied-Agent Supported Environment for Learning (EASEL)
 
+#### ===== Requirements:
+- Windows 10/11 OS
+- Unity Version 6.3 LTS if you opening in the inspector
+- Stable internet connection
+- VPNs are turned off to prevent API rate limiting
+- Meta Horizon Link app
+- Data cable or fast internet speed for Air link
+- VR Headset (Tested with Quest Pro)
+- Verify unity project file path is: `"C:/UnityProjects/EASEL"`
+Should look like the following:
+```
+--C:/UnityProjects/EASEL/
+ |- Assets
+ |- Packages
+ |- ProjectSettings
+ |- UIElementsSchema
+ |- TempAssembly.dll
+```
+- If filepath does not match then the agent is unable to find the whisper model to use for speech to text.
+
+
+#### ===== Download instructions:
+1. Take `"EASEL"` folder and drag into path: `"C:/UnityProjects/"`
+- If `"UnityProjects"` doesn't exist then please create it and then drag "EASEL" into that folder
+- ! It is important the path matches 100%
+
+
+#### ===== Setup:
+1.Open Meta Horizon Link app and enable link with Meta Quest headset via air link or data link cable.
+2. Make sure VPNs are off so that the API calls are not rate limited.
+3. Create an environment variable for the `INWORLD_API` key. (For demonstration purposes this has been hardcoded).
+4. Create an environment variable for the `MISTRAL_API_KEY`. (For demonstration purposes this has been hardcoded).
+5. Ensure sound settings have the "Headphones - Oculus Virtual Audio Device" selected for output and "Headset  Microphone - Oculus Virtual Audio Device".
+6. Ready for launching.
+
+
+#### ===== If playing editor version:
+(Most stable)
+1. Ensure you have downloaded the project files and placed them in `"C:/UnityProjects/EASEL"`
+2. Add project to Unity Editor
+3. Wait for editor load (may take a long time)
+4. Press the play button at top center of the Unity Editor
+
+
+#### ===== If playing build version:
+(Crashes sometimes after Lesson 2 when using the MetaXRSimulator)
+1. Ensure you have downloaded the project files and placed them in `"C:/UnityProjects/EASEL"`
+2. Open `"Build 3.1"` folder
+3. Run EASEL2.exe
+
+
+#### ===== Examining save data
+1. Use `Windows+R` to open the run panel.
+2. Type `%appdata%` and hit `enter`.
+3. Once in the "Roaming" directory go back into the `"AppData"` directory.
+4. You should see at least 3 folders.
+5. Go into `"LocalLow"`.
+6. Then find `"215Exeter"` and enter that folder.
+7. Enter `"EASEL2"` folder and you should see your exam data stored in there.
+
+---
+
+### Project Details
+
 The aim of this project was to explore the use of embodied agents (EAs) within a Virtual Reality (VR) space. EAs are simply put, AI agents with a physical or virtual representation. Physically represented possibly as a robot on tracks like in Wall-E, or virtually as a non-playable character in a game.
 
 By escaping the confines of textual representation we are able to create a greater feeling of immersion and emotional connection. And the reason for that is because we tend to treat something in the human form better than just plain text on a screen. However, through my research I discovered that how we replicate the humanoid form is extremely important, this is so that we do not make interactions with it unsettling. This uncomfortable feeling is derived from the 'uncanny valley' effect which is when something doesn't quite match what our experience expects. So for my EA I opted for a stylized representation over a more realistic one, incorporating facial movements which match what you would expect.
