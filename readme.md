@@ -1,6 +1,20 @@
 
 ### Embodied-Agent Supported Environment for Learning (EASEL)
 
+### Table of Contents:
+[Requirements](#-requirements) <br>
+[Download instructions](#-download-instructions) <br>
+[Setup](#-setup) <br>
+[Playing in Unity Editor](#-if-playing-editor-version) <br>
+[Playing the build](#-if-playing-build-version) <br>
+[Examining save data](#-examining-save-data) <br>
+ <br>
+[Project details](#project-details) <br>
+[Features](#features) <br>
+[The Creation Process](#the-creation-process) <br>
+[Version 2](#version-2) <br>
+[Improvements](#improvements) <br>
+
 #### ===== Requirements:
 - Windows 10/11 OS
 - Unity Version 6.3 LTS if you opening in the inspector
